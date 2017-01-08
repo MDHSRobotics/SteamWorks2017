@@ -11,7 +11,7 @@ This project is intended to be the base project from which each season's Java Ro
 * Core Subsystem
 * WebSockets Subsystem
 * Diagnostics Subsystem
-* Drive Sybsystem
+* Drive Subsystem
 * ADIS16448_IMU Gyro Implementation
 
 See [Understanding This Repository](https://github.com/MDHSRobotics/TeamWiki/wiki/Understanding%20MaterBot) for more information
