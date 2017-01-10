@@ -1,4 +1,4 @@
-#Project: SteamWorks2017
+#SteamWorks2017
 
 ###Description
 
