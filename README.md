@@ -2,7 +2,7 @@
 
 ###Description
 
-This project is intended to be the base project from which each season's Java RoboRio controller project is derived from. 
+This project is intended to be the base project from which this season's Java RoboRio controller project is derived from. All contributions made will be added to this project moving forward. Learn how to push changes in the guide [How to Git](https://github.com/MDHSRobotics/TeamWiki/wiki/How%20to%20Git).
 
 ###Features
 * Improved Configuration
@@ -14,11 +14,7 @@ This project is intended to be the base project from which each season's Java Ro
 * Drive Subsystem
 * ADIS16448_IMU Gyro Implementation
 
-See [Understanding Materbot/Steamworks2017](https://github.com/MDHSRobotics/TeamWiki/wiki/Understanding%20MaterBot) for more information
-
-###Typical Use
-Typically, this project would be duplicated for each season. See the [Duplicating a Repository](https://help.github.com/articles/duplicating-a-repository/) guide from GitHub
-
+See [Understanding Materbot](https://github.com/MDHSRobotics/TeamWiki/wiki/Understanding%20MaterBot) for more information (current example for future FIRST competitions).
 
 ###Backlog
-N/A 
+Currently N/A.
