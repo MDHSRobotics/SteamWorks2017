@@ -28,9 +28,9 @@ public class OI extends OIBase{
 		//Typically, a robot will have at least 1 joystick and 1 console
 		
 		//if using gamepad, the buttons are generally as follows:
-		// x is button 1
-		// a is button 2
-		// b is button 3
+		// a is button 1
+		// b is button 2
+		// x is button 3
 		// y is button 4
 		
 		
@@ -41,9 +41,9 @@ public class OI extends OIBase{
 			.whileHeld("leftBumper",6,new MDPrintCommand(getRobot(),"Left Bumper Command","Left Bumper Command message"))
 		    //the following commands are test move commands useful in testing drive configuration and set up
 		    //comment out and replace as needed
-			.whenPressed("X",1,new MDMoveCommand(getRobot(),"left command",Direction.left))
-			.whenPressed("A",2,new MDMoveCommand(getRobot(),"reverse command",Direction.reverse))
-			.whenPressed("B",3,new MDMoveCommand(getRobot(),"right command",Direction.right))
+			.whenPressed("X",3,new MDMoveCommand(getRobot(),"left command",Direction.left))
+			.whenPressed("A",1,new MDMoveCommand(getRobot(),"reverse command",Direction.reverse))
+			.whenPressed("B",2,new MDMoveCommand(getRobot(),"right command",Direction.right))
 			.whenPressed("Y",4,new MDMoveCommand(getRobot(),"forward command",Direction.forward))
 			.configure()
 		);

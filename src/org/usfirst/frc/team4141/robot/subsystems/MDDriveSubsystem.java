@@ -71,7 +71,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 				throw new IllegalArgumentException("Invalid motor configuration for TankDrive system.");
 			}				
 			if(getMotors().size()==2){
-				if()!getMotors().containsKey(MotorPosition.left.toString()) || !getMotors().containsKey(MotorPosition.right.toString())){
+				if(!getMotors().containsKey(MotorPosition.left.toString()) || !getMotors().containsKey(MotorPosition.right.toString())){
 					throw new IllegalArgumentException("Invalid motor configuration for TankDrive system with 2 motors.");
 				}
 				robotDrive = new RobotDrive(get(MotorPosition.left), get(MotorPosition.right));
@@ -115,7 +115,6 @@ public class MDDriveSubsystem extends MDSubsystem {
 	}
 	
 	private double calculateDirection(double x, double y){
-		private double calculateMagnitude(double x,double y){
 			//joystick will give x & y in a range of -1 <= 0 <= 1
 			// the direction indicates in what angle the robot should move. this is not rotation.
 			// 0 degrees means go straight
@@ -127,25 +126,24 @@ public class MDDriveSubsystem extends MDSubsystem {
 			// since this includes a division we need logic to handle things when x & y are 0
 			double angle = 0;
 			if(y==0){
-				if(x>0) angle = Math.PI/2;
-				if (x<0) angle = -Math.PI/2;
+				if(x>0) angle = 90;
+				if (x<0) angle = -90;
 			}
 			else if (x==0){
-				if(y<0) angle = -Math.PI;
+				if(y<0) angle = 180;
 			}
 			else{
-				angle = Math.atan2(x, y);
+				angle = Math.atan2(x, y)*180/Math.PI;
 			}
 			return angle;  //range is -pi to +pi
 			//TODO: Do we need to convert to degrees?
-		}
 	}
 	
 	public void arcadeDrive(Joystick joystick) {
 		switch(type){
 		case MecanumDrive:
-			double magnitude= calculateMagnitude(joystick.getRawAxis(0),joystick.getRawAxis(1));
-			double direction = calculateDirection(joystick.getRawAxis(0),joystick.getRawAxis(1));
+			double magnitude= calculateMagnitude(joystick.getRawAxis(3),joystick.getRawAxis(2));
+			double direction = calculateDirection(joystick.getRawAxis(3),joystick.getRawAxis(2));
 			double rotation = joystick.getRawAxis(5);
 			robotDrive.mecanumDrive_Polar(magnitude, direction, rotation);
 			break;
@@ -181,7 +179,8 @@ public class MDDriveSubsystem extends MDSubsystem {
 	}
 
 	public void right(double speed) {
-		double direction = Math.PI/2;
+		System.out.println("right");
+		double direction = 90;
 		switch(type){
 		case MecanumDrive:
 			robotDrive.mecanumDrive_Polar(speed, direction, 0);
@@ -192,7 +191,8 @@ public class MDDriveSubsystem extends MDSubsystem {
 	}
 
 	public void left(double speed) {
-		double direction = -Math.PI/2;
+		System.out.println("left");
+		double direction = -90;
 		switch(type){
 		case MecanumDrive:
 			robotDrive.mecanumDrive_Polar(speed, direction, 0);
@@ -203,17 +203,19 @@ public class MDDriveSubsystem extends MDSubsystem {
 	}
 
 	public void reverse(double speed) {
-		double direction = Math.PI;
+		System.out.println("reverse");
+		double direction = 180;
 		switch(type){
 		case MecanumDrive:
 			robotDrive.mecanumDrive_Polar(speed, direction, 0);
 			break;
 		default:
-			robotDrive.tankDrive(-speed, -speed);
+			robotDrive.tankDrive(-speed, speed);
 		}
 	}
 
 	public void forward(double speed) {
+		System.out.println("forward");
 		double direction = 0;
 		switch(type){
 		case MecanumDrive:

@@ -52,10 +52,10 @@ public class Robot extends MDRobotBase {
 		//uncomment the desired drive system and adjust the motor configuration as needed
 		//Mecanum example :
 		add(new MDDriveSubsystem(this, "driveSystem", Type.MecanumDrive)
-				.add(MotorPosition.frontRight, new Victor(0))
-				.add(MotorPosition.rearRight, new Victor(1))
-				.add(MotorPosition.frontLeft, new Victor(2))
-				.add(MotorPosition.rearLeft, new Victor(3))
+				.add(MotorPosition.frontRight, new Victor(1))
+				.add(MotorPosition.rearRight, new Victor(0))
+				.add(MotorPosition.frontLeft, new Victor(3))
+				.add(MotorPosition.rearLeft, new Victor(2))
 				.add("accelerometer", new MD_BuiltInAccelerometer())
 				.add("IMU", new MD_IMU())
 				.configure()

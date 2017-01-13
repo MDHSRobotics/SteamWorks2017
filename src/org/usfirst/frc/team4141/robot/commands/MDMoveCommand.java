@@ -14,7 +14,7 @@ public class MDMoveCommand extends MDCommand {
 	// the duration is defaulted to 3 seconds
 	// speed is defaulted to 0.5
 	private double duration = 3000; //3 seconds in milliseconds
-	private double speed = 0.5;
+	private double speed = 0.2;
 	
 	public enum Direction{
 		left,
