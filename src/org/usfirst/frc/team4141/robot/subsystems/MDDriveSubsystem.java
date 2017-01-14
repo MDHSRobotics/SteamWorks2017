@@ -103,8 +103,9 @@ public class MDDriveSubsystem extends MDSubsystem {
 
 	@Override
 	protected void initDefaultCommand() {
+		robotDrive.stopMotor();
 		//set up default command, as needed
-		setDefaultCommand(new ArcadeDriveCommand(getRobot()));
+		//setDefaultCommand(new ArcadeDriveCommand(getRobot()));
 	}
 	
 	private double calculateMagnitude(double x,double y){
@@ -135,16 +136,17 @@ public class MDDriveSubsystem extends MDSubsystem {
 			else{
 				angle = Math.atan2(x, y)*180/Math.PI;
 			}
-			return angle;  //range is -pi to +pi
-			//TODO: Do we need to convert to degrees?
+			System.out.println("angle="+angle);
+			return angle;  
 	}
 	
 	public void arcadeDrive(Joystick joystick) {
 		switch(type){
 		case MecanumDrive:
-			double magnitude= calculateMagnitude(joystick.getRawAxis(3),joystick.getRawAxis(2));
-			double direction = calculateDirection(joystick.getRawAxis(3),joystick.getRawAxis(2));
-			double rotation = joystick.getRawAxis(5);
+//			System.out.println("mecanum...");
+			double magnitude= calculateMagnitude(joystick.getRawAxis(0),joystick.getRawAxis(1));
+			double direction = calculateDirection(-joystick.getRawAxis(0),-joystick.getRawAxis(1));
+			double rotation = joystick.getRawAxis(4);
 			robotDrive.mecanumDrive_Polar(magnitude, direction, rotation);
 			break;
 		default:
@@ -158,6 +160,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 	}
 	
 	public void stop(){
+		System.out.println("motors stopped");
 		robotDrive.stopMotor();
 	}	
 	
@@ -180,7 +183,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 
 	public void right(double speed) {
 		System.out.println("right");
-		double direction = 90;
+		double direction = -90;
 		switch(type){
 		case MecanumDrive:
 			robotDrive.mecanumDrive_Polar(speed, direction, 0);
@@ -192,7 +195,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 
 	public void left(double speed) {
 		System.out.println("left");
-		double direction = -90;
+		double direction = 90;
 		switch(type){
 		case MecanumDrive:
 			robotDrive.mecanumDrive_Polar(speed, direction, 0);

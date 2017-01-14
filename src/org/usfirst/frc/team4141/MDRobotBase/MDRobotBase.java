@@ -17,6 +17,7 @@ import org.usfirst.frc.team4141.MDRobotBase.sensors.RobotDiagnostics;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.Sensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.SensorReading;
 import org.usfirst.frc.team4141.robot.OI;
+import org.usfirst.frc.team4141.robot.commands.ArcadeDriveCommand;
 import org.usfirst.frc.team4141.robot.subsystems.DiagnosticsSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.WebSocketSubsystem;
 
@@ -185,6 +186,8 @@ public abstract class MDRobotBase extends IterativeRobot{
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+    	ArcadeDriveCommand arcadeCommand = new ArcadeDriveCommand(this);
+    	arcadeCommand.start();
     }
 
     /**

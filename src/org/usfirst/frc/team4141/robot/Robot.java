@@ -8,6 +8,7 @@ import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.config.DoubleConfigSetting;
 import org.usfirst.frc.team4141.MDRobotBase.config.StringConfigSetting;
 import org.usfirst.frc.team4141.robot.commands.MDPrintCommand;
+import org.usfirst.frc.team4141.robot.commands.MDStopCommand;
 import org.usfirst.frc.team4141.robot.subsystems.CoreSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem.MotorPosition;
@@ -34,8 +35,8 @@ public class Robot extends MDRobotBase {
 		//A commands needs to be configured for the autonomous mode.
 		//In some cases it is desirable to have more than 1 auto command and make a decision at game time which command to use
 		setAutonomousCommand(new MDCommand[]{
-				new MDPrintCommand(this,"AutonomousCommand","AutonomousCommand message")
-			}, "AutonomousCommand"  //specify the default
+				new MDStopCommand(this,"StopCommand")
+			}, "StopCommand"  //specify the default
 		);
 
 		//Subsystem to manage robot wide config settings
