@@ -21,6 +21,9 @@ public class MDDigitalInput extends DigitalInput implements Sensor {
 		readings[0] = new DigitalSensorReading(this,name, get());
 	}
 
+	public MDDigitalInput(String name, int channel) {
+		this(null,name,channel);
+	}
 	@Override
 	public String getName() {
 		return name;

@@ -2,6 +2,7 @@ package org.usfirst.frc.team4141.robot;
 
 
 import org.usfirst.frc.team4141.MDRobotBase.MDCommand;
+import org.usfirst.frc.team4141.MDRobotBase.sensors.MDDigitalInput;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_BuiltInAccelerometer;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_IMU;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
@@ -10,10 +11,12 @@ import org.usfirst.frc.team4141.MDRobotBase.config.StringConfigSetting;
 import org.usfirst.frc.team4141.robot.commands.MDPrintCommand;
 import org.usfirst.frc.team4141.robot.commands.MDStopCommand;
 import org.usfirst.frc.team4141.robot.subsystems.CoreSubsystem;
+import org.usfirst.frc.team4141.robot.subsystems.GearSubSystem;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem.MotorPosition;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem.Type;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 
 /**
@@ -81,6 +84,13 @@ public class Robot extends MDRobotBase {
 //				.configure()
 //		);	
 		
+		add(new GearSubSystem(this, "gearSubsystem")
+				.add(GearSubSystem.SolenoidPosition.left.toString(), new Solenoid(0))
+				.add(GearSubSystem.SolenoidPosition.right.toString(), new Solenoid(1))
+				.add(GearSubSystem.motorName, new Victor(4))
+				.add(GearSubSystem.SwitchPosition.extended.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.extended.toString(), 0))
+				.add(GearSubSystem.SwitchPosition.recessed.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.recessed.toString(), 1))
+				.configure());
 
 	}
 

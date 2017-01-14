@@ -6,9 +6,11 @@ import org.usfirst.frc.team4141.MDRobotBase.MDJoystick;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.OIBase;
 import org.usfirst.frc.team4141.MDRobotBase.RioHID;
+import org.usfirst.frc.team4141.robot.commands.ExtendCommand;
 import org.usfirst.frc.team4141.robot.commands.MDMoveCommand;
 import org.usfirst.frc.team4141.robot.commands.MDMoveCommand.Direction;
 import org.usfirst.frc.team4141.robot.commands.MDPrintCommand;
+import org.usfirst.frc.team4141.robot.commands.RetractCommand;
 
 
 /**
@@ -45,6 +47,8 @@ public class OI extends OIBase{
 			.whenPressed("A",1,new MDMoveCommand(getRobot(),"reverse command",Direction.reverse))
 			.whenPressed("B",2,new MDMoveCommand(getRobot(),"right command",Direction.right))
 			.whenPressed("Y",4,new MDMoveCommand(getRobot(),"forward command",Direction.forward))
+			.whenPressed("LeftBumper",6,new ExtendCommand(getRobot(),"ExtendCommand"))
+			.whenPressed("RightBumper",5,new RetractCommand(getRobot(),"RetractCommand"))
 			.configure()
 		);
 
