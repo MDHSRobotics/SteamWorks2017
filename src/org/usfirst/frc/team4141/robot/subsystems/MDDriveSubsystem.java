@@ -1,7 +1,5 @@
 package org.usfirst.frc.team4141.robot.subsystems;
 
-import javax.print.attribute.standard.Media;
-
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
 import org.usfirst.frc.team4141.MDRobotBase.MultiSpeedController;
@@ -9,7 +7,6 @@ import org.usfirst.frc.team4141.MDRobotBase.NotImplementedException;
 import org.usfirst.frc.team4141.MDRobotBase.TankDriveInterpolator;
 import org.usfirst.frc.team4141.MDRobotBase.config.ConfigSetting;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.Sensor;
-import org.usfirst.frc.team4141.robot.commands.ArcadeDriveCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWM;
