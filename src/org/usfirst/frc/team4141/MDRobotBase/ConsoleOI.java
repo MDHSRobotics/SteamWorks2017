@@ -81,6 +81,6 @@ public class ConsoleOI extends MDGenericHID {
 	public boolean isConfigured(){ return isConfigured;}
 
 	public void setRumble(Joystick.RumbleType hand,double value) {
-		getRobot().post(new ConsoleRumbleNotification(getRobot(),hand,value,true,true));
+		getRobot().post(new ConsoleRumbleNotification(getRobot(),hand,value));
 	}
 }

@@ -12,11 +12,12 @@ import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
  *
  */
 public class EventManager {
+
 	private final EventManager self = this;
 	private long nextMessageID = 0;
 	private MessageHandler handler;
 	private ArrayBlockingQueue<Notification>outbound= new ArrayBlockingQueue<Notification>(100);
-	private ArrayBlockingQueue<String>inbound= new ArrayBlockingQueue<String>(100);
+	private ArrayBlockingQueue<Request>inbound= new ArrayBlockingQueue<Request>(100);
 	private Hashtable<String,EventManagerWebSocket> remotes;
 	private int port = 5808;
 	
@@ -71,10 +72,10 @@ public class EventManager {
 	}
 	
 	public synchronized  void process(){
-		String message;
-		while((message = inbound.poll())!=null){
+		Request request;
+		while((request = inbound.poll())!=null){
 			if(handler!=null){
-				handler.process(message);
+				handler.process(request);
 			}
 		}
 	}
@@ -87,21 +88,22 @@ public class EventManager {
 //			System.out.println(notification.toJSON());
 			
 			notification.setMessageId(nextMessageID++);
-			if(notification.showJavaConsole()){
+			if(notification.showInConsole()){
 				System.out.println(notification);
 			}
 			if(enableWebSockets){
-				if(notification.broadcast()){
-					try {
-						for(EventManagerWebSocket socket : remotes.values()){
-							if(socket!=null && socket.getSession() !=null && socket.getSession().isOpen()){
-								socket.getSession().getRemote().sendString(notification.toJSON());
-							}
+				if(notification.getTarget()!=null && remotes!=null && remotes.containsKey(notification.getTarget())){
+					EventManagerWebSocket socket = remotes.get(notification.getTarget());
+					try{
+						if(socket!=null && socket.getSession() !=null && socket.getSession().isOpen()){
+							socket.getSession().getRemote().sendString(notification.toJSON());
 						}
+
 					} catch (Exception e) {
-						System.err.println("unable to post: "+notification.toJSON());
+						System.err.println("unable to post: "+notification.toJSON()+" due to error:");
+						System.err.println(e.getMessage());						
 					}
-				}	
+				}
 			}
 		}
 	}
@@ -121,20 +123,30 @@ public class EventManager {
 		return this.handler;
 	}
 
+	private String consoleSocketKey;
+	private String holySeeSocketKey;
+	public String getConsoleSocketKey(){return consoleSocketKey;}
+	public String getHolySeeSocketKey(){return holySeeSocketKey;}
+	
 	public synchronized void connected(EventManagerWebSocket socket) {
 		System.out.printf("connected socket local address: %s\n",socket.getSession().getLocalAddress().getHostString());
 		System.out.printf("connected socket remote address: %s\n",socket.getSession().getRemoteAddress().getHostString());
-		remotes.put(socket.toString(),socket);
-		System.out.printf("connected! %d remotes\n",remotes.size());
+		//remotes.put(socket.toString(),socket);
+		//System.out.printf("added remote %s\n",socket.toString());
+		//System.out.printf("connected! %d remotes\n",remotes.size());
 		handler.connect(socket);
 	}
 	
-	public  void process(String message) {
+	public  void process(Request request) {
 		try {
-			inbound.put(message);
+			inbound.put(request);
 		} catch (InterruptedException e) {
-			System.err.println("unable to receive: "+message);
+			System.err.println("unable to process: "+request);
 		}	
 	}
 	public int getPort(){return port;}
+	public void identify(String id, EventManagerWebSocket socket) {
+		System.out.printf("identifying %s:%s\n",id,socket.toString());
+		remotes.put(id, socket);
+	}
 }

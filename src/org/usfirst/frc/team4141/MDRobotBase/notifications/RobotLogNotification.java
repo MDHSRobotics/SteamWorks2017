@@ -20,25 +20,23 @@ public class RobotLogNotification extends RobotNotification {
 		return level;
 	}
 	
-	public RobotLogNotification(Level level,String logOrigin, String message,boolean showJavaConsole, boolean showMDConsole, boolean broadcast, boolean record) {
-		super("RobotLogNotification",showJavaConsole,showMDConsole,broadcast, record);
+	public RobotLogNotification(Level level,String logOrigin, String message,boolean showInConsole, String target, boolean record) {
+		super("RobotLogNotification",showInConsole,target, record);
 		this.level = level;
 		this.source = logOrigin;
 		this.message = message;
 	}
-	public RobotLogNotification(Level level,String logOrigin, String message,boolean showMDConsole) {
-		this(level,logOrigin,message,false,showMDConsole,true,true);
+	public RobotLogNotification(Level level,String logOrigin, String message) {
+		this(level,logOrigin,message,true,null,false);
 	}
-	public RobotLogNotification(Level level,String logOrigin, String message,boolean showMDConsole,boolean record) {
-		this(level,logOrigin,message,false,showMDConsole,true,record);
-	}
+	public RobotLogNotification(Level level,String logOrigin, String message, String target) {
+		this(level,logOrigin,message,false,target,false);
+	}	
 	
 	public RobotLogNotification(String source, String message) {
 		this(Level.INFO,source,message);
 	}
-	public RobotLogNotification(Level level, String source, String message) {
-		this(level,source,message,true,true);
-	}
+
 	@Override
 	protected void addJSONPayload() {
 		if(sb.length()>0){

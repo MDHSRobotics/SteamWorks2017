@@ -8,6 +8,7 @@ import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
 import org.usfirst.frc.team4141.MDRobotBase.config.ConfigSetting;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.Sensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.SensorReading;
+import org.usfirst.frc.team4141.robot.subsystems.WebSocketSubsystem;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PWM;
@@ -20,16 +21,15 @@ public class RobotConfigurationNotification extends RobotNotification {
 	
 	private MDRobotBase robot;
 	public RobotConfigurationNotification(MDRobotBase robot) {
-		this(robot, false, false, true, true);
+		this(robot, true, WebSocketSubsystem.Remote.console.toString(), true);
 	}
-	public RobotConfigurationNotification(MDRobotBase robot,boolean showMDConsole) {
-		this(robot, false, showMDConsole,true, true);
+
+	public RobotConfigurationNotification(MDRobotBase robot, boolean record) {
+		this(robot, true, WebSocketSubsystem.Remote.console.toString(), record);
 	}
-	public RobotConfigurationNotification(MDRobotBase robot,boolean showMDConsole, boolean record) {
-		this(robot, false, showMDConsole,true, record);
-	}
-	public RobotConfigurationNotification(MDRobotBase robot, boolean showJavaConsole, boolean showMDConsole, boolean broadcast, boolean record) {
-		super("RobotConfigurationNotification", showJavaConsole, showMDConsole, broadcast, record);
+	
+	public RobotConfigurationNotification(MDRobotBase robot, boolean showInConsole, String target, boolean record) {
+		super("RobotConfigurationNotification", showInConsole, target, record);
 		this.robot = robot;
 	}
 

@@ -18,6 +18,7 @@ import org.usfirst.frc.team4141.MDRobotBase.eventmanager.EventManager;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.EventManagerWebSocket;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.JSON;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.MessageHandler;
+import org.usfirst.frc.team4141.MDRobotBase.eventmanager.Request;
 import org.usfirst.frc.team4141.MDRobotBase.notifications.RobotConfigurationNotification;
 import org.usfirst.frc.team4141.MDRobotBase.notifications.RobotLogNotification;
 import org.usfirst.frc.team4141.MDRobotBase.notifications.RobotNotification;
@@ -31,6 +32,11 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 	private Notifier dispatcher;
 	private double updatePeriod = 0.1;  //0.1 seconds
 
+	public enum Remote{
+		console,
+		holysee
+	}
+	
 	public WebSocketSubsystem(MDRobotBase robot, String name) {
 		super(robot, name);
 		setCore(true);
@@ -92,7 +98,7 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 
 	//
     //EventManager helper methods
-	public void post(RobotNotification notification){
+	public void post(String target,RobotNotification notification){
 		if(eventManager.isWebSocketsEnabled()){
 			eventManager.post(notification);
 		}
@@ -100,9 +106,9 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 
 	@SuppressWarnings({"rawtypes" })
 	@Override
-	public void process(String messageText) {
+	public void process(Request request) {
 //		System.out.println("Robot received message: "+messageText);
-		Map message = JSON.parse(messageText);
+		Map message = JSON.parse(request.getMessage());
 		if(message.containsKey("type")){
 			String type = message.get("type").toString();
 			if(type.equals("consoleButtonUpdate")){
@@ -112,15 +118,20 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 				updateSetting(message);
 			}
 			if(type.equals("remoteIdentification")){
-				addRemote(message);
+				identifyRemote(request,message);
 			}
 		}
 		message.keySet();
 	}
 
-	private void addRemote(Map message) {
+	private void identifyRemote(Request request, Map message) {
 		if(message.containsKey("id")){
 			System.out.printf("%s connected!\n",message.get("id"));
+			eventManager.identify((String)message.get("id"),request.getSocket());
+			if(message.get("id").equals(Remote.console.toString())){
+				eventManager.post(new RobotLogNotification(this.getClass().getName()+".connect()","Connection"));
+				eventManager.post(new RobotConfigurationNotification(getRobot()));
+			}
 		}
 	}
 
@@ -206,11 +217,7 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 	}
 
 	@Override
-	public void connect(EventManagerWebSocket socket) {
-		eventManager.post(new RobotLogNotification(this.getClass().getName()+".connect()","Connection"));
-		eventManager.post(new RobotConfigurationNotification(getRobot()));
-
-		
+	public void connect(EventManagerWebSocket socket) {	
 	}
 
 }
