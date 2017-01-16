@@ -225,7 +225,7 @@ public abstract class MDRobotBase extends IterativeRobot{
 	}
 	public void post(RobotNotification notification){
 		if(getSubsystems()!=null && getSubsystems().containsKey("WebSockets")){
-			((WebSocketSubsystem)(getSubsystems().get("WebSockets"))).post(null,notification);
+			((WebSocketSubsystem)(getSubsystems().get("WebSockets"))).post(notification);
 		}
 	}
 	

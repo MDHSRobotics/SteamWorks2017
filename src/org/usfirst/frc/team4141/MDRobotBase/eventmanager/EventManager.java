@@ -62,6 +62,12 @@ public class EventManager {
 	
 	public synchronized void post(Notification notification){
 		try{
+			if(notification.showInConsole()){
+				if(notification.getNotificationType().equals("RobotLogNotification") && ((RobotLogNotification)notification).getLevel() == Level.DEBUG){
+					System.out.println(((RobotLogNotification)notification).getMessage());
+				}
+				else System.out.println(notification);
+			}			
 			outbound.add(notification);
 //			System.out.printf("Message Added to outbound queue, now (%d)\n", outbound.size());
 //			System.out.println(notification.toJSON());
@@ -90,12 +96,7 @@ public class EventManager {
 //			System.out.println(notification.toJSON());
 			
 			notification.setMessageId(nextMessageID++);
-			if(notification.showInConsole()){
-				if(notification.getNotificationType().equals("RobotLogNotification") && ((RobotLogNotification)notification).getLevel() == Level.DEBUG){
-					System.out.println(((RobotLogNotification)notification).getMessage());
-				}
-				else System.out.println(notification);
-			}
+
 			if(enableWebSockets){
 				if(notification.getTarget()!=null && remotes!=null && remotes.containsKey(notification.getTarget())){
 					EventManagerWebSocket socket = remotes.get(notification.getTarget());

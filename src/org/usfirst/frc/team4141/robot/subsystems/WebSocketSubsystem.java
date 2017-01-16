@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.util.Map;
 
 import javax.jmdns.JmDNS;
+import javax.jmdns.NetworkTopologyDiscovery;
 import javax.jmdns.ServiceInfo;
 
 import org.usfirst.frc.team4141.MDRobotBase.MDConsoleButton;
@@ -45,7 +46,7 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 
 	@Override
 	protected void initDefaultCommand() {
-//		System.out.println("WebSocketSubsystem.initDefaultCommand()");
+		System.out.println("WebSocketSubsystem.initDefaultCommand()");
 		dispatcher = new Notifier(new Dispatcher(eventManager));
 		dispatcher.startPeriodic(updatePeriod);
 	}
@@ -79,17 +80,24 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 	private JmDNS jmdns;
 
     private void announce() {
-    	 try {
-             // Create a JmDNS instance
-             jmdns = JmDNS.create(InetAddress.getLocalHost());
+    	InetAddress[] addresses = NetworkTopologyDiscovery.Factory.getInstance().getInetAddresses();
+    	for(InetAddress addr : addresses){
+    		if(addr.getHostName().contains("roboRIO")){
+    			 try {
+    	   	         // Create a JmDNS instance
+    	             jmdns = JmDNS.create(addr);
 
-             // Register a service
-             ServiceInfo serviceInfo = ServiceInfo.create("_ws._tcp.local.", "Team4141Robot", eventManager.getPort(), "");
-             jmdns.registerService(serviceInfo);
+    	             // Register a service
+    	             ServiceInfo serviceInfo = ServiceInfo.create("_ws._tcp.local.", "Team4141Robot", eventManager.getPort(), "");
+    	             jmdns.registerService(serviceInfo);
 
-         } catch (IOException e) {
-             debug(e.getMessage());
-         }		
+    	         } catch (IOException e) {
+    	        	 debug(e.getMessage());
+    	         }		
+    			break;
+    		}
+    	}
+    	
 		
 	}
     
@@ -97,7 +105,7 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 
 	//
     //EventManager helper methods
-	public void post(String target,RobotNotification notification){
+	public void post(RobotNotification notification){
 		if(eventManager.isWebSocketsEnabled()){
 			eventManager.post(notification);
 		}
