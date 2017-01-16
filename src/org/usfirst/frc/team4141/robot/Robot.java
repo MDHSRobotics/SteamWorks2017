@@ -45,7 +45,7 @@ public class Robot extends MDRobotBase {
 		//Subsystem to manage robot wide config settings
 		add( new CoreSubsystem(this, "core")
 				 .add("name",new StringConfigSetting("MaterBot"))					//go ahead name your robot
-				 .add("autoCommand",new StringConfigSetting("AutonomousCommand"))		//name of autoCommand you wish to start with
+				 .add("autoCommand",new StringConfigSetting("StopCommand"))		//name of autoCommand you wish to start with
 				 .configure()
 		);		
 		

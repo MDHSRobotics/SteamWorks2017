@@ -52,12 +52,7 @@ public class TankDriveInterpolator {
 			}
 		}
 	}
-	public static void main(String[] args) {
-		test(new TankDriveInterpolator());
-		test(new TankDriveInterpolator(0.5,0.5));
-		test(new TankDriveInterpolator(0.25,0.4));
 
-	}
 	
 	private static String formatCoordinates(double[] coordinates){
 		if(coordinates!=null && coordinates.length>1){
@@ -128,21 +123,26 @@ public class TankDriveInterpolator {
 		return sb.toString();
 	}
 
-	private static void test(TankDriveInterpolator tankDriveInterpolator) {
-		// generate the contour map
-		String[][] contour= new String[9][9];
-		double[] range = {-1,-0.75,-0.5,-0.25,0,0.25,0.5,0.75,1};
-		for(int row = 0;row<range.length;row++){
-			for(int col = 0;col<range.length;col++){
-				contour[row][col] = formatCoordinates(tankDriveInterpolator.calculate(range[range.length-1-row],range[col]));
-			}
-		}
-		
-		System.out.println(toStringTable(range,contour));
-//		System.out.println(toMarkDownTable(range,contour));
-				
-	}
-
+//	private static void test(TankDriveInterpolator tankDriveInterpolator) {
+//		// generate the contour map
+//		String[][] contour= new String[9][9];
+//		double[] range = {-1,-0.75,-0.5,-0.25,0,0.25,0.5,0.75,1};
+//		for(int row = 0;row<range.length;row++){
+//			for(int col = 0;col<range.length;col++){
+//				contour[row][col] = formatCoordinates(tankDriveInterpolator.calculate(range[range.length-1-row],range[col]));
+//			}
+//		}
+//		
+//		System.out.println(toStringTable(range,contour));
+////		System.out.println(toMarkDownTable(range,contour));
+//				
+//	}
+//	public static void main(String[] args) {
+//	test(new TankDriveInterpolator());
+//	test(new TankDriveInterpolator(0.5,0.5));
+//	test(new TankDriveInterpolator(0.25,0.4));
+//
+//}
 }
 
 

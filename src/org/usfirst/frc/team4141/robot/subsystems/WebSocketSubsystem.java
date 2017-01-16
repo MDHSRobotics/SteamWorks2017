@@ -20,7 +20,6 @@ import org.usfirst.frc.team4141.MDRobotBase.eventmanager.JSON;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.MessageHandler;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.Request;
 import org.usfirst.frc.team4141.MDRobotBase.notifications.RobotConfigurationNotification;
-import org.usfirst.frc.team4141.MDRobotBase.notifications.RobotLogNotification;
 import org.usfirst.frc.team4141.MDRobotBase.notifications.RobotNotification;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -68,12 +67,12 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 //		else{
 //			System.out.println("websockets disabled");
 //		}
-		System.out.println("starting event manager");
+		debug("starting event manager");
 		try {
 			eventManager.start();
 			announce();
 		} catch (Exception e) {
-			System.out.println("unable to start web socket manager");
+			debug("unable to start web socket manager");
 			e.printStackTrace();
 		}
 	}
@@ -89,7 +88,7 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
              jmdns.registerService(serviceInfo);
 
          } catch (IOException e) {
-             System.out.println(e.getMessage());
+             debug(e.getMessage());
          }		
 		
 	}
@@ -126,10 +125,10 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 
 	private void identifyRemote(Request request, Map message) {
 		if(message.containsKey("id")){
-			System.out.printf("%s connected!\n",message.get("id"));
+			debug(message.get("id")+" connected!");
 			eventManager.identify((String)message.get("id"),request.getSocket());
 			if(message.get("id").equals(Remote.console.toString())){
-				eventManager.post(new RobotLogNotification(this.getClass().getName()+".connect()","Connection"));
+				log("identifyRemote",Remote.console.toString()+" connected.");
 				eventManager.post(new RobotConfigurationNotification(getRobot()));
 			}
 		}
@@ -149,21 +148,21 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 			String settingName = (String)(message.get("settingName"));
 			if(geRobot().getSubsystems().containsKey(subsystemName)){
 				MDSubsystem subsystem = getRobot().getSubsystems().get(subsystemName);
-				System.out.println("changing setting for subsystem "+subsystem.getName());
+				debug("changing setting for subsystem "+subsystem.getName());
 				if(subsystem.hasSetting(settingName)){
 					ConfigSetting setting = subsystem.getSetting(settingName);
-					System.out.println("updating setting "+setting.getName());
+					debug("updating setting "+setting.getName());
 					if(message.containsKey("value")){
 						setting.setValue(message.get("value"));
-						System.out.println("value now set to "+setting.getValue().toString());
+						debug("value now set to "+setting.getValue().toString());
 					}
 					if(message.containsKey("min")){
 						setting.setMin(message.get("min"));
-						System.out.println("min now set to "+setting.getMin().toString());
+						debug("min now set to "+setting.getMin().toString());
 					}
 					if(message.containsKey("max")){
 						setting.setMax(message.get("max"));
-						System.out.println("max now set to "+setting.getMax().toString());
+						debug("max now set to "+setting.getMax().toString());
 					}
 					subsystem.settingChangeListener(setting);
 					ConfigPreferenceManager.save(setting);
@@ -187,7 +186,7 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 				if(button.getName().equals(name)){
 					button.setPressed(pressed);
 					if(name.equals("ExampleCommand1") && pressed){
-						System.out.println("need to rumble");
+						debug("need to rumble");
 						getRobot().getOi().getConsole().setRumble(Joystick.RumbleType.kLeftRumble,0.5);
 					}
 				}
@@ -202,15 +201,15 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 	
 	@Override
 	public void settingChangeListener(ConfigSetting changedSetting) {
-		System.out.println(changedSetting.getPath()+ " was changed to "+ changedSetting.getValue().toString());
+		debug(changedSetting.getPath()+ " was changed to "+ changedSetting.getValue().toString());
 		if(changedSetting.getName().equals("enableWebSockets") && changedSetting.getType().equals(Type.binary)){
 			//we know that enableWe
 			if(changedSetting.getBoolean()){
-				System.out.println("enabling websockets");
+				debug("enabling websockets");
 				eventManager.enableWebSockets();
 			}
 			else{
-				System.out.println("disabling websockets");
+				debug("disabling websockets");
 				eventManager.disableWebSockets();
 			}
 		}

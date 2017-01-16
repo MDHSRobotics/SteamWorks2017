@@ -38,7 +38,7 @@ public class DiagnosticsSubsystem extends MDSubsystem {
 	
 	@Override
 	protected void initDefaultCommand() {
-		System.out.println("initDefaultCommand()");
+		debug("initDefaultCommand()");
 		scan = new Notifier(new DiagnosticScan(getRobot()));
 		scan.startPeriodic(scanPeriod);
 	}
@@ -47,7 +47,7 @@ public class DiagnosticsSubsystem extends MDSubsystem {
 		
 		if(this.scan!=null && changedSetting.getName().equals("diagnosticsScanPeriod")){
 			scanPeriod = getConfigSettings().get("diagnosticsScanPeriod").getDouble();
-			System.out.println("changing scan period to "+scanPeriod);
+			debug("changing scan period to "+scanPeriod);
 			scan.startPeriodic(scanPeriod);
 //			scan.stop();
 //			scan = new Notifier(new DiagnosticScan(getRobot()));

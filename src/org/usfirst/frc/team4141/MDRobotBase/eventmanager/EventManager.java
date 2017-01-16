@@ -6,6 +6,8 @@ import java.util.concurrent.ArrayBlockingQueue;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.websocket.server.WebSocketHandler;
 import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
+import org.usfirst.frc.team4141.MDRobotBase.Logger.Level;
+import org.usfirst.frc.team4141.MDRobotBase.notifications.RobotLogNotification;
 
 /**
  * @author RobotC
@@ -89,7 +91,10 @@ public class EventManager {
 			
 			notification.setMessageId(nextMessageID++);
 			if(notification.showInConsole()){
-				System.out.println(notification);
+				if(notification.getNotificationType().equals("RobotLogNotification") && ((RobotLogNotification)notification).getLevel() == Level.DEBUG){
+					System.out.println(((RobotLogNotification)notification).getMessage());
+				}
+				else System.out.println(notification);
 			}
 			if(enableWebSockets){
 				if(notification.getTarget()!=null && remotes!=null && remotes.containsKey(notification.getTarget())){
@@ -146,7 +151,6 @@ public class EventManager {
 	}
 	public int getPort(){return port;}
 	public void identify(String id, EventManagerWebSocket socket) {
-		System.out.printf("identifying %s:%s\n",id,socket.toString());
 		remotes.put(id, socket);
 	}
 }

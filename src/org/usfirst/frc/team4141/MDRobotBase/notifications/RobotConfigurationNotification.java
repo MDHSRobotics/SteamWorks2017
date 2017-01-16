@@ -21,7 +21,7 @@ public class RobotConfigurationNotification extends RobotNotification {
 	
 	private MDRobotBase robot;
 	public RobotConfigurationNotification(MDRobotBase robot) {
-		this(robot, true, WebSocketSubsystem.Remote.console.toString(), true);
+		this(robot, false, WebSocketSubsystem.Remote.console.toString(), true);
 	}
 
 	public RobotConfigurationNotification(MDRobotBase robot, boolean record) {
@@ -93,8 +93,7 @@ public class RobotConfigurationNotification extends RobotNotification {
 			sb.append("}");
 		}
 		if(robot.getOi().getConsole()!=null){
-			System.out.println("MDConsoleOI to configure");
-
+			
 			sb.append(", \"consoleOI\":{");
 			sb.append("\"rumbles\":{");
 			sb.append("\"left\":0,");
@@ -103,7 +102,6 @@ public class RobotConfigurationNotification extends RobotNotification {
 			sb.append("\"buttons\":[");
 			boolean first = true;
 			for(Integer buttonIndex : robot.getOi().getConsole().getButtons().keySet()){
-				System.out.println("buttonIndex: "+buttonIndex);
 				if(first){first = false;}
 				else{
 					sb.append(", ");

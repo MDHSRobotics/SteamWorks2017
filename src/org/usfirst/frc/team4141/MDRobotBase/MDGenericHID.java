@@ -55,4 +55,7 @@ public class MDGenericHID extends GenericHID {
 	public int getPOV(int pov) {
 		return super.getPOV();
 	}	
+	public void debug(String message) {
+		getRobot().debug(message);		
+	}
 }

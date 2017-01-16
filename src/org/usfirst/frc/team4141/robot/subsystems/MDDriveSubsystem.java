@@ -133,7 +133,6 @@ public class MDDriveSubsystem extends MDSubsystem {
 			else{
 				angle = Math.atan2(x, y)*180/Math.PI;
 			}
-			System.out.println("angle="+angle);
 			return angle;  
 	}
 	
@@ -157,7 +156,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 	}
 	
 	public void stop(){
-		System.out.println("motors stopped");
+		debug("motors stopped");
 		robotDrive.stopMotor();
 	}	
 	
@@ -179,7 +178,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 	}
 
 	public void right(double speed) {
-		System.out.println("right");
+		debug("right");
 		double direction = -90;
 		switch(type){
 		case MecanumDrive:
@@ -191,7 +190,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 	}
 
 	public void left(double speed) {
-		System.out.println("left");
+		debug("left");
 		double direction = 90;
 		switch(type){
 		case MecanumDrive:
@@ -203,7 +202,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 	}
 
 	public void reverse(double speed) {
-		System.out.println("reverse");
+		debug("reverse");
 		double direction = 180;
 		switch(type){
 		case MecanumDrive:
@@ -215,7 +214,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 	}
 
 	public void forward(double speed) {
-		System.out.println("forward");
+		debug("forward");
 		double direction = 0;
 		switch(type){
 		case MecanumDrive:

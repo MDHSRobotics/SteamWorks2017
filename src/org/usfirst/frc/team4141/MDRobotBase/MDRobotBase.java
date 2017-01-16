@@ -60,7 +60,7 @@ public abstract class MDRobotBase extends IterativeRobot{
 	
 	//register subsystems
     public void add(MDSubsystem subsystem){
-    	System.out.println("adding subsystem "+subsystem.getName());
+    	debug("adding subsystem "+subsystem.getName());
     	this.subsystems.put(subsystem.getName(),subsystem);
     }
 	public Hashtable<String, MDSubsystem> getSubsystems() {
@@ -114,10 +114,8 @@ public abstract class MDRobotBase extends IterativeRobot{
     	this.commandChooser=new Hashtable<String,MDCommand>();
     	oi = new OI(this);
     	
-    	ConfigPreferenceManager.clearPreferences();
-    	
     	if(HALUtil.getFPGAButton()){
-    		System.out.println("resetting preferences");
+    		debug("resetting preferences");
         	ConfigPreferenceManager.clearPreferences();
     	}
     	// *** pre configured subsystems
@@ -125,7 +123,7 @@ public abstract class MDRobotBase extends IterativeRobot{
 		//Special Subsystem used for RobotDiagnostics
 		add( new DiagnosticsSubsystem(this, "diagnosticsSubsystem")
 				 .add("diagnosticsSensor",new RobotDiagnostics())
-				 .add("diagnosticsScanPeriod",new DoubleConfigSetting(0.05, 1.0, 0.05))
+				 .add("diagnosticsScanPeriod",new DoubleConfigSetting(0.05, 1.0, 0.1))
 				 .configure()
 		);
 		
@@ -136,7 +134,7 @@ public abstract class MDRobotBase extends IterativeRobot{
 		);    	
     	configureRobot();  
     	oi.configureOI();
-    	System.out.println("RobotInit completed");
+    	debug("RobotInit completed");
     }
 
     /**
@@ -163,7 +161,7 @@ public abstract class MDRobotBase extends IterativeRobot{
 	public void autonomousInit() {
     	if (autonomousCommand != null) autonomousCommand.start();
     	else{
-    		System.out.println("autonomousCommand is unexpectedly null");
+    		debug("autonomousCommand is unexpectedly null");
     	}
     }
 
@@ -235,7 +233,7 @@ public abstract class MDRobotBase extends IterativeRobot{
 		for(MDCommand command : commands){
 			commandChooser.put(command.getName(), command);
 			if(autonomousCommand==null){
-				System.out.println("defaulting autoCommand to "+command.getName());
+				debug("defaulting autoCommand to "+command.getName());
 				autonomousCommand = command;
 			}
 		}
@@ -245,7 +243,7 @@ public abstract class MDRobotBase extends IterativeRobot{
 		for(MDCommand command : commands){
 			commandChooser.put(command.getName(), command);
 			if(defaultCommandName!=null && defaultCommandName.equals(command.getName())){
-				System.out.println("defaulting autoCommand to "+command.getName());
+				debug("defaulting autoCommand to "+command.getName());
 				autonomousCommand = command;
 			}
 		}
@@ -259,5 +257,9 @@ public abstract class MDRobotBase extends IterativeRobot{
 		if(commandChooser.containsKey(commandName)){
 			autonomousCommand = commandChooser.get(commandName);
 		}
+	}
+
+	public void debug(String message) {
+		log(Level.DEBUG, "", message);
 	}
 }

@@ -21,7 +21,7 @@ public class RioHID extends MDGenericHID {
 		this.userButton = new InternalButton();
 		this.agent = new Notifier(new UserButtonAgent(userButton));
 		agent.startPeriodic(0.2);
-		System.out.println("RioHID created");
+		debug("RioHID created");
 	}
 
 

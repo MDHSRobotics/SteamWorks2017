@@ -103,10 +103,10 @@ public abstract class MDSubsystem extends Subsystem {
 					robot.add(item);
 					for(SensorReading reading : item.getReadings()){
 						if(reading == null){
-							System.out.println("reading unexpectedly null in sensor "+item.getName());
+							debug("reading unexpectedly null in sensor "+item.getName());
 						}
 						else{
-							System.out.println("registering reading "+reading.getName()+" from "+item.getName());	
+//							debug("registering reading "+reading.getName()+" from "+item.getName());	
 							if(reading.observe()){
 								robot.add(reading);
 							}
@@ -158,5 +158,8 @@ public abstract class MDSubsystem extends Subsystem {
 			return true;
 		}
 		return false;
+	}
+	public void debug(String message) {
+		getRobot().debug(message);		
 	}
 }

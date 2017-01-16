@@ -21,7 +21,7 @@ public class OI extends OIBase{
 	
 	public OI(MDRobotBase robot) {
 		super(robot);
-		System.out.println("OI created");
+		robot.debug("OI created");
 	}
 
 

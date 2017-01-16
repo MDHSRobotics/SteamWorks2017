@@ -23,9 +23,11 @@ public class ConsoleOI extends MDGenericHID {
 		super(robot,name);
 		this.buttons = new Hashtable<Integer,MDConsoleButton>();
 		
-		System.out.println("ConsoleOI created");
+		debug("ConsoleOI created");
 	}
 	
+
+
 	public Hashtable<Integer,MDConsoleButton> getButtons() { return buttons;}
 
 
