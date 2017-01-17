@@ -8,10 +8,11 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.hal.HALUtil;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-import org.usfirst.frc.team4141.MDRobotBase.Logger.Level;
 import org.usfirst.frc.team4141.MDRobotBase.config.BooleanConfigSetting;
 import org.usfirst.frc.team4141.MDRobotBase.config.ConfigPreferenceManager;
 import org.usfirst.frc.team4141.MDRobotBase.config.DoubleConfigSetting;
+import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
+import org.usfirst.frc.team4141.MDRobotBase.notifications.RobotLogNotification;
 import org.usfirst.frc.team4141.MDRobotBase.notifications.RobotNotification;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.RobotDiagnostics;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.Sensor;
@@ -32,7 +33,6 @@ import org.usfirst.frc.team4141.robot.subsystems.WebSocketSubsystem;
 public abstract class MDRobotBase extends IterativeRobot{
 
 	private OI oi;
-	private Logger logger;
 	private Hashtable<String,MDSubsystem> subsystems;
 	private Hashtable<String,MDCommand> commandChooser;
 
@@ -83,10 +83,37 @@ public abstract class MDRobotBase extends IterativeRobot{
 	
 	//Log helper methods
 	public void log(String logOrigin, String message) {
-		logger.log(logOrigin, message);		
+		log(Level.INFO,logOrigin, message);		
 	}
+
+	public void log(Level level, String logOrigin, String message, boolean showInConsole, String target, boolean record) {
+		post(new RobotLogNotification(level, logOrigin, message, showInConsole, null, record));
+	}	
+	
+	public void log(Level level, String logOrigin, String message, String target) {
+		switch(level){
+		case DEBUG:
+			log(level,logOrigin,message,true,target,false);
+			break;
+		case ERROR:
+			log(level,logOrigin,message,true,target,true);
+			break;
+		default:
+			log(level,logOrigin,message,false,target,false);
+		}
+	}
+	
 	public void log(Level level, String logOrigin, String message) {
-		logger.log(level,logOrigin, message);		
+		switch(level){
+		case DEBUG:
+			log(level,logOrigin,message,true,null,false);
+			break;
+		case ERROR:
+			log(level,logOrigin,message,true,WebSocketSubsystem.Remote.console.toString(),true);
+			break;
+		default:
+			log(level,logOrigin,message,false,WebSocketSubsystem.Remote.console.toString(),false);
+		}
 	}
 
 //	public Logger getLogger() {
@@ -109,7 +136,6 @@ public abstract class MDRobotBase extends IterativeRobot{
     @Override
 	public void robotInit() {
     	
-    	this.logger=new Logger(this);
     	this.subsystems=new Hashtable<String,MDSubsystem>();
     	this.commandChooser=new Hashtable<String,MDCommand>();
     	oi = new OI(this);

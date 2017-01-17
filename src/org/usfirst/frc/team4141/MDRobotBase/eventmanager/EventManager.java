@@ -6,7 +6,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.websocket.server.WebSocketHandler;
 import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
-import org.usfirst.frc.team4141.MDRobotBase.Logger.Level;
+import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
 import org.usfirst.frc.team4141.MDRobotBase.notifications.RobotLogNotification;
 
 /**

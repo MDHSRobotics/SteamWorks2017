@@ -10,7 +10,7 @@ package org.usfirst.frc.team4141.MDRobotBase.eventmanager;
 public class LogNotification extends Notification {
 	public enum Level{
 		INFO,
-		WARN,
+		DEBUG,
 		ERROR
 	};
 	

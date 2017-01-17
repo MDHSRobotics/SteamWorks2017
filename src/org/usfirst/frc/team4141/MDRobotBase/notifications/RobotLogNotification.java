@@ -1,6 +1,6 @@
 package org.usfirst.frc.team4141.MDRobotBase.notifications;
 
-import org.usfirst.frc.team4141.MDRobotBase.Logger.Level;
+import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
 
 public class RobotLogNotification extends RobotNotification {
 	//{"eventType": "LogNotification", "messageId":1, "timestamp": 1456619634747, "level":"INFO","source":"source","message":"message"}

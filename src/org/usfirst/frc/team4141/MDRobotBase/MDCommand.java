@@ -1,7 +1,8 @@
 package org.usfirst.frc.team4141.MDRobotBase;
 
 
-import org.usfirst.frc.team4141.MDRobotBase.Logger.Level;
+
+import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
 
 import edu.wpi.first.wpilibj.command.Command;
 

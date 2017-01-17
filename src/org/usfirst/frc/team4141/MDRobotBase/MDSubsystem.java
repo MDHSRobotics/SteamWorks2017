@@ -3,9 +3,9 @@ package org.usfirst.frc.team4141.MDRobotBase;
 import java.util.Hashtable;
 import java.util.Set;
 
-import org.usfirst.frc.team4141.MDRobotBase.Logger.Level;
 import org.usfirst.frc.team4141.MDRobotBase.config.ConfigPreferenceManager;
 import org.usfirst.frc.team4141.MDRobotBase.config.ConfigSetting;
+import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.Sensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.SensorReading;
 

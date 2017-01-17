@@ -2,10 +2,10 @@ package org.usfirst.frc.team4141.robot.commands;
 
 import org.usfirst.frc.team4141.MDRobotBase.MDCommand;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
+import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
 
 import java.util.Date;
 
-import org.usfirst.frc.team4141.MDRobotBase.Logger.Level;
 import org.usfirst.frc.team4141.robot.subsystems.BallSubsystem;
 
 public class CloseDoorCommand extends MDCommand {
