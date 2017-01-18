@@ -1,20 +1,19 @@
 package org.usfirst.frc.team4141.robot;
 
-
 import org.usfirst.frc.team4141.MDRobotBase.MDCommand;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MDDigitalInput;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_BuiltInAccelerometer;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_IMU;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
-import org.usfirst.frc.team4141.MDRobotBase.config.DoubleConfigSetting;
 import org.usfirst.frc.team4141.MDRobotBase.config.StringConfigSetting;
-import org.usfirst.frc.team4141.robot.commands.MDPrintCommand;
 import org.usfirst.frc.team4141.robot.commands.MDStopCommand;
 import org.usfirst.frc.team4141.robot.subsystems.CoreSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.GearSubSystem;
+import org.usfirst.frc.team4141.robot.subsystems.BallSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem.MotorPosition;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem.Type;
+import org.usfirst.frc.team4141.robot.subsystems.RopeSubsystem;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
@@ -64,25 +63,32 @@ public class Robot extends MDRobotBase {
 				.add("IMU", new MD_IMU())
 				.configure()
 		);	
+
+/*
+
+TankDrive with 2 motors example:
 		
-		//TankDrive with 2 motors example:
-//		add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
-//				.add(MotorPosition.right, new Victor(0))
-//				.add(MotorPosition.left, new Victor(1))
-//				.add("accelerometer", new MD_BuiltInAccelerometer())
-//				.add("IMU", new MD_IMU())
-//				.configure()
-//		);	
-		//TankDrive with 4 motors example:
-//		add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
-//				.add(MotorPosition.frontRight, new Victor(0))
-//				.add(MotorPosition.rearRight, new Victor(1))
-//				.add(MotorPosition.frontLeft, new Victor(2))
-//				.add(MotorPosition.rearLeft, new Victor(3))
-//				.add("accelerometer", new MD_BuiltInAccelerometer())
-//				.add("IMU", new MD_IMU())
-//				.configure()
-//		);	
+		add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
+				.add(MotorPosition.right, new Victor(0))
+				.add(MotorPosition.left, new Victor(1))
+				.add("accelerometer", new MD_BuiltInAccelerometer())
+				.add("IMU", new MD_IMU())
+				.configure()
+		);	
+		
+TankDrive with 4 motors example:
+
+		add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
+				.add(MotorPosition.frontRight, new Victor(0))
+				.add(MotorPosition.rearRight, new Victor(1))
+				.add(MotorPosition.frontLeft, new Victor(2))
+				.add(MotorPosition.rearLeft, new Victor(3))
+				.add("accelerometer", new MD_BuiltInAccelerometer())
+				.add("IMU", new MD_IMU())
+				.configure()
+		);	
+	
+*/	
 		
 		add(new GearSubSystem(this, "gearSubsystem")
 				.add(GearSubSystem.SolenoidPosition.left.toString(), new Solenoid(0))
@@ -90,6 +96,16 @@ public class Robot extends MDRobotBase {
 				.add(GearSubSystem.motorName, new Victor(4))
 				.add(GearSubSystem.SwitchPosition.extended.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.extended.toString(), 0))
 				.add(GearSubSystem.SwitchPosition.recessed.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.recessed.toString(), 1))
+				.configure());
+		
+		add(new BallSubsystem(this, "ballSubsystem")
+				.add(BallSubsystem.motorName, new Victor(4))
+			//	.add(BallSubsystem.?
+				.configure());
+
+		add(new RopeSubsystem(this, "ropeSubsystem")
+				.add(RopeSubsystem.RopeSensor.up.toString(), new MDDigitalInput(RopeSubsystem.RopeSensor.up.toString(), 0))
+				.add(RopeSubsystem.RopeSensor.down.toString(), new MDDigitalInput(RopeSubsystem.RopeSensor.up.toString(), 0))
 				.configure());
 
 	}

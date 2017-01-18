@@ -11,7 +11,7 @@ public class BallSubsystem extends MDSubsystem {
 	public static int closePosition=0;
 	public static int openPosition=140;
 	
-	public static String motorName="gateServoMotor";	
+	public static String motorName="gateServoMotor";
 	
 	public MDSubsystem configure() {
 		super.configure();
