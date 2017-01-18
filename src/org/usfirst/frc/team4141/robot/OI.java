@@ -10,6 +10,7 @@ import org.usfirst.frc.team4141.robot.commands.ExtendCommand;
 import org.usfirst.frc.team4141.robot.commands.MDMoveCommand;
 import org.usfirst.frc.team4141.robot.commands.MDMoveCommand.Direction;
 import org.usfirst.frc.team4141.robot.commands.MDPrintCommand;
+import org.usfirst.frc.team4141.robot.commands.OpenDoorCommand;
 import org.usfirst.frc.team4141.robot.commands.RetractCommand;
 
 
@@ -45,10 +46,13 @@ public class OI extends OIBase{
 		    //comment out and replace as needed
 			.whenPressed("X",3,new MDMoveCommand(getRobot(),"left command",Direction.left))
 			.whenPressed("A",1,new MDMoveCommand(getRobot(),"reverse command",Direction.reverse))
-			.whenPressed("B",2,new MDMoveCommand(getRobot(),"right command",Direction.right))
+			.whenPressed("B",2,new OpenDoorCommand(getRobot(),"Open Door Command"))
+//			.whenPressed("B",2,new MDMoveCommand(getRobot(),"right command",Direction.right))
 			.whenPressed("Y",4,new MDMoveCommand(getRobot(),"forward command",Direction.forward))
-			.whenPressed("LeftBumper",6,new ExtendCommand(getRobot(),"ExtendCommand"))
-			.whenPressed("RightBumper",5,new RetractCommand(getRobot(),"RetractCommand"))
+//			.whenPressed("LeftBumper",5,new ExtendCommand(getRobot(),"ExtendCommand"))
+//			.whenPressed("RightBumper",6,new RetractCommand(getRobot(),"RetractCommand"))
+			.whenPressed("LeftBumper",5,new MDPrintCommand(getRobot(),"LB","Left Bumper Pressed"))
+			.whenPressed("RightBumper",6,new MDPrintCommand(getRobot(),"RB","Right Bumper Pressed"))
 			.configure()
 		);
 

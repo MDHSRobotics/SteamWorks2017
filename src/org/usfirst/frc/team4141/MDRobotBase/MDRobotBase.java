@@ -140,10 +140,10 @@ public abstract class MDRobotBase extends IterativeRobot{
     	this.commandChooser=new Hashtable<String,MDCommand>();
     	oi = new OI(this);
     	
-    	if(HALUtil.getFPGAButton()){
-    		debug("resetting preferences");
-        	ConfigPreferenceManager.clearPreferences();
-    	}
+//    	if(HALUtil.getFPGAButton()){
+//    		debug("resetting preferences");
+//        	ConfigPreferenceManager.clearPreferences();
+//    	}
     	// *** pre configured subsystems
 		
 		//Special Subsystem used for RobotDiagnostics

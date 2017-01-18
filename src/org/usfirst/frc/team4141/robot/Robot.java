@@ -94,18 +94,19 @@ TankDrive with 4 motors example:
 				.add(GearSubSystem.SolenoidPosition.left.toString(), new Solenoid(0))
 				.add(GearSubSystem.SolenoidPosition.right.toString(), new Solenoid(1))
 				.add(GearSubSystem.motorName, new Victor(4))
-				.add(GearSubSystem.SwitchPosition.extended.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.extended.toString(), 0))
-				.add(GearSubSystem.SwitchPosition.recessed.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.recessed.toString(), 1))
+				.add(GearSubSystem.SwitchPosition.extended.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.extended.toString(), 2))
+				.add(GearSubSystem.SwitchPosition.recessed.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.recessed.toString(), 3))
 				.configure());
 		
 		add(new BallSubsystem(this, "ballSubsystem")
-				.add(BallSubsystem.motorName, new Victor(4))
+				.add(BallSubsystem.motorName, new Victor(5))
 			//	.add(BallSubsystem.?
 				.configure());
 
 		add(new RopeSubsystem(this, "ropeSubsystem")
-				.add(RopeSubsystem.RopeSensor.up.toString(), new MDDigitalInput(RopeSubsystem.RopeSensor.up.toString(), 0))
-				.add(RopeSubsystem.RopeSensor.down.toString(), new MDDigitalInput(RopeSubsystem.RopeSensor.up.toString(), 0))
+				.add(RopeSubsystem.motorName, new Victor(6))
+				.add(RopeSubsystem.RopeSensor.up.toString(), new MDDigitalInput(RopeSubsystem.RopeSensor.up.toString(), 4))
+				.add(RopeSubsystem.RopeSensor.down.toString(), new MDDigitalInput(RopeSubsystem.RopeSensor.up.toString(), 5))
 				.configure());
 
 	}
