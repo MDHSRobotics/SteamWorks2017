@@ -14,6 +14,7 @@ import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem.MotorPosition;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem.Type;
 import org.usfirst.frc.team4141.robot.subsystems.RopeSubsystem;
+import org.usfirst.frc.team4141.robot.subsystems.ShootSubsystem;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
@@ -107,6 +108,11 @@ TankDrive with 4 motors example:
 				.add(RopeSubsystem.motorName, new Victor(6))
 				.add(RopeSubsystem.RopeSensor.up.toString(), new MDDigitalInput(RopeSubsystem.RopeSensor.up.toString(), 4))
 				.add(RopeSubsystem.RopeSensor.down.toString(), new MDDigitalInput(RopeSubsystem.RopeSensor.up.toString(), 5))
+				.configure());
+		
+		add(new ShootSubsystem(this, "shootSubsystem")
+				.add(ShootSubsystem.motorName, new Victor(7))
+				.add(ShootSubsystem.motorName1, new Victor(8))
 				.configure());
 
 	}
