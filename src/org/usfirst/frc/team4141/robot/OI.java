@@ -51,6 +51,7 @@ public class OI extends OIBase{
 //			.whenPressed("RightBumper",6,new RetractCommand(getRobot(),"RetractCommand"))
 			.whenPressed("LeftBumper",5,new MDPrintCommand(getRobot(),"LB","Left Bumper Pressed"))
 			.whenPressed("RightBumper",6,new MDPrintCommand(getRobot(),"RB","Right Bumper Pressed"))
+			//.whenPressed("RightBumper",6,new MDPrintCommand(getRobot(),"RB","Right Bumper Pressed"))
 			.configure()
 		);
 

@@ -28,11 +28,13 @@ public class RopeSubsystem extends MDSubsystem {
 		if(getSensors()==null 
 				|| !getSensors().containsKey(RopeSensor.up.toString()) 
 				|| !getSensors().containsKey(RopeSensor.down.toString()))
-			throw new IllegalArgumentException("Invalid rope sensor configuration for gear system.");
+			throw new IllegalArgumentException("Invalid rope sensor configuration for rope system.");
 		return this;
 	}
 	
 	public void move(double speed){
+		//positive speed=wind
+		//negative speed=unwind
 		getMotors().get(motorName).setPosition(speed);
 	}
 	
