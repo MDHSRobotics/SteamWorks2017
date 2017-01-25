@@ -14,7 +14,9 @@ public class ShootSubsystem extends MDSubsystem {
 	}
 	
 	public static String motorName="turnShooterMotor";
-	public static String motorName1="turnAgitatorMotor";
+	public static String motorName1="turnAngleMotor";
+	public static String servoName="turnAgitatorMotor";
+
 		
 		public MDSubsystem configure(){
 			super.configure();
@@ -25,9 +27,11 @@ public class ShootSubsystem extends MDSubsystem {
 				throw new IllegalArgumentException("Invalid shooter motor configuration for shoot system.");
 			if(getMotors()==null 
 					|| !getMotors().containsKey(motorName1))
-				throw new IllegalArgumentException("Invalid agitator configuration for shoot system.");
-			return this;
-
+				throw new IllegalArgumentException("Invalid angle motor configuration for shoot system.");
+			if(getMotors()==null 
+					|| !getMotors().containsKey(servoName))
+				throw new IllegalArgumentException("Invalid servo configuration for shoot system.");
+				return this;
 		}
 		
 	public ShootSubsystem(MDRobotBase robot, String name) {
@@ -56,8 +60,11 @@ public class ShootSubsystem extends MDSubsystem {
 	public void turn(double speed){
 		getMotors().get(motorName).setPosition(speed);
 	}
-	public void low(double speed){
+	public void move(double speed){
 		getMotors().get(motorName1).setPosition(speed);
+	}
+	public void low(double speed){
+		getMotors().get(servoName).setPosition(speed);
 	}
 
 	public static boolean on() {

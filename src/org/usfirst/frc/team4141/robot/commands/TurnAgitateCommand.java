@@ -36,4 +36,9 @@ public class TurnAgitateCommand extends MDCommand {
 			shootSubsystem.turn(speed);
 		}
 		
+		@Override
+		protected void end() {
+			// TODO Auto-generated method stub
+			super.end();
+		}
 	}

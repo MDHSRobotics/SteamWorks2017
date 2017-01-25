@@ -55,7 +55,7 @@ public class Robot extends MDRobotBase {
 		//We have 2 types of drive systems, tank drive and mecanum drive
 		//uncomment the desired drive system and adjust the motor configuration as needed
 		//Mecanum example :
-		add(new MDDriveSubsystem(this, "driveSystem", Type.MecanumDrive)
+		add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
 				.add(MotorPosition.frontRight, new Victor(1))
 				.add(MotorPosition.rearRight, new Victor(0))
 				.add(MotorPosition.frontLeft, new Victor(3))
@@ -113,6 +113,7 @@ TankDrive with 4 motors example:
 		add(new ShootSubsystem(this, "shootSubsystem")
 				.add(ShootSubsystem.motorName, new Victor(7))
 				.add(ShootSubsystem.motorName1, new Victor(8))
+				.add(ShootSubsystem.servoName, new Victor(9))
 				.configure());
 
 	}

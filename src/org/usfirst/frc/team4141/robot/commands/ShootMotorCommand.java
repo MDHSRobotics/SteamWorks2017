@@ -9,7 +9,7 @@ import org.usfirst.frc.team4141.robot.subsystems.ShootSubsystem;
 public class ShootMotorCommand extends MDCommand {
 	
 	private double speed= 0.7;
-
+//'private double speed' can change 
 	public ShootMotorCommand(MDRobotBase robot, String name) {
 		super(robot, name);
 		// TODO Auto-generated constructor stub
@@ -36,5 +36,6 @@ public class ShootMotorCommand extends MDCommand {
 		protected void execute() {
 			shootSubsystem.turn(speed);
 		}
+		
 		
 	}
