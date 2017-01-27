@@ -27,6 +27,8 @@ public class MDMoveCommand extends MDCommand {
 	private MDDriveSubsystem driveSystem;
 	
 
+
+
 	public MDMoveCommand(MDRobotBase robot, String name, Direction direction) {
 		super(robot,name);
 		this.direction = direction;
@@ -70,5 +72,9 @@ public class MDMoveCommand extends MDCommand {
 		default: //default to forward
 			driveSystem.forward(speed);
 		}
+	}
+	@Override
+	protected void end() {
+		driveSystem.stop();
 	}
 }

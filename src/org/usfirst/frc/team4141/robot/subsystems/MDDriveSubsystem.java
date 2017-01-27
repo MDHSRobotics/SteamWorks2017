@@ -30,6 +30,9 @@ public class MDDriveSubsystem extends MDSubsystem {
 	
 	private RobotDrive robotDrive;
 	private Type type;
+	private boolean isFlipped = false;
+	private double _speed = 0;
+	
 	
 	public MDDriveSubsystem(MDRobotBase robot, String name, Type type) {
 		super(robot, name);
@@ -150,7 +153,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 			  double leftTriggerValue = -joystick.getRawAxis(2);
 			  double forward = (rightTriggerValue+leftTriggerValue)*(1.0-(1.0-c));
 		  	  double rotate = joystick.getRawAxis(0);
-		  	  double[] speeds = interpolator.calculate(forward, rotate);
+		  	  double[] speeds = interpolator.calculate(forward, rotate, isFlipped);
 			  robotDrive.tankDrive(-speeds[0], speeds[1]);
 		}
 	}
@@ -158,6 +161,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 	public void stop(){
 		debug("motors stopped");
 		robotDrive.stopMotor();
+		_speed = 0;
 	}	
 	
 	private double c = 1.0;
@@ -178,6 +182,11 @@ public class MDDriveSubsystem extends MDSubsystem {
 	}
 
 	public void right(double speed) {
+		_speed = speed;
+		
+		if (isFlipped) {
+			speed = -speed;
+		}
 		debug("right");
 		double direction = -90;
 		switch(type){
@@ -190,6 +199,11 @@ public class MDDriveSubsystem extends MDSubsystem {
 	}
 
 	public void left(double speed) {
+		_speed = speed;
+		
+		if (isFlipped) {
+			speed = -speed;
+		}
 		debug("left");
 		double direction = 90;
 		switch(type){
@@ -202,6 +216,11 @@ public class MDDriveSubsystem extends MDSubsystem {
 	}
 
 	public void reverse(double speed) {
+		_speed = speed;
+		
+		if (isFlipped) {
+			speed = -speed;
+		}
 		debug("reverse");
 		double direction = 180;
 		switch(type){
@@ -214,14 +233,39 @@ public class MDDriveSubsystem extends MDSubsystem {
 	}
 
 	public void forward(double speed) {
-		debug("forward");
+	//	debug("forward"); 
+		
+		_speed = speed;
+		
+		if (isFlipped) {
+			speed = -speed;
+		}
+		
 		double direction = 0;
+		
 		switch(type){
 		case MecanumDrive:
 			robotDrive.mecanumDrive_Polar(speed, direction, 0);
 			break;
 		default:
+			debug("speed =" + speed);
 			robotDrive.tankDrive(speed, speed);
 		}
 	}
+	
+	public void flip() {
+		
+		if (_speed != 0) return;
+		
+		isFlipped = !isFlipped;
+			
+		debug("flip. isFlipped now sent to " + isFlipped + ". speed = " + _speed);
+	}
+		
 }
+
+
+
+
+
+

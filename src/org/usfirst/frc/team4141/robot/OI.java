@@ -10,6 +10,7 @@ import org.usfirst.frc.team4141.robot.commands.MDMoveCommand;
 import org.usfirst.frc.team4141.robot.commands.MDMoveCommand.Direction;
 import org.usfirst.frc.team4141.robot.commands.MDPrintCommand;
 import org.usfirst.frc.team4141.robot.commands.OpenDoorCommand;
+import org.usfirst.frc.team4141.robot.commands.ToggleOrientation;
 
 
 /**
@@ -38,20 +39,21 @@ public class OI extends OIBase{
 		
 		//Configure the joystick(s) here
 		add(new MDJoystick(getRobot(), "joystick", 0)
-			.whenPressed("rightBumper",5,new MDPrintCommand(getRobot(),"Right Bumper Command","Right Bumper Command message"))
-			.whileHeld("leftBumper",6,new MDPrintCommand(getRobot(),"Left Bumper Command","Left Bumper Command message"))
+//			.whenPressed("rightBumper",5,new MDPrintCommand(getRobot(),"Right Bumper Command","Right Bumper Command message"))
+//			.whileHeld("leftBumper",6,new MDPrintCommand(getRobot(),"Left Bumper Command","Left Bumper Command message"))
 		    //the following commands are test move commands useful in testing drive configuration and set up
 		    //comment out and replace as needed
 			.whenPressed("X",3,new MDMoveCommand(getRobot(),"left command",Direction.left))
-			.whenPressed("A",1,new MDMoveCommand(getRobot(),"reverse command",Direction.reverse))
+//			.whenPressed("A",1,new MDMoveCommand(getRobot(),"reverse command",Direction.reverse))
 			.whenPressed("B",2,new OpenDoorCommand(getRobot(),"Open Door Command"))
 //			.whenPressed("B",2,new MDMoveCommand(getRobot(),"right command",Direction.right))
-			.whenPressed("Y",4,new MDMoveCommand(getRobot(),"forward command",Direction.forward))
+			.whenPressed("A",1,new MDMoveCommand(getRobot(),"forward command",Direction.forward))
 //			.whenPressed("LeftBumper",5,new ExtendCommand(getRobot(),"ExtendCommand"))
 //			.whenPressed("RightBumper",6,new RetractCommand(getRobot(),"RetractCommand"))
 			.whenPressed("LeftBumper",5,new MDPrintCommand(getRobot(),"LB","Left Bumper Pressed"))
 			.whenPressed("RightBumper",6,new MDPrintCommand(getRobot(),"RB","Right Bumper Pressed"))
 			//.whenPressed("RightBumper",6,new MDPrintCommand(getRobot(),"RB","Right Bumper Pressed"))
+			.whenPressed("Y",4,new ToggleOrientation(getRobot(),"Flip"))
 			.configure()
 		);
 
