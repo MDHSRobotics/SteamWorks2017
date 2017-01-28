@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team4141.robot.subsystems;
 
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
@@ -12,7 +13,7 @@ public class ShootSubsystem extends MDSubsystem {
 		on,
 		off
 	}
-	
+
 	public static String motorName="turnShooterMotor";
 	public static String motorName1="turnAngleMotor";
 	public static String servoName="turnAgitatorMotor";
