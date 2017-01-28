@@ -9,66 +9,60 @@ import org.usfirst.frc.team4141.robot.subsystems.GearSubSystem.SwitchPosition;
 
 public class ShootSubsystem extends MDSubsystem {
 	
-	public enum Toggle{
-		on,
-		off
-	}
+	
 
-	public static String motorName="turnShooterMotor";
-	public static String motorName1="turnAngleMotor";
-	public static String servoName="turnAgitatorMotor";
-
+	public static String shootMotor="ShooterMotor";
+	public static String angleMotor="AngleMotor";
+	public static String agitatorMotor="AgitatorMotor";
+//remove agitator motor
 		
 		public MDSubsystem configure(){
 			super.configure();
 			//are we configured properly?
 			// assume if more than one motor, use the first motor
 			if(getMotors()==null 
-					|| !getMotors().containsKey(motorName))
+					|| !getMotors().containsKey(shootMotor))
 				throw new IllegalArgumentException("Invalid shooter motor configuration for shoot system.");
 			if(getMotors()==null 
-					|| !getMotors().containsKey(motorName1))
+					|| !getMotors().containsKey(angleMotor))
 				throw new IllegalArgumentException("Invalid angle motor configuration for shoot system.");
 			if(getMotors()==null 
-					|| !getMotors().containsKey(servoName))
+					|| !getMotors().containsKey(agitatorMotor))
 				throw new IllegalArgumentException("Invalid servo configuration for shoot system.");
 				return this;
 		}
 		
 	public ShootSubsystem(MDRobotBase robot, String name) {
 		super(robot, name);
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	@Override
 	protected void setUp() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void settingChangeListener(ConfigSetting setting) {
-		// TODO Auto-generated method stub
-
+		// TODO: add a shooting setting for ui
 	}
 
 	@Override
 	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
 
 	}
 
-	public void turn(double speed){
-		getMotors().get(motorName).setPosition(speed);
+	public void shoot(double speed){
+		getMotors().get(shootMotor).setPosition(speed);
 	}
 	public void move(double speed){
-		getMotors().get(motorName1).setPosition(speed);
+		getMotors().get(angleMotor).setPosition(speed);
 	}
-	public void low(double speed){
-		getMotors().get(servoName).setPosition(speed);
+	public void agitate(double speed){
+		getMotors().get(agitatorMotor).setPosition(speed);
 	}
 
-	public static boolean on() {
+	public static boolean isOn() {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -76,11 +70,6 @@ public class ShootSubsystem extends MDSubsystem {
 	public static void off() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	public static boolean un() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 	
 }

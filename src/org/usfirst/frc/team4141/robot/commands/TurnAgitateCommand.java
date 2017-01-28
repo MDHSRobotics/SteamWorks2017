@@ -24,7 +24,7 @@ public class TurnAgitateCommand extends MDCommand {
 		
 		@Override
 		protected boolean isFinished() {
-			if(ShootSubsystem.on()){
+			if(ShootSubsystem.isOn()){
 				ShootSubsystem.off();
 				return true;
 			}

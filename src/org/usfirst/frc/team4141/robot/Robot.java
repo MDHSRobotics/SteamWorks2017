@@ -5,6 +5,7 @@ import org.usfirst.frc.team4141.MDRobotBase.sensors.MDDigitalInput;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_BuiltInAccelerometer;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_IMU;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
+import org.usfirst.frc.team4141.MDRobotBase.config.DoubleConfigSetting;
 import org.usfirst.frc.team4141.MDRobotBase.config.StringConfigSetting;
 import org.usfirst.frc.team4141.robot.commands.MDStopCommand;
 import org.usfirst.frc.team4141.robot.subsystems.CoreSubsystem;
@@ -113,9 +114,10 @@ public class Robot extends MDRobotBase {
 				.configure());
 		
 		add(new ShootSubsystem(this, "shootSubsystem")
-				.add(ShootSubsystem.motorName, new Victor(7))
-				.add(ShootSubsystem.motorName1, new Victor(8))
-				.add(ShootSubsystem.servoName, new Victor(9))
+				.add(ShootSubsystem.shootMotor, new Victor(7))
+				.add(ShootSubsystem.angleMotor, new Victor(8))
+				.add(ShootSubsystem.agitatorMotor, new Victor(9))
+				//.add("shootMotorSpeed",new DoubleConfigSetting(0.05, 0.5, 0.1))
 				.configure());
 
 	}

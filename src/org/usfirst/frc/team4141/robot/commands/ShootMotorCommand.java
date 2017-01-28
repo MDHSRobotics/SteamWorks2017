@@ -25,7 +25,7 @@ public class ShootMotorCommand extends MDCommand {
 		}
 		@Override
 		protected boolean isFinished() {
-			if(ShootSubsystem.un()){ 
+			if(ShootSubsystem.isOn()){ 
 				ShootSubsystem.off();
 				return true;
 			}
@@ -34,7 +34,7 @@ public class ShootMotorCommand extends MDCommand {
 		
 		@Override
 		protected void execute() {
-			shootSubsystem.turn(speed);
+			shootSubsystem.shoot(speed);
 		}
 		
 		
