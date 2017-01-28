@@ -10,6 +10,7 @@ import org.usfirst.frc.team4141.robot.commands.MDMoveCommand;
 import org.usfirst.frc.team4141.robot.commands.MDMoveCommand.Direction;
 import org.usfirst.frc.team4141.robot.commands.MDPrintCommand;
 import org.usfirst.frc.team4141.robot.commands.OpenDoorCommand;
+import org.usfirst.frc.team4141.robot.commands.RopeRiseCommand;
 import org.usfirst.frc.team4141.robot.commands.ToggleOrientationCommand;
 
 
@@ -35,6 +36,14 @@ public class OI extends OIBase{
 		// x is button 3
 		// y is button 4
 		
+//		if using joystick, the buttons are generally as follows:
+//			trigger is button 1
+//			side is button 2
+//			3 is button 3
+//			4 is button 4
+//			5 is button 5
+//			6 is button 6
+		
 		
 		
 		//Configure the joystick(s) here
@@ -43,17 +52,31 @@ public class OI extends OIBase{
 //			.whileHeld("leftBumper",6,new MDPrintCommand(getRobot(),"Left Bumper Command","Left Bumper Command message"))
 		    //the following commands are test move commands useful in testing drive configuration and set up
 		    //comment out and replace as needed
+				/*
+			//Controller Config:Xbox/Logictech
+			
 			.whenPressed("X",3,new MDMoveCommand(getRobot(),"left command",Direction.left))
-//			.whenPressed("A",1,new MDMoveCommand(getRobot(),"reverse command",Direction.reverse))
+			.whenPressed("A",1,new MDMoveCommand(getRobot(),"reverse command",Direction.reverse))
 			.whenPressed("B",2,new OpenDoorCommand(getRobot(),"Open Door Command"))
-//			.whenPressed("B",2,new MDMoveCommand(getRobot(),"right command",Direction.right))
+			.whenPressed("B",2,new MDMoveCommand(getRobot(),"right command",Direction.right))
 			.whenPressed("A",1,new MDMoveCommand(getRobot(),"forward command",Direction.forward))
-//			.whenPressed("LeftBumper",5,new ExtendCommand(getRobot(),"ExtendCommand"))
-//			.whenPressed("RightBumper",6,new RetractCommand(getRobot(),"RetractCommand"))
+			.whenPressed("LeftBumper",5,new ExtendCommand(getRobot(),"ExtendCommand"))
+			.whenPressed("RightBumper",6,new RetractCommand(getRobot(),"RetractCommand"))
 			.whenPressed("LeftBumper",5,new MDPrintCommand(getRobot(),"LB","Left Bumper Pressed"))
 			.whenPressed("RightBumper",6,new MDPrintCommand(getRobot(),"RB","Right Bumper Pressed"))
 			//.whenPressed("RightBumper",6,new MDPrintCommand(getRobot(),"RB","Right Bumper Pressed"))
 			.whenPressed("Y",4,new ToggleOrientationCommand(getRobot(),"Flip"))
+				*/
+				
+			//Joystick Config: EXTREME¡!!!!!!360PRO
+//			.whenPressed("trigger",1,new ShootCommand(getRobot(), "ShootCommand"))
+//			.whenPressed("Trigger",1,new ShootCommand(getRobot(), "ShootCommand"))
+			.whenPressed("SideButton",2,new ToggleOrientationCommand(getRobot(), "ToggleOrientationCommand"))
+			.whenPressed("Button3",3,new OpenDoorCommand(getRobot(), "OpenDoorCommand"))
+			.whenPressed("Button4",4,new MDMoveCommand(getRobot(),"reverse command",Direction.reverse))
+			.whenPressed("Button5",5,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
+			.whenPressed("Button6",6,new MDMoveCommand(getRobot(),"forward command",Direction.forward))
+			
 			.configure()
 		);
 
