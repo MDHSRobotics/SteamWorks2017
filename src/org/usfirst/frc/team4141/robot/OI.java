@@ -47,7 +47,7 @@ public class OI extends OIBase{
 		
 		
 //      Configure the joystick(s) here
-		add(new MDJoystick(getRobot(), "joystick", 0)
+		add(new MDJoystick(getRobot(), "driveJoystick", 0)
 //			.whenPressed("rightBumper",5,new MDPrintCommand(getRobot(),"Right Bumper Command","Right Bumper Command message"))
 //			.whileHeld("leftBumper",6,new MDPrintCommand(getRobot(),"Left Bumper Command","Left Bumper Command message"))
 //          the following commands are test move commands useful in testing drive configuration and set up

@@ -21,7 +21,7 @@ public class ArcadeDriveCommand extends MDCommand {
 	@Override
 	protected void initialize() {
 		super.initialize();
-		joystick = getRobot().getOi().getJoysticks().get("joystick");
+		joystick = getRobot().getOi().getJoysticks().get("driveJoystick");
 	}
 
     // Called repeatedly when this Command is scheduled to run
