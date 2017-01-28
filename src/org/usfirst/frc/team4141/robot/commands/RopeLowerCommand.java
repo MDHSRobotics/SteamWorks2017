@@ -5,13 +5,13 @@ import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
 import org.usfirst.frc.team4141.robot.subsystems.RopeSubsystem;
 
-public class RopeRiseCommand extends MDCommand {
+public class RopeLowerCommand extends MDCommand {
 //speed subject to change
 	private double speed=0.2;
 	
 	private RopeSubsystem ropeSubsystem;
 	
-	public RopeRiseCommand(MDRobotBase robot, String name) {
+	public RopeLowerCommand(MDRobotBase robot, String name) {
 		super(robot, name);
 		// TODO Auto-generated constructor stub
 	}

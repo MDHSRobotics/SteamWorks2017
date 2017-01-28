@@ -30,25 +30,25 @@ public class TankDriveInterpolator {
 		return forward+b*rotate*(1-forward);
 	}
 	
-	public double[] calculate(double forward, double rotate){
+	public double[] calculate(double forward, double rotate, boolean isFlipped){
 		if (forward>=0) {
 			if (rotate>=0){
 				//Q1
-				return new double[] {L(forward, rotate),R(forward,rotate)};
+				return new double[] {(isFlipped?-1:1)*L(forward, rotate),(isFlipped?-1:1)*R(forward,rotate)};
 			}
 			else{
 				//Q2
-				return new double[] {R(forward, -rotate),L(forward,-rotate)};
+				return new double[] {(isFlipped?-1:1)*R(forward, -rotate),(isFlipped?-1:1)*L(forward,-rotate)};
 			}
 		}
 		else{
 			if (rotate>=0){
 				//Q4
-				return  new double[] {-R(-forward, rotate),-L(-forward,rotate)};
+				return  new double[] {(isFlipped?-1:1)*-R(-forward, rotate),(isFlipped?-1:1)*-L(-forward,rotate)};
 			}
 			else{
 				//Q3
-				return  new double[] {-L(-forward, -rotate),-R(-forward,-rotate)};
+				return  new double[] {(isFlipped?-1:1)*-L(-forward, -rotate),(isFlipped?-1:1)*-R(-forward,-rotate)};
 			}
 		}
 	}

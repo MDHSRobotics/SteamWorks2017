@@ -289,3 +289,6 @@ public abstract class MDRobotBase extends IterativeRobot{
 		log(Level.DEBUG, "", message);
 	}
 }
+
+
+
