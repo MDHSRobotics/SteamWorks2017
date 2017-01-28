@@ -13,8 +13,6 @@ public class ShootSubsystem extends MDSubsystem {
 
 	public static String shootMotor="ShooterMotor";
 	public static String angleMotor="AngleMotor";
-	public static String agitatorMotor="AgitatorMotor";
-//remove agitator motor
 		
 		public MDSubsystem configure(){
 			super.configure();
@@ -26,10 +24,9 @@ public class ShootSubsystem extends MDSubsystem {
 			if(getMotors()==null 
 					|| !getMotors().containsKey(angleMotor))
 				throw new IllegalArgumentException("Invalid angle motor configuration for shoot system.");
-			if(getMotors()==null 
-					|| !getMotors().containsKey(agitatorMotor))
-				throw new IllegalArgumentException("Invalid servo configuration for shoot system.");
+		
 				return this;
+				
 		}
 		
 	public ShootSubsystem(MDRobotBase robot, String name) {
@@ -44,7 +41,7 @@ public class ShootSubsystem extends MDSubsystem {
 
 	@Override
 	public void settingChangeListener(ConfigSetting setting) {
-		// TODO: add a shooting setting for ui
+		// TODO: add a shooting setting for UI
 	}
 
 	@Override
@@ -58,17 +55,15 @@ public class ShootSubsystem extends MDSubsystem {
 	public void move(double speed){
 		getMotors().get(angleMotor).setPosition(speed);
 	}
-	public void agitate(double speed){
-		getMotors().get(agitatorMotor).setPosition(speed);
-	}
 
 	public static boolean isOn() {
 		// TODO Auto-generated method stub
+		//may need to add code here
 		return false;
 	}
 
 	public static void off() {
-		// TODO Auto-generated method stub
+		// TODO Stop all shoot motors
 		
 	}
 	

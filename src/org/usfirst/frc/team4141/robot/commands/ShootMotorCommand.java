@@ -12,7 +12,6 @@ public class ShootMotorCommand extends MDCommand {
 //'private double speed' can change 
 	public ShootMotorCommand(MDRobotBase robot, String name) {
 		super(robot, name);
-		// TODO Auto-generated constructor stub
 	}
 		private ShootSubsystem shootSubsystem;
 		
@@ -31,11 +30,14 @@ public class ShootMotorCommand extends MDCommand {
 			}
 			return false;
 		}
-		
 		@Override
 		protected void execute() {
 			shootSubsystem.shoot(speed);
 		}
 		
+		@Override
+		protected void end() {
+				shootSubsystem.off();
+		}
 		
 	}

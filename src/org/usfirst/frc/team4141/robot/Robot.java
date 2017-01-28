@@ -116,7 +116,6 @@ public class Robot extends MDRobotBase {
 		add(new ShootSubsystem(this, "shootSubsystem")
 				.add(ShootSubsystem.shootMotor, new Victor(7))
 				.add(ShootSubsystem.angleMotor, new Victor(8))
-				.add(ShootSubsystem.agitatorMotor, new Victor(9))
 				//.add("shootMotorSpeed",new DoubleConfigSetting(0.05, 0.5, 0.1))
 				.configure());
 
