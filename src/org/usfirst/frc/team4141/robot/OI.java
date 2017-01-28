@@ -46,14 +46,15 @@ public class OI extends OIBase{
 		
 		
 		
-		//Configure the joystick(s) here
+//      Configure the joystick(s) here
 		add(new MDJoystick(getRobot(), "joystick", 0)
 //			.whenPressed("rightBumper",5,new MDPrintCommand(getRobot(),"Right Bumper Command","Right Bumper Command message"))
 //			.whileHeld("leftBumper",6,new MDPrintCommand(getRobot(),"Left Bumper Command","Left Bumper Command message"))
-		    //the following commands are test move commands useful in testing drive configuration and set up
-		    //comment out and replace as needed
-				/*
-			//Controller Config:Xbox/Logictech
+//          the following commands are test move commands useful in testing drive configuration and set up
+//          comment out and replace as needed
+				
+/*
+			// Controller Config: Xbox
 			
 			.whenPressed("X",3,new MDMoveCommand(getRobot(),"left command",Direction.left))
 			.whenPressed("A",1,new MDMoveCommand(getRobot(),"reverse command",Direction.reverse))
@@ -66,9 +67,10 @@ public class OI extends OIBase{
 			.whenPressed("RightBumper",6,new MDPrintCommand(getRobot(),"RB","Right Bumper Pressed"))
 			//.whenPressed("RightBumper",6,new MDPrintCommand(getRobot(),"RB","Right Bumper Pressed"))
 			.whenPressed("Y",4,new ToggleOrientationCommand(getRobot(),"Flip"))
-				*/
+*/
 				
-			//Joystick Config: EXTREME¡!!!!!!360PRO
+			// Joystick Config: EXTREME 360 Pro
+				
 //			.whenPressed("trigger",1,new ShootCommand(getRobot(), "ShootCommand"))
 //			.whenPressed("Trigger",1,new ShootCommand(getRobot(), "ShootCommand"))
 			.whenPressed("SideButton",2,new ToggleOrientationCommand(getRobot(), "ToggleOrientationCommand"))
@@ -76,7 +78,6 @@ public class OI extends OIBase{
 			.whenPressed("Button4",4,new MDMoveCommand(getRobot(),"reverse command",Direction.reverse))
 			.whenPressed("Button5",5,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
 			.whenPressed("Button6",6,new MDMoveCommand(getRobot(),"forward command",Direction.forward))
-			
 			.configure()
 		);
 
