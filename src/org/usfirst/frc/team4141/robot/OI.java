@@ -10,7 +10,7 @@ import org.usfirst.frc.team4141.robot.commands.MDMoveCommand;
 import org.usfirst.frc.team4141.robot.commands.MDMoveCommand.Direction;
 import org.usfirst.frc.team4141.robot.commands.MDPrintCommand;
 import org.usfirst.frc.team4141.robot.commands.OpenDoorCommand;
-import org.usfirst.frc.team4141.robot.commands.ToggleOrientation;
+import org.usfirst.frc.team4141.robot.commands.ToggleOrientationCommand;
 
 
 /**
@@ -53,7 +53,7 @@ public class OI extends OIBase{
 			.whenPressed("LeftBumper",5,new MDPrintCommand(getRobot(),"LB","Left Bumper Pressed"))
 			.whenPressed("RightBumper",6,new MDPrintCommand(getRobot(),"RB","Right Bumper Pressed"))
 			//.whenPressed("RightBumper",6,new MDPrintCommand(getRobot(),"RB","Right Bumper Pressed"))
-			.whenPressed("Y",4,new ToggleOrientation(getRobot(),"Flip"))
+			.whenPressed("Y",4,new ToggleOrientationCommand(getRobot(),"Flip"))
 			.configure()
 		);
 

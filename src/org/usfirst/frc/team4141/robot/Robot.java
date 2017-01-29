@@ -69,7 +69,7 @@ public class Robot extends MDRobotBase {
 
 
 // TankDrive with 2 motors example:
-/*		
+		
 		add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
 				.add(MotorPosition.right, new Victor(0))
 				.add(MotorPosition.left, new Victor(1))
@@ -77,10 +77,10 @@ public class Robot extends MDRobotBase {
 				.add("IMU", new MD_IMU())
 				.configure()
 		);	
-*/		
+		
 // TankDrive with 4 motors example:
 
-		add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
+/*		add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
 				.add(MotorPosition.frontRight, new Victor(0))
 				.add(MotorPosition.rearRight, new Victor(1))
 				.add(MotorPosition.frontLeft, new Victor(2))
@@ -90,7 +90,7 @@ public class Robot extends MDRobotBase {
 				.configure()
 		);	
 	
-
+*/
 		
 		add(new GearSubSystem(this, "gearSubsystem")
 				.add(GearSubSystem.SolenoidPosition.left.toString(), new Solenoid(0))

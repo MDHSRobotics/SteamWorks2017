@@ -7,9 +7,9 @@ import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem;
 
-public class ToggleOrientation extends MDCommand {
+public class ToggleOrientationCommand extends MDCommand {
 
-	public ToggleOrientation(MDRobotBase robot, String name) {
+	public ToggleOrientationCommand(MDRobotBase robot, String name) {
 		super(robot, name);
 		
 		
