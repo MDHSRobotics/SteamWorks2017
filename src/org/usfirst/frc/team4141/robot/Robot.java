@@ -103,7 +103,7 @@ public class Robot extends MDRobotBase {
 				.configure());
 		
 		add(new BallSubsystem(this, "ballSubsystem")
-				.add(BallSubsystem.motorName, new Victor(5))
+				.add(BallSubsystem.motorName, new Victor(2))
 			//	.add(BallSubsystem.?
 				.configure());
 
