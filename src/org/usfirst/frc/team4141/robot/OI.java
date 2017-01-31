@@ -6,12 +6,15 @@ import org.usfirst.frc.team4141.MDRobotBase.MDJoystick;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.OIBase;
 import org.usfirst.frc.team4141.MDRobotBase.RioHID;
+import org.usfirst.frc.team4141.robot.commands.CollectCommand;
 import org.usfirst.frc.team4141.robot.commands.MDMoveCommand;
 import org.usfirst.frc.team4141.robot.commands.MDMoveCommand.Direction;
 import org.usfirst.frc.team4141.robot.commands.MDPrintCommand;
 //import org.usfirst.frc.team4141.robot.commands.OpenDoorCommand;
 import org.usfirst.frc.team4141.robot.commands.RopeRiseCommand;
+import org.usfirst.frc.team4141.robot.commands.StopCommand;
 import org.usfirst.frc.team4141.robot.commands.ToggleOrientationCommand;
+import org.usfirst.frc.team4141.robot.commands.UnjamedCommand;
 
 
 /**
@@ -71,13 +74,13 @@ public class OI extends OIBase{
 				
 			// Joystick Config: EXTREME 360 Pro
 				
-//			.whenPressed("trigger",1,new ShootCommand(getRobot(), "ShootCommand"))
-//			.whenPressed("Trigger",1,new ShootCommand(getRobot(), "ShootCommand"))
+			.whenPressed("trigger",1,new StopCommand(getRobot(), "StopCommand"))
 			.whenPressed("SideButton",2,new ToggleOrientationCommand(getRobot(), "ToggleOrientationCommand"))
-//			.whenPressed("Button3",3,new OpenDoorCommand(getRobot(), "OpenDoorCommand"))
+			.whenPressed("Button3",3,new CollectCommand(getRobot(), "CollectCommand"))
 			.whenPressed("Button4",4,new MDMoveCommand(getRobot(),"reverse command",Direction.reverse))
 			.whenPressed("Button5",5,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
-			.whenPressed("Button6",6,new MDMoveCommand(getRobot(),"forward command",Direction.forward))
+//			.whenPressed("Button6",6,new MDMoveCommand(getRobot(),"forward command",Direction.forward))
+			.whenPressed("Button6",6,new UnjamedCommand(getRobot(),"UnjamwdCommand"))
 			.configure()
 		);
 
