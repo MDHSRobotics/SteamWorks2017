@@ -1,7 +1,5 @@
 package org.usfirst.frc.team4141.robot.commands;
 
-import java.util.Date;
-
 import org.usfirst.frc.team4141.MDRobotBase.MDCommand;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
@@ -12,8 +10,6 @@ public class ToggleOrientationCommand extends MDCommand {
 	public ToggleOrientationCommand(MDRobotBase robot, String name) {
 		super(robot, name);
 		
-		
-		// TODO Auto-generated constructor stub
 	}
 	
 	private MDDriveSubsystem driveSystem;
