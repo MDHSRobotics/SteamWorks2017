@@ -11,6 +11,7 @@ import org.usfirst.frc.team4141.MDRobotBase.sensors.Sensor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 
 
@@ -32,6 +33,11 @@ public class MDDriveSubsystem extends MDSubsystem {
 	private Type type;
 	private boolean isFlipped = false;
 	private double _speed = 0;
+	private double speed = 0.2;
+	private int fastSpeed = 1;
+	private boolean isHighGear = false;
+	public static String shiftSolenoid = "shiftSolenoid";
+	private Solenoid shifter;
 	
 	
 	public MDDriveSubsystem(MDRobotBase robot, String name, Type type) {
@@ -84,6 +90,13 @@ public class MDDriveSubsystem extends MDSubsystem {
 				robotDrive = new RobotDrive(new MultiSpeedController(new SpeedController[]{get(MotorPosition.rearLeft), get(MotorPosition.frontLeft)}),
 						new MultiSpeedController(new SpeedController[]{get(MotorPosition.rearRight), get(MotorPosition.frontRight)}));
 			}
+			
+			if(getSolenoids()==null 
+					|| !getSolenoids().containsKey(shiftSolenoid) || !(getSolenoids().get(shiftSolenoid) instanceof Solenoid)) {
+					throw new IllegalArgumentException("Invalid shift solenoid configuration for Drive system.");
+			}	
+			shifter=(Solenoid) getSolenoids().get(shiftSolenoid);
+			
 			break;
 		case MecanumDrive:
 			if(getMotors()==null || !getMotors().containsKey(MotorPosition.rearLeft.toString()) || !getMotors().containsKey(MotorPosition.frontLeft.toString())
@@ -263,6 +276,20 @@ public class MDDriveSubsystem extends MDSubsystem {
 			
 		debug("flip. isFlipped now sent to " + isFlipped + ". speed = " + _speed);
 	}
+	
+	public void shift() {
+		stop();
+		
+		isHighGear = !isHighGear;
+		
+		shifter.set(isHighGear);
+		
+		
+		
+		debug("shifted to " + (isHighGear?"high gear" : "low gear"));
+		
+	}
+	
 		
 }
 

@@ -1,18 +1,21 @@
 package org.usfirst.frc.team4141.robot.commands;
 
+//REMEMBER TO TEST CODE
+
 import org.usfirst.frc.team4141.MDRobotBase.MDCommand;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem;
 
-public class ToggleOrientationCommand extends MDCommand {
-
-	public ToggleOrientationCommand(MDRobotBase robot, String name) {
-		super(robot, name);
-		
-	}
+public class ShiftToggleCommand extends MDCommand {
 	
-	private MDDriveSubsystem driveSystem;
+	
+	public ShiftToggleCommand(MDRobotBase robot, String name) {
+		super(robot, name);
+		// TODO Auto-generated constructor stub
+	}
+
+private MDDriveSubsystem driveSystem;
 	
 	@Override
 	protected void initialize() {
@@ -30,8 +33,9 @@ public class ToggleOrientationCommand extends MDCommand {
 	@Override
 	protected void execute() {
 		
-			driveSystem.flip();
+			driveSystem.shift();
 		
 	}
 
+	
 }
