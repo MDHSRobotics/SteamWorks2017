@@ -6,46 +6,39 @@ import org.usfirst.frc.team4141.MDRobotBase.config.ConfigSetting;
 
 // TODO: configure subsystem in Robot.java and configure buttons
 
-public class BallSubsystem extends MDSubsystem {
+public class BallPickupSubsystem extends MDSubsystem {
 
-	public static int closePosition=0;
-	public static int openPosition=140;
-	
-	public static String motorName="gateServoMotor";
+	public static String motorCollect="collectBallMotor";
 	
 	public MDSubsystem configure() {
 		super.configure();
 		if(getMotors()==null 
-				|| !getMotors().containsKey(motorName))
-			throw new IllegalArgumentException("Invalid motor configuration for ball system.");
+				|| !getMotors().containsKey(motorCollect))
+			throw new IllegalArgumentException("Invalid motor configuration for ball Pickup system.");
 		return this;
 	}
 
 	
-	public BallSubsystem(MDRobotBase robot, String name) {
+	public BallPickupSubsystem(MDRobotBase robot, String name) {
 		super(robot, name);
-	}
-	
-	public void move(double position){
-		getMotors().get(motorName).setPosition(position);
 	}
 	
 	@Override
 	protected void setUp() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void settingChangeListener(ConfigSetting setting) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
 		
+	}
+	
+	public void collect(double position){
+		getMotors().get(motorCollect).setPosition(position);
 	}
 	
 	

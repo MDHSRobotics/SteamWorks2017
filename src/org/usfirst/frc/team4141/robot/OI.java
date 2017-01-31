@@ -9,7 +9,7 @@ import org.usfirst.frc.team4141.MDRobotBase.RioHID;
 import org.usfirst.frc.team4141.robot.commands.MDMoveCommand;
 import org.usfirst.frc.team4141.robot.commands.MDMoveCommand.Direction;
 import org.usfirst.frc.team4141.robot.commands.MDPrintCommand;
-import org.usfirst.frc.team4141.robot.commands.OpenDoorCommand;
+//import org.usfirst.frc.team4141.robot.commands.OpenDoorCommand;
 import org.usfirst.frc.team4141.robot.commands.RopeRiseCommand;
 import org.usfirst.frc.team4141.robot.commands.ToggleOrientationCommand;
 
@@ -74,7 +74,7 @@ public class OI extends OIBase{
 //			.whenPressed("trigger",1,new ShootCommand(getRobot(), "ShootCommand"))
 //			.whenPressed("Trigger",1,new ShootCommand(getRobot(), "ShootCommand"))
 			.whenPressed("SideButton",2,new ToggleOrientationCommand(getRobot(), "ToggleOrientationCommand"))
-			.whenPressed("Button3",3,new OpenDoorCommand(getRobot(), "OpenDoorCommand"))
+//			.whenPressed("Button3",3,new OpenDoorCommand(getRobot(), "OpenDoorCommand"))
 			.whenPressed("Button4",4,new MDMoveCommand(getRobot(),"reverse command",Direction.reverse))
 			.whenPressed("Button5",5,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
 			.whenPressed("Button6",6,new MDMoveCommand(getRobot(),"forward command",Direction.forward))

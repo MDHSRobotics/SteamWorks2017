@@ -10,7 +10,7 @@ import org.usfirst.frc.team4141.MDRobotBase.config.StringConfigSetting;
 import org.usfirst.frc.team4141.robot.commands.MDStopCommand;
 import org.usfirst.frc.team4141.robot.subsystems.CoreSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.GearSubSystem;
-import org.usfirst.frc.team4141.robot.subsystems.BallSubsystem;
+import org.usfirst.frc.team4141.robot.subsystems.BallPickupSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem.MotorPosition;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem.Type;
@@ -102,8 +102,13 @@ public class Robot extends MDRobotBase {
 				.add(GearSubSystem.SwitchPosition.recessed.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.recessed.toString(), 3))
 				.configure());
 		
+<<<<<<< Updated upstream
 		add(new BallSubsystem(this, "ballSubsystem")
 				.add(BallSubsystem.motorName, new Victor(2))
+=======
+		add(new BallPickupSubsystem(this, "ballPickupSubsystem")
+				.add(BallPickupSubsystem.motorCollect, new Victor(2))
+>>>>>>> Stashed changes
 			//	.add(BallSubsystem.?
 				.configure());
 
