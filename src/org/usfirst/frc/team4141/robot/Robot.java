@@ -101,14 +101,10 @@ public class Robot extends MDRobotBase {
 				.add(GearSubSystem.SwitchPosition.extended.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.extended.toString(), 2))
 				.add(GearSubSystem.SwitchPosition.recessed.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.recessed.toString(), 3))
 				.configure());
-		
-<<<<<<< Updated upstream
-		add(new BallSubsystem(this, "ballSubsystem")
-				.add(BallSubsystem.motorName, new Victor(2))
-=======
+
 		add(new BallPickupSubsystem(this, "ballPickupSubsystem")
 				.add(BallPickupSubsystem.motorCollect, new Victor(2))
->>>>>>> Stashed changes
+
 			//	.add(BallSubsystem.?
 				.configure());
 
