@@ -77,6 +77,7 @@ public class Robot extends MDRobotBase {
 				.add(MotorPosition.left, new Victor(1))
 				.add("accelerometer", new MD_BuiltInAccelerometer())
 				.add("IMU", new MD_IMU())
+				.add(MDDriveSubsystem.shiftSolenoid, new Solenoid(2))
 				.configure()
 		);	
 		
@@ -93,32 +94,32 @@ public class Robot extends MDRobotBase {
 		);	
 	
 */
-		
-		add(new GearSubSystem(this, "gearSubsystem")
-				.add(GearSubSystem.SolenoidPosition.left.toString(), new Solenoid(0))
-				.add(GearSubSystem.SolenoidPosition.right.toString(), new Solenoid(1))
-				.add(GearSubSystem.motorName, new Victor(4))
-				.add(GearSubSystem.SwitchPosition.extended.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.extended.toString(), 2))
-				.add(GearSubSystem.SwitchPosition.recessed.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.recessed.toString(), 3))
-				.configure());
-
-		add(new BallPickupSubsystem(this, "ballPickupSubsystem")
-				.add(BallPickupSubsystem.motorCollect, new Victor(2))
-
-			//	.add(BallSubsystem.?
-				.configure());
-
-		add(new RopeSubsystem(this, "ropeSubsystem")
-				.add(RopeSubsystem.motorName, new Victor(6))
-				.add(RopeSubsystem.RopeSensor.up.toString(), new MDDigitalInput(RopeSubsystem.RopeSensor.up.toString(), 4))
-				.add(RopeSubsystem.RopeSensor.down.toString(), new MDDigitalInput(RopeSubsystem.RopeSensor.up.toString(), 5))
-				.configure());
-		
-		add(new ShootSubsystem(this, "shootSubsystem")
-				.add(ShootSubsystem.shootMotor, new Victor(7))
-				.add(ShootSubsystem.angleMotor, new Victor(8))
-				//.add("shootMotorSpeed",new DoubleConfigSetting(0.05, 0.5, 0.1))
-				.configure());
+//		
+//		add(new GearSubSystem(this, "gearSubsystem")
+//				.add(GearSubSystem.SolenoidPosition.left.toString(), new Solenoid(0))
+//				.add(GearSubSystem.SolenoidPosition.right.toString(), new Solenoid(1))
+//				.add(GearSubSystem.motorName, new Victor(4))
+//				.add(GearSubSystem.SwitchPosition.extended.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.extended.toString(), 2))
+//				.add(GearSubSystem.SwitchPosition.recessed.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.recessed.toString(), 3))
+//				.configure());
+//
+//		add(new BallPickupSubsystem(this, "ballPickupSubsystem")
+//				.add(BallPickupSubsystem.motorCollect, new Victor(2))
+//
+//			//	.add(BallSubsystem.?
+//				.configure());
+//
+//		add(new RopeSubsystem(this, "ropeSubsystem")
+//				.add(RopeSubsystem.motorName, new Victor(6))
+//				.add(RopeSubsystem.RopeSensor.up.toString(), new MDDigitalInput(RopeSubsystem.RopeSensor.up.toString(), 4))
+//				.add(RopeSubsystem.RopeSensor.down.toString(), new MDDigitalInput(RopeSubsystem.RopeSensor.up.toString(), 5))
+//				.configure());
+//		
+//		add(new ShootSubsystem(this, "shootSubsystem")
+//				.add(ShootSubsystem.shootMotor, new Victor(7))
+//				.add(ShootSubsystem.angleMotor, new Victor(8))
+//				//.add("shootMotorSpeed",new DoubleConfigSetting(0.05, 0.5, 0.1))
+//				.configure());
 
 	}
 
