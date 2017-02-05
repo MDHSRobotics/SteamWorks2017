@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 
 public class ShootSubsystem extends MDSubsystem {
 		
+	//motors may change
 	private SpeedController shooterController;
 	private SpeedController feederController;
 	private double shootspeed=0.5; 
