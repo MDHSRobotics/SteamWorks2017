@@ -70,17 +70,17 @@ public class Robot extends MDRobotBase {
 //
 //
 //
-//// TankDrive with 2 motors example:
-//		
-//		add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
-//				.add(MotorPosition.right, new Victor(0))
-//				.add(MotorPosition.left, new Victor(1))
-//				.add("accelerometer", new MD_BuiltInAccelerometer())
-//				.add("IMU", new MD_IMU())
-//				.add(MDDriveSubsystem.shiftSolenoid, new Solenoid(2))
-//				.configure()
-//		);	
-//		
+// TankDrive with 2 motors example:
+		
+		add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
+				.add(MotorPosition.right, new Victor(0))
+				.add(MotorPosition.left, new Victor(1))
+				.add("accelerometer", new MD_BuiltInAccelerometer())
+				.add("IMU", new MD_IMU())
+				.add(MDDriveSubsystem.shiftSolenoid, new Solenoid(2))
+				.configure()
+		);	
+		
 //// TankDrive with 4 motors example:
 //
 ///*		add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
