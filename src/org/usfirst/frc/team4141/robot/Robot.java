@@ -7,7 +7,10 @@ import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_IMU;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.config.DoubleConfigSetting;
 import org.usfirst.frc.team4141.MDRobotBase.config.StringConfigSetting;
+import org.usfirst.frc.team4141.robot.commands.ArcadeDriveCommand;
+import org.usfirst.frc.team4141.robot.commands.CollectCommand;
 import org.usfirst.frc.team4141.robot.commands.MDStopCommand;
+import org.usfirst.frc.team4141.robot.commands.SpinShootMotorCommand;
 import org.usfirst.frc.team4141.robot.subsystems.CoreSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.GearSubSystem;
 import org.usfirst.frc.team4141.robot.subsystems.BallPickupSubsystem;
@@ -122,6 +125,24 @@ public class Robot extends MDRobotBase {
 				.configure());
 
 	}
+	
+	@Override
+	public void teleopInit() {
+		super.teleopInit();   //ArcardeCommand started in super.teleopInit();
+    	SpinShootMotorCommand spinShootMotorCommand = new SpinShootMotorCommand(this,"spinShootMotorCommand");
+    	spinShootMotorCommand.start();
+    	CollectCommand collectCommand = new CollectCommand(this,"collectCommand");
+    	collectCommand.start();
+
+	}
+	@Override
+	public void autonomousInit() {
+		super.autonomousInit();
+    	SpinShootMotorCommand spinShootMotorCommand = new SpinShootMotorCommand(this,"spinShootMotorCommand");
+    	spinShootMotorCommand.start();
+    	CollectCommand collectCommand = new CollectCommand(this,"collectCommand");
+    	collectCommand.start();
+	}	
 }
 
 
