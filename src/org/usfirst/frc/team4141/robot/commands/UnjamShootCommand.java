@@ -7,6 +7,8 @@ import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
 import org.usfirst.frc.team4141.robot.subsystems.ShootSubsystem;
 
+import edu.wpi.first.wpilibj.command.Scheduler;
+
 public class UnjamShootCommand extends MDCommand {
 	
 	private long start;
@@ -15,32 +17,35 @@ public class UnjamShootCommand extends MDCommand {
 
 	public UnjamShootCommand(MDRobotBase robot, String name) {
 		super(robot, name);
-		// TODO Auto-generated constructor stub
-		if(!getRobot().getSubsystems().containsKey("ShootSubsystem")){
-			log(Level.ERROR, "initialize()",  "Shoot subsystem not found");
+		if(!getRobot().getSubsystems().containsKey("shootSubsystem")){
+			log(Level.ERROR, "initialize()",  "Shoot Subsystem not found");
+			throw new IllegalArgumentException("Shoot Subsystem not found");
 		}
-		shootSubsystem = (ShootSubsystem)getRobot().getSubsystems().get("ShootSubsystem"); 
+		shootSubsystem = (ShootSubsystem)getRobot().getSubsystems().get("shootSubsystem");
 		requires(shootSubsystem);
 	}
-		
-private ShootSubsystem shootSubsystem;
+	
+	private ShootSubsystem shootSubsystem;
 		
 		@Override
 		protected void initialize() {
+			start =(new Date()).getTime();
+			shootSubsystem.stop();
 		}
 		
-		protected boolean isFinish() {
+		protected boolean isFinished() {
 			long now = (new Date()).getTime();
 			return  (now >=(start+unjamDuration));
 		}
 		
 		@Override
-		protected boolean isFinished() {
-				return true;
-			}
-		@Override
 		protected void execute() {
 			shootSubsystem.unjam();
+		}
+		protected void end() {
+			shootSubsystem.stop();
+			//TODO:  run collect command
+			Scheduler.getInstance().add(new SpinShootMotorCommand(getRobot(), "SpinShootMotorCommand"));
 		}
 		
 	}

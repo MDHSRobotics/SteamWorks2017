@@ -167,7 +167,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 			  double forwardAxisValue = -joystick.getRawAxis(1);
 			  double forward = (forwardAxisValue)*(1.0-(1.0-c));
 		  	  double rotate = joystick.getRawAxis(2);
-		  	  debug("forward = " + forward + ", rotate = " + rotate);
+//	  	  debug("forward = " + forward + ", rotate = " + rotate);
 		  	  double[] speeds = interpolator.calculate(forward, rotate, isFlipped);
 			  robotDrive.tankDrive(-speeds[0], speeds[1]);
 		}

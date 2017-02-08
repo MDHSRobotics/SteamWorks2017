@@ -9,18 +9,19 @@ public class CollectCommand extends MDCommand {
 
 	public CollectCommand(MDRobotBase robot, String name) {
 		super(robot, name);
-		// TODO Auto-generated constructor stub
+		if(!getRobot().getSubsystems().containsKey("ballPickupSubsystem")){
+			log(Level.ERROR, "initialize()",  "Ball Pickup Subsystem not found");
+			throw new IllegalArgumentException("Ball Pickup Subsystem not found");
+		}
+		ballPickupSubsystem = (BallPickupSubsystem)getRobot().getSubsystems().get("ballPickupSubsystem");
+		requires(ballPickupSubsystem);
 	}
 	
 	private BallPickupSubsystem ballPickupSubsystem;
 	
 	@Override
 	protected void initialize() {
-		if(!getRobot().getSubsystems().containsKey("BallPickupSubsystem")){
-			log(Level.ERROR, "initialize()",  "Ball Pickup Subsystem not found");
-		}
-		ballPickupSubsystem = (BallPickupSubsystem)getRobot().getSubsystems().get("BallPickupSubsystem");
-		requires(ballPickupSubsystem);
+		
 	}
 	@Override
 	protected boolean isFinished() {

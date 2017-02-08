@@ -12,15 +12,15 @@ public class SpinShootMotorCommand extends MDCommand {
 	
 	public SpinShootMotorCommand(MDRobotBase robot, String name) {
 		super(robot, name);
-		
-		if(!getRobot().getSubsystems().containsKey("ShootSubsystem")){
-			log(Level.ERROR, "initialize()",  "Shoot subsystem not found");
+		if(!getRobot().getSubsystems().containsKey("shootSubsystem")){
+			log(Level.ERROR, "initialize()",  "Shoot Subsystem not found");
+			throw new IllegalArgumentException("Shoot Subsystem not found");
 		}
-		
-		shootSubsystem = (ShootSubsystem)getRobot().getSubsystems().get("ShootSubsystem"); 
+		shootSubsystem = (ShootSubsystem)getRobot().getSubsystems().get("shootSubsystem");
 		requires(shootSubsystem);
 	}
-		private ShootSubsystem shootSubsystem;
+	
+	private ShootSubsystem shootSubsystem;
 		
 		@Override
 		protected void initialize() {

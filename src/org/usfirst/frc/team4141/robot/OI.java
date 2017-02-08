@@ -13,11 +13,14 @@ import org.usfirst.frc.team4141.robot.commands.MDPrintCommand;
 //import org.usfirst.frc.team4141.robot.commands.OpenDoorCommand;
 import org.usfirst.frc.team4141.robot.commands.RopeRiseCommand;
 
-import org.usfirst.frc.team4141.robot.commands.StopCommand;
+import org.usfirst.frc.team4141.robot.commands.StopBallsystemCommand;
+import org.usfirst.frc.team4141.robot.commands.StopShootSystemCommand;
 import org.usfirst.frc.team4141.robot.commands.ShiftToggleCommand;
+import org.usfirst.frc.team4141.robot.commands.ShootCommand;
 //import org.usfirst.frc.team4141.robot.commands.ShootCommand;
 import org.usfirst.frc.team4141.robot.commands.ToggleOrientationCommand;
-import org.usfirst.frc.team4141.robot.commands.UnjamedCommand;
+import org.usfirst.frc.team4141.robot.commands.UnjamBallsystemCommand;
+import org.usfirst.frc.team4141.robot.commands.UnjamShootCommand;
 
 
 /**
@@ -78,22 +81,24 @@ public class OI extends OIBase{
 			// Joystick Config: EXTREME 360 Pro
 
 				
-			.whenPressed("trigger",1,new StopCommand(getRobot(), "StopCommand"))
+//			.whenPressed("trigger",1,new StopBallsystemCommand(getRobot(), "StopBallsystemCommand"))
 			.whenPressed("SideButton",2,new ToggleOrientationCommand(getRobot(), "ToggleOrientationCommand"))
-			.whenPressed("Button7",7,new CollectCommand(getRobot(), "CollectCommand"))
+//			.whenPressed("Button7",7,new StopBallsystemCommand(getRobot(), "CollectCommand"))
 	
-/*
-			.whenPressed("trigger",1,new ShootCommand(getRobot(), "ShootCommand"))
-			.whenPressed("Trigger",1,new ShootCommand(getRobot(), "ShootCommand"))
-			.whenPressed("SideButton",2,new ToggleOrientationCommand(getRobot(), "ToggleOrientationCommand"))
-			.whenPressed("Button3",3,new OpenDoorCommand(getRobot(), "OpenDoorCommand"))
-			*/
+
+			.whileHeld("trigger",1,new ShootCommand(getRobot(), "ShootCommand"))
+//			.whenPressed("Trigger",1,new ShootCommand(getRobot(), "ShootCommand"))
+//			.whenPressed("SideButton",2,new ToggleOrientationCommand(getRobot(), "ToggleOrientationCommand"))
+//			.whenPressed("Button3",3,new OpenDoorCommand(getRobot(), "OpenDoorCommand"))
+			
 			.whenPressed("Button3",3,new ShiftToggleCommand(getRobot(), "ShiftToggle"))
 			.whenPressed("Button4",4,new MDMoveCommand(getRobot(),"reverse command",Direction.reverse))
 			.whenPressed("Button5",5,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
 //			.whenPressed("Button6",6,new MDMoveCommand(getRobot(),"forward command",Direction.forward))
-			.whenPressed("Button6",6,new UnjamedCommand(getRobot(),"UnjamedCommand"))
+			.whenPressed("Button6",6,new UnjamBallsystemCommand(getRobot(),"UnjamBallsystemCommand"))
 //			.whenPressed("Button7",7,new ShootCommand(getRobot(),"ShootCommand"))
+			.whenPressed("Button11",11,new StopShootSystemCommand(getRobot(),"StopShootSystemCommand"))
+			.whenPressed("Button12",12,new UnjamShootCommand(getRobot(),"UnjamShootCommand"))
 			.configure()
 		);
 

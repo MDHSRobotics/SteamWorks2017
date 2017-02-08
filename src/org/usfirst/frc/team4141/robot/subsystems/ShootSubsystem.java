@@ -33,7 +33,10 @@ public class ShootSubsystem extends MDSubsystem {
 			if(getMotors()==null 
 					|| !getMotors().containsKey(feedMotor))
 				throw new IllegalArgumentException("Invalid feeder motor configuration for shoot system.");
+			shooterController = (SpeedController)(getMotors().get(shootMotor));
+			feederController = (SpeedController)(getMotors().get(feedMotor));
 			return this;
+			
 				
 		}
 		
@@ -59,18 +62,23 @@ public class ShootSubsystem extends MDSubsystem {
 	
 	public void spin(){
 		shooterController.set(shootspeed);
+		debug("Spin at " + shootspeed);
 	}
 	
 	public void shoot(){
 	feederController.set(feedspeed);
 	}
-	
+	//"all the time"-Mr.Martin 2k17
 	public void unjam(){
 		shooterController.set(unjamspeed);
 		feederController.set(unjamspeed);
 	}
 	public void stop(){
 		shooterController.stopMotor();
+		feederController.stopMotor();
+	}
+
+	public void stopFeed() {
 		feederController.stopMotor();
 	}
 	

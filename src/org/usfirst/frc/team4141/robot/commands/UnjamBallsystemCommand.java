@@ -9,14 +9,18 @@ import org.usfirst.frc.team4141.robot.subsystems.BallPickupSubsystem;
 
 import edu.wpi.first.wpilibj.command.Scheduler;
 
-public class UnjamedCommand extends MDCommand {
+public class UnjamBallsystemCommand extends MDCommand {
 
-	public UnjamedCommand(MDRobotBase robot, String name) {
+	public UnjamBallsystemCommand(MDRobotBase robot, String name) {
 		super(robot, name);
+		if(!getRobot().getSubsystems().containsKey("ballPickupSubsystem")){
+			log(Level.ERROR, "initialize()",  "Ball Pickup Subsystem not found");
+			throw new IllegalArgumentException("Ball Pickup Subsystem not found");
+		}
+		ballPickupSubsystem = (BallPickupSubsystem)getRobot().getSubsystems().get("ballPickupSubsystem");
+		requires(ballPickupSubsystem);
 		
 	}
-	
-	// TODO make this command require the ballpickup subsystem
 
 	
 	private BallPickupSubsystem ballPickupSubsystem;
@@ -26,11 +30,6 @@ public class UnjamedCommand extends MDCommand {
 	
 	@Override
 	protected void initialize() {
-		if(!getRobot().getSubsystems().containsKey("BallPickupSubsystem")){
-			log(Level.ERROR, "initialize()",  "Ball Pickup Subsystem not found");
-		}
-		ballPickupSubsystem = (BallPickupSubsystem)getRobot().getSubsystems().get("BallPickupSubsystem");
-		requires(ballPickupSubsystem);
 		start =(new Date()).getTime();
 		ballPickupSubsystem.stop();
 	}
