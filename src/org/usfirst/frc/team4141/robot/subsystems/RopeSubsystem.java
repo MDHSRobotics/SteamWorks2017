@@ -5,16 +5,15 @@ import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
 import org.usfirst.frc.team4141.MDRobotBase.config.ConfigSetting;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MDDigitalInput;
 
+import edu.wpi.first.wpilibj.SpeedController;
+
 public class RopeSubsystem extends MDSubsystem {
+	
+	private SpeedController ropeController;
 	
 	public enum RopeSensor{
 		up,
 		down
-	}
-
-	public RopeSubsystem(MDRobotBase robot, String name) {
-		super(robot, name);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public static String motorName="ropeMotor";
@@ -25,11 +24,17 @@ public class RopeSubsystem extends MDSubsystem {
 		if(getMotors()==null 
 				|| !getMotors().containsKey(motorName))
 			throw new IllegalArgumentException("Invalid motor configuration for rope system.");
-		if(getSensors()==null 
-				|| !getSensors().containsKey(RopeSensor.up.toString()) 
-				|| !getSensors().containsKey(RopeSensor.down.toString()))
-			throw new IllegalArgumentException("Invalid rope sensor configuration for rope system.");
+//		if(getSensors()==null 
+//				|| !getSensors().containsKey(RopeSensor.up.toString()) 
+//				|| !getSensors().containsKey(RopeSensor.down.toString()))
+//			throw new IllegalArgumentException("Invalid rope sensor configuration for rope system.");
+		ropeController = (SpeedController)(getMotors().get(motorName));
 		return this;
+	}
+	
+	public RopeSubsystem(MDRobotBase robot, String name) {
+		super(robot, name);
+		// TODO Auto-generated constructor stub
 	}
 	
 	public void move(double speed){
@@ -38,13 +43,18 @@ public class RopeSubsystem extends MDSubsystem {
 		getMotors().get(motorName).setPosition(speed);
 	}
 	
-	public boolean isUp(){
-		return ((MDDigitalInput)(getSensors().get(RopeSensor.up.toString()))).get();
-	}
-	public boolean isDown(){
-		return ((MDDigitalInput)(getSensors().get(RopeSensor.down.toString()))).get();
-	}
+//	public boolean isUp(){
+//		return ((MDDigitalInput)(getSensors().get(RopeSensor.up.toString()))).get();
+//	}
+//	public boolean isDown(){
+//		return ((MDDigitalInput)(getSensors().get(RopeSensor.down.toString()))).get();
+//	}
 		
+	public void stop(){
+		ropeController.stopMotor();
+		
+	}
+	
 	@Override
 	protected void setUp() {
 		// TODO Auto-generated method stub

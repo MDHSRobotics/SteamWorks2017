@@ -26,16 +26,17 @@ public class RopeRiseCommand extends MDCommand {
 		}
 	}
 	
-	protected boolean isFinished() {
-		return  ropeSubsystem.isUp();
-	}
+//	protected boolean isFinished() {
+//		return  ropeSubsystem.isUp();
+//	}
 	
 	protected void execute() {
 		if (ropeSubsystem!=null)ropeSubsystem.move(speed);
 	}
 	@Override
 		protected void end() {
-			ropeSubsystem.move(0);
+			
+			ropeSubsystem.stop();
 			
 		}
 }

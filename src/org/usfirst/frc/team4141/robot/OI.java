@@ -93,7 +93,7 @@ public class OI extends OIBase{
 			
 			.whenPressed("Button3",3,new ShiftToggleCommand(getRobot(), "ShiftToggle"))
 			.whenPressed("Button4",4,new MDMoveCommand(getRobot(),"reverse command",Direction.reverse))
-			.whenPressed("Button5",5,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
+			.whileHeld("Button5",5,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
 //			.whenPressed("Button6",6,new MDMoveCommand(getRobot(),"forward command",Direction.forward))
 			.whenPressed("Button6",6,new UnjamBallsystemCommand(getRobot(),"UnjamBallsystemCommand"))
 //			.whenPressed("Button7",7,new ShootCommand(getRobot(),"ShootCommand"))
