@@ -1,3 +1,4 @@
+/bin/
 *.class
 *.project
 sysProps.xml
@@ -15,4 +16,3 @@ hs_err_pid*
 
 !tools/
 !tools/*
-/bin/
