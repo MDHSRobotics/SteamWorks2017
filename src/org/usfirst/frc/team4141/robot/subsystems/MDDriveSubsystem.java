@@ -32,9 +32,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 	private RobotDrive robotDrive;
 	private Type type;
 	private boolean isFlipped = false;
-	private double _speed = 0;
-	private double speed = 0.2;
-	private int fastSpeed = 1;
+	private double speed = 0;
 	private boolean isHighGear = false;
 	public static String shiftSolenoid = "shiftSolenoid";
 	private Solenoid shifter;
@@ -51,7 +49,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 		}
 		else
 		{
-			throw new NotImplementedException("input is not a PWM");
+			throw new NotImplementedException("Input is not a PWM");
 		}
 		return this;
 	}
@@ -176,7 +174,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 	public void stop(){
 		debug("motors stopped");
 		robotDrive.stopMotor();
-		_speed = 0;
+		speed = 0;
 	}	
 	
 	private double c = 1.0;
@@ -197,10 +195,10 @@ public class MDDriveSubsystem extends MDSubsystem {
 	}
 
 	public void right(double speed) {
-		_speed = speed;
+		this.speed = speed;
 		
 		if (isFlipped) {
-			speed = -speed;
+			this.speed = -this.speed;
 		}
 		debug("right");
 		double direction = -90;
@@ -209,15 +207,15 @@ public class MDDriveSubsystem extends MDSubsystem {
 			robotDrive.mecanumDrive_Polar(speed, direction, 0);
 			break;
 		default:
-			robotDrive.tankDrive(speed, speed/10);
+			robotDrive.tankDrive(this.speed, this.speed/10);
 		}
 	}
 
 	public void left(double speed) {
-		_speed = speed;
+		this.speed = speed;
 		
 		if (isFlipped) {
-			speed = -speed;
+			this.speed = -this.speed;
 		}
 		debug("left");
 		double direction = 90;
@@ -226,15 +224,15 @@ public class MDDriveSubsystem extends MDSubsystem {
 			robotDrive.mecanumDrive_Polar(speed, direction, 0);
 			break;
 		default:
-			robotDrive.tankDrive(speed/10, speed);
+			robotDrive.tankDrive(this.speed/10, this.speed);
 		}
 	}
 
 	public void reverse(double speed) {
-		_speed = speed;
+		this.speed = speed;
 		
 		if (isFlipped) {
-			speed = -speed;
+			this.speed = -this.speed;
 		}
 		debug("reverse");
 		double direction = 180;
@@ -243,17 +241,17 @@ public class MDDriveSubsystem extends MDSubsystem {
 			robotDrive.mecanumDrive_Polar(speed, direction, 0);
 			break;
 		default:
-			robotDrive.tankDrive(-speed, speed);
+			robotDrive.tankDrive(-this.speed, this.speed);
 		}
 	}
 
 	public void forward(double speed) {
 	//	debug("forward"); 
 		
-		_speed = speed;
+		this.speed = speed;
 		
 		if (isFlipped) {
-			speed = -speed;
+			this.speed = -this.speed;
 		}
 		
 		double direction = 0;
@@ -264,17 +262,17 @@ public class MDDriveSubsystem extends MDSubsystem {
 			break;
 		default:
 			debug("speed =" + speed);
-			robotDrive.tankDrive(speed, speed);
+			robotDrive.tankDrive(this.speed, this.speed);
 		}
 	}
 	
 	public void flip() {
 		
-		if (_speed != 0) return;
-		
+		if (speed != 0) return;
+	
 		isFlipped = !isFlipped;
 			
-		debug("flip. isFlipped now sent to " + isFlipped + ". speed = " + _speed);
+		debug("flip. isFlipped now sent to " + isFlipped + ". speed = " + speed);
 	}
 	
 	public void shift() {

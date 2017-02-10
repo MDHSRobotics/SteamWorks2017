@@ -83,7 +83,7 @@ public class OI extends OIBase{
 				
 //			.whenPressed("trigger",1,new StopBallsystemCommand(getRobot(), "StopBallsystemCommand"))
 			.whenPressed("SideButton",2,new ToggleOrientationCommand(getRobot(), "ToggleOrientationCommand"))
-//			.whenPressed("Button7",7,new StopBallsystemCommand(getRobot(), "CollectCommand"))
+//		    .whenPressed("Button7",7,new StopBallsystemCommand(getRobot(), "CollectCommand"))
 	
 
 			.whileHeld("trigger",1,new ShootCommand(getRobot(), "ShootCommand"))

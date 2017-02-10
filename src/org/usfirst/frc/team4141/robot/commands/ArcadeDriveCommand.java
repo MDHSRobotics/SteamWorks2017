@@ -5,6 +5,7 @@ import org.usfirst.frc.team4141.MDRobotBase.MDCommand;
 import org.usfirst.frc.team4141.MDRobotBase.MDJoystick;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
+import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem;
 
 
@@ -12,9 +13,12 @@ public class ArcadeDriveCommand extends MDCommand {
 	MDDriveSubsystem driveSys;
 	public ArcadeDriveCommand(MDRobotBase robot) {
 		super(robot,"ArcadeDriveCommand");
-		MDSubsystem sys = robot.getSubsystems().get("driveSystem");
-		requires(sys);
-		driveSys = (MDDriveSubsystem)sys;
+		if(!getRobot().getSubsystems().containsKey("driveSystem")){
+			log(Level.ERROR, "initialize()",  "Arcade Drive system not found");
+			throw new IllegalArgumentException("Arcade Drive system not found");
+		}
+		driveSys = (MDDriveSubsystem)getRobot().getSubsystems().get("driveSystem"); 
+		requires(driveSys);
     }
 	
 	private MDJoystick joystick = null;

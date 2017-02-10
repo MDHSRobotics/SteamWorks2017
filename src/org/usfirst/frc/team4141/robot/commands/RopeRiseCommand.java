@@ -4,35 +4,32 @@ import org.usfirst.frc.team4141.MDRobotBase.MDCommand;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
 import org.usfirst.frc.team4141.robot.subsystems.RopeSubsystem;
+import org.usfirst.frc.team4141.robot.subsystems.ShootSubsystem;
 
 public class RopeRiseCommand extends MDCommand {
-//speed subject to change
-	private double speed=0.2;
 	
 	private RopeSubsystem ropeSubsystem;
 	
 	public RopeRiseCommand(MDRobotBase robot, String name) {
 		super(robot, name);
-		// TODO Auto-generated constructor stub
+		if(!getRobot().getSubsystems().containsKey("ropeSubsystem")){
+			log(Level.ERROR, "initialize()", "rope subsystem not found");
+			throw new IllegalArgumentException("Rope Subsystem not found");
+		}
+		ropeSubsystem = (RopeSubsystem)getRobot().getSubsystems().get("ropeSubsystem"); 
 	}
 
 	protected void initialize() {
-		if(!getRobot().getSubsystems().containsKey("ropeSubsystem")){
-			log(Level.ERROR, "initialize()", "rope subsystem not found");
 		}
-		else {
-			ropeSubsystem = (RopeSubsystem)getRobot().getSubsystems().get("ropeSubsystem"); 
-			ropeSubsystem.move(0);
-		}
-	}
 	
-//	protected boolean isFinished() {
-//		return  ropeSubsystem.isUp();
-//	}
+	protected boolean isFinished() {
+		return false;
+	}
 	
 	protected void execute() {
-		if (ropeSubsystem!=null)ropeSubsystem.move(speed);
+		if (ropeSubsystem!=null)ropeSubsystem.move();
 	}
+	
 	@Override
 		protected void end() {
 			

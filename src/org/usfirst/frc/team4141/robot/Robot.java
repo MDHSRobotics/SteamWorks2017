@@ -9,7 +9,7 @@ import org.usfirst.frc.team4141.MDRobotBase.config.DoubleConfigSetting;
 import org.usfirst.frc.team4141.MDRobotBase.config.StringConfigSetting;
 import org.usfirst.frc.team4141.robot.commands.ArcadeDriveCommand;
 import org.usfirst.frc.team4141.robot.commands.CollectCommand;
-import org.usfirst.frc.team4141.robot.commands.MDStopCommand;
+import org.usfirst.frc.team4141.robot.commands.MDDriveStopCommand;
 import org.usfirst.frc.team4141.robot.commands.SpinShootMotorCommand;
 //import org.usfirst.frc.team4141.robot.commands.SpinShootMotorCommand;
 import org.usfirst.frc.team4141.robot.subsystems.CoreSubsystem;
@@ -40,10 +40,35 @@ public class Robot extends MDRobotBase {
 	@Override
 	protected void configureRobot() {
 
+		// TankDrive with 2 motors example:
+		
+				add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
+						.add(MotorPosition.right, new Victor(0))
+						.add(MotorPosition.left, new Victor(1))
+						.add("accelerometer", new MD_BuiltInAccelerometer())
+						.add("IMU", new MD_IMU())
+						.add(MDDriveSubsystem.shiftSolenoid, new Solenoid(2))
+						.configure()
+				);	
+				
+		//// TankDrive with 4 motors example:
+		//
+		///*		add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
+//						.add(MotorPosition.frontRight, new Victor(0))
+//						.add(MotorPosition.rearRight, new Victor(1))
+//						.add(MotorPosition.frontLeft, new Victor(2))
+//						.add(MotorPosition.rearLeft, new Victor(3))
+//						.add("accelerometer", new MD_BuiltInAccelerometer())
+//						.add("IMU", new MD_IMU())
+//						.configure()
+//				);	
+		//	
+		//*/
+				
 		//A commands needs to be configured for the autonomous mode.
 		//In some cases it is desirable to have more than 1 auto command and make a decision at game time which command to use
 		setAutonomousCommand(new MDCommand[]{
-				new MDStopCommand(this,"StopCommand")
+				new MDDriveStopCommand(this,"StopCommand")
 			}, "StopCommand"  //specify the default
 		);
 
@@ -74,30 +99,6 @@ public class Robot extends MDRobotBase {
 //
 //
 //
-// TankDrive with 2 motors example:
-		
-		add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
-				.add(MotorPosition.right, new Victor(0))
-				.add(MotorPosition.left, new Victor(1))
-				.add("accelerometer", new MD_BuiltInAccelerometer())
-				.add("IMU", new MD_IMU())
-				.add(MDDriveSubsystem.shiftSolenoid, new Solenoid(2))
-				.configure()
-		);	
-		
-//// TankDrive with 4 motors example:
-//
-///*		add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
-//				.add(MotorPosition.frontRight, new Victor(0))
-//				.add(MotorPosition.rearRight, new Victor(1))
-//				.add(MotorPosition.frontLeft, new Victor(2))
-//				.add(MotorPosition.rearLeft, new Victor(3))
-//				.add("accelerometer", new MD_BuiltInAccelerometer())
-//				.add("IMU", new MD_IMU())
-//				.configure()
-//		);	
-//	
-//*/
 		
 		add(new GearSubSystem(this, "gearSubsystem")
 				.add(GearSubSystem.SolenoidPosition.left.toString(), new Solenoid(0))
@@ -116,8 +117,6 @@ public class Robot extends MDRobotBase {
 
 		add(new RopeSubsystem(this, "ropeSubsystem")
 				.add(RopeSubsystem.motorName, new Victor(6))
-				.add(RopeSubsystem.RopeSensor.up.toString(), new MDDigitalInput(RopeSubsystem.RopeSensor.up.toString(), 4))
-				.add(RopeSubsystem.RopeSensor.down.toString(), new MDDigitalInput(RopeSubsystem.RopeSensor.up.toString(), 5))
 				.configure());
 		
 		add(new ShootSubsystem(this, "shootSubsystem")

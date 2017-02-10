@@ -9,12 +9,9 @@ import edu.wpi.first.wpilibj.SpeedController;
 
 public class RopeSubsystem extends MDSubsystem {
 	
-	private SpeedController ropeController;
+	private double speed=0.2;
 	
-	public enum RopeSensor{
-		up,
-		down
-	}
+	private SpeedController ropeController;
 	
 	public static String motorName="ropeMotor";
 
@@ -24,10 +21,6 @@ public class RopeSubsystem extends MDSubsystem {
 		if(getMotors()==null 
 				|| !getMotors().containsKey(motorName))
 			throw new IllegalArgumentException("Invalid motor configuration for rope system.");
-//		if(getSensors()==null 
-//				|| !getSensors().containsKey(RopeSensor.up.toString()) 
-//				|| !getSensors().containsKey(RopeSensor.down.toString()))
-//			throw new IllegalArgumentException("Invalid rope sensor configuration for rope system.");
 		ropeController = (SpeedController)(getMotors().get(motorName));
 		return this;
 	}
@@ -37,18 +30,11 @@ public class RopeSubsystem extends MDSubsystem {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void move(double speed){
+	public void move(){
 		//positive speed=wind
 		//negative speed=unwind
 		getMotors().get(motorName).setPosition(speed);
 	}
-	
-//	public boolean isUp(){
-//		return ((MDDigitalInput)(getSensors().get(RopeSensor.up.toString()))).get();
-//	}
-//	public boolean isDown(){
-//		return ((MDDigitalInput)(getSensors().get(RopeSensor.down.toString()))).get();
-//	}
 		
 	public void stop(){
 		ropeController.stopMotor();

@@ -21,6 +21,7 @@ public class ShiftToggleCommand extends MDCommand {
 		super(robot, name);
 		if(!getRobot().getSubsystems().containsKey("driveSystem")){
 			log(Level.ERROR, "initialize()",  "drive system not found");
+			throw new IllegalArgumentException("Shift system not found");
 		}
 		driveSystem = (MDDriveSubsystem)getRobot().getSubsystems().get("driveSystem");
 		
@@ -30,7 +31,7 @@ public class ShiftToggleCommand extends MDCommand {
 	
 	private MDDriveSubsystem driveSystem;
 	private long start;
-	private long shiftToogleDuration = 2000;
+	private long shiftToggleDuration = 2000;
 	private long now;
 
 	
@@ -40,22 +41,23 @@ public class ShiftToggleCommand extends MDCommand {
 		log(Level.DEBUG, "initialize()", "Shift Gears");
 		
 		start =(new Date()).getTime();
-		driveSystem.shift();
 	}
 	
 	@Override
 	protected boolean isFinished() {
 		long now = (new Date()).getTime();
-		return  (now >=(start+shiftToogleDuration));
+		return  (now >=(start+shiftToggleDuration));
 	}
 	
 	@Override
 	protected void execute() {
 		driveSystem.stop();
 	}
+	
 	@Override
 	protected void end() {
 		driveSystem.stop();
+		driveSystem.shift();
 		//TODO:  run collect command
 		Scheduler.getInstance().add(new ArcadeDriveCommand(getRobot()));
 	}
