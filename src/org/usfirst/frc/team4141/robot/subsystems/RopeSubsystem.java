@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 
 public class RopeSubsystem extends MDSubsystem {
 	
-	private double speed=0.2;
+	private double liftSpeed=0.2;
 	
 	private SpeedController ropeController;
 	
@@ -33,7 +33,7 @@ public class RopeSubsystem extends MDSubsystem {
 	public void move(){
 		//positive speed=wind
 		//negative speed=unwind
-		getMotors().get(motorName).setPosition(speed);
+		ropeController.set(liftSpeed);
 	}
 		
 	public void stop(){
@@ -43,13 +43,15 @@ public class RopeSubsystem extends MDSubsystem {
 	
 	@Override
 	protected void setUp() {
-		// TODO Auto-generated method stub
-
+		
+		if(getConfigSettings().containsKey("liftSpeed")) liftSpeed = getConfigSettings().get("liftSpeed").getDouble();
+		
 	}
 
 	@Override
-	public void settingChangeListener(ConfigSetting setting) {
-		// TODO Auto-generated method stub
+	public void settingChangeListener(ConfigSetting changedSetting) {
+		
+		if(changedSetting.getName().equals("liftSpeed")) liftSpeed = changedSetting.getDouble();
 
 	}
 

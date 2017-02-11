@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 public class BallPickupSubsystem extends MDSubsystem {
 
 	public static String motorCollect="collectBallMotor";
-	private double speed=0.5;
+	private double pickupSpeed=0.5;
 	private double unjamedSpeed=-0.3;
 	private SpeedController motorController;
 	
@@ -34,11 +34,14 @@ public class BallPickupSubsystem extends MDSubsystem {
 	
 	@Override
 	protected void setUp() {
-		
+		if(getConfigSettings().containsKey("pickupSpeed")) pickupSpeed = getConfigSettings().get("pickupSpeed").getDouble();
+		if(getConfigSettings().containsKey("unjamSpeed")) unjamedSpeed = getConfigSettings().get("unjamSpeed").getDouble();
 	}
 
 	@Override
-	public void settingChangeListener(ConfigSetting setting) {
+	public void settingChangeListener(ConfigSetting changedSetting) {
+		if(changedSetting.getName().equals("pickupSpeed")) pickupSpeed = changedSetting.getDouble();
+		if(changedSetting.getName().equals("unjamSpeed")) unjamedSpeed = changedSetting.getDouble();
 	}
 
 	@Override
@@ -47,7 +50,7 @@ public class BallPickupSubsystem extends MDSubsystem {
 	}
 	
 	public void collect(){
-		motorController.set(speed);
+		motorController.set(pickupSpeed);
 	}
 	
 	public void stop(){

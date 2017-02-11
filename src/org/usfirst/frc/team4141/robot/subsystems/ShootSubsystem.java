@@ -16,9 +16,9 @@ public class ShootSubsystem extends MDSubsystem {
 	//motors may change
 	private SpeedController shooterController;
 	private SpeedController feederController;
-	private double shootspeed=0.5; 
-	private double feedspeed=0.5;
-	private double unjamspeed=-0.2;
+	private double shootSpeed=0.5; 
+	private double feedSpeed=0.5;
+	private double unjamSpeed=-0.2;
 	
 	public static String shootMotor="ShootMotor";
 	public static String feedMotor="FeedMotor";
@@ -47,12 +47,17 @@ public class ShootSubsystem extends MDSubsystem {
 
 	@Override
 	protected void setUp() {
-
+		if(getConfigSettings().containsKey("shootSpeed")) shootSpeed = getConfigSettings().get("shootSpeed").getDouble();
+		if(getConfigSettings().containsKey("feedSpeed")) feedSpeed = getConfigSettings().get("feedSpeed").getDouble();
+		if(getConfigSettings().containsKey("unjamSpeed")) unjamSpeed = getConfigSettings().get("unjamSpeed").getDouble();
 	}
 
 	@Override
-	public void settingChangeListener(ConfigSetting setting) {
-		// TODO: add a shooting setting for UI
+	public void settingChangeListener(ConfigSetting changedSetting) {
+		if(changedSetting.getName().equals("shootSpeed")) shootSpeed = changedSetting.getDouble();
+		if(changedSetting.getName().equals("feedSpeed")) feedSpeed = changedSetting.getDouble();
+		if(changedSetting.getName().equals("unjamSpeed")) unjamSpeed = changedSetting.getDouble();
+	
 	}
 
 	@Override
@@ -61,17 +66,18 @@ public class ShootSubsystem extends MDSubsystem {
 	}
 	
 	public void spin(){
-		shooterController.set(shootspeed);
-		debug("Spin at " + shootspeed);
+		shooterController.set(shootSpeed);
+		debug("Spin at " + shootSpeed);
 	}
 	
 	public void shoot(){
-	feederController.set(feedspeed);
+	feederController.set(feedSpeed);
 	}
-	//"all the time"-Mr.Martin 2k17
+	
 	public void unjam(){
-		shooterController.set(unjamspeed);
-		feederController.set(unjamspeed);
+		shooterController.set(unjamSpeed);
+		feederController.set(unjamSpeed);
+		
 	}
 	public void stop(){
 		shooterController.stopMotor();

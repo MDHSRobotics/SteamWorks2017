@@ -48,8 +48,24 @@ public class Robot extends MDRobotBase {
 						.add("accelerometer", new MD_BuiltInAccelerometer())
 						.add("IMU", new MD_IMU())
 						.add(MDDriveSubsystem.shiftSolenoid, new Solenoid(2))
+						.add("a", new DoubleConfigSetting(0.0, 1.0, 0.25))//high speed turn factor
+				 	    .add("b", new DoubleConfigSetting(0.0, 1.0, 0.4))//slow speed turn factor
+						.add("c", new DoubleConfigSetting(0.0, 1.0, 1.0))//speed governor
 						.configure()
 				);	
+				
+//				add(new MDDriveSubsystem(this, "driveSystem", Type.MecanumDrive)
+//						.add(MotorPosition.frontLeft, new Victor(3))
+//						.add(MotorPosition.rearLeft, new Victor(2))
+//						.add(MotorPosition.frontRight, new Victor(1))
+//						.add(MotorPosition.rearRight, new Victor(0))
+//						.add("accelerometer", new MD_BuiltInAccelerometer())
+//						.add("IMU", new MD_IMU())
+//						.add("a", new DoubleConfigSetting(0.0, 1.0, 0.25))
+//						.add("b", new DoubleConfigSetting(0.0, 1.0, 0.4))
+//						.add("c", new DoubleConfigSetting(0.0, 1.0, 1.0))
+//						.configure()
+//				);	
 				
 		//// TankDrive with 4 motors example:
 		//
@@ -110,19 +126,23 @@ public class Robot extends MDRobotBase {
 
 		add(new BallPickupSubsystem(this, "ballPickupSubsystem")
 				.add(BallPickupSubsystem.motorCollect, new Victor(2))
-				
+				.add("pickupSpeed",new DoubleConfigSetting(0.0, 1.0, 0.5))
+				.add("unjamSpeed",new DoubleConfigSetting(-1.0, 0.0, -0.3))
 
 			//	.add(BallSubsystem.?
 				.configure());
 
 		add(new RopeSubsystem(this, "ropeSubsystem")
 				.add(RopeSubsystem.motorName, new Victor(6))
+				.add("liftSpeed", new DoubleConfigSetting(-1.0, 1.0, 0.2))
 				.configure());
 		
 		add(new ShootSubsystem(this, "shootSubsystem")
 				.add(ShootSubsystem.shootMotor, new Victor(7))
 				.add(ShootSubsystem.feedMotor, new Victor(8))
-				//.add("shootMotorSpeed",new DoubleConfigSetting(0.05, 0.5, 0.1))
+				.add("shootSpeed",new DoubleConfigSetting(0.0, 1.0, 0.5))
+				.add("feedSpeed",new DoubleConfigSetting(0.0, 1.0, 0.5))
+				.add("unjamSpeed",new DoubleConfigSetting(-1.0, 0.0, -0.2))
 				.configure());
 
 	}
