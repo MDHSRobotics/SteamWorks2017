@@ -21,7 +21,9 @@ import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem.Type;
 import org.usfirst.frc.team4141.robot.subsystems.RopeSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.RumbleSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.ShootSubsystem;
+import org.usfirst.frc.team4141.robot.subsystems.TalonDriveSubsystem;
 
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 
@@ -139,6 +141,11 @@ public class Robot extends MDRobotBase {
 		add(new RopeSubsystem(this, "ropeSubsystem")
 				.add(RopeSubsystem.motorName, new Victor(6))
 				.add("liftSpeed", new DoubleConfigSetting(-1.0, 1.0, 0.2))
+				.configure());
+		
+		add(new TalonDriveSubsystem(this, "talonSubsystem")
+				.add(TalonDriveSubsystem.motorName, new CANTalon(0))
+				.add("talonSpeed", new DoubleConfigSetting(-1.0, 1.0, 0.2))
 				.configure());
 		
 		add(new ShootSubsystem(this, "shootSubsystem")
