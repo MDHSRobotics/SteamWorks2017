@@ -19,6 +19,7 @@ import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem.MotorPosition;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem.Type;
 import org.usfirst.frc.team4141.robot.subsystems.RopeSubsystem;
+import org.usfirst.frc.team4141.robot.subsystems.RumbleSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.ShootSubsystem;
 
 import edu.wpi.first.wpilibj.Solenoid;
@@ -146,6 +147,11 @@ public class Robot extends MDRobotBase {
 				.add("shootSpeed",new DoubleConfigSetting(0.0, 1.0, 0.5))
 				.add("feedSpeed",new DoubleConfigSetting(0.0, 1.0, 0.5))
 				.add("unjamSpeed",new DoubleConfigSetting(-1.0, 0.0, -0.2))
+				.configure());
+		
+		add(new RumbleSubsystem(this, "rumbleSubsystem")
+				.add("rumbleDuration",new DoubleConfigSetting(0.0, 1.0, 0.5))
+				.add("rumbleIntenisty",new DoubleConfigSetting(0.0, 1.0, 0.5))
 				.configure());
 	}
 	
