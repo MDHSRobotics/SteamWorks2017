@@ -34,37 +34,41 @@ public class OI extends OIBase{
 		robot.debug("OI created");
 	}
 
-
 	public void configureOI(){
-		//A robot should have 1 or more operator interfaces (OI)
-		//Typically, a robot will have at least 1 joystick and 1 console
 		
-		//if using gamepad, the buttons are generally as follows:
-		// a is button 1
-		// b is button 2
-		// x is button 3
-		// y is button 4
+/*		A robot should have 1 or more operator interfaces (OI)
+		Typically, a robot will have at least 1 joystick and 1 console
 		
-//		if using joystick, the buttons are generally as follows:
-//			trigger is button 1
-//			side is button 2
-//			3 is button 3
-//			4 is button 4
-//			5 is button 5
-//			6 is button 6
+		If using gamepad, the buttons are generally as follows:
+		 a is button 1
+		 b is button 2
+		 x is button 3
+		 y is button 4
 		
+		If using joystick, the buttons are generally as follows:
+			trigger is button 1
+			side is button 2
+			3 is button 3
+			4 is button 4
+			5 is button 5
+			6 is button 6
 		
+*/		
 		
 //      Configure the joystick(s) here
+//      -------------------------------------------		
 		add(new MDJoystick(getRobot(), "driveJoystick", 0)
-//			.whenPressed("rightBumper",5,new MDPrintCommand(getRobot(),"Right Bumper Command","Right Bumper Command message"))
-//			.whileHeld("leftBumper",6,new MDPrintCommand(getRobot(),"Left Bumper Command","Left Bumper Command message"))
-//          the following commands are test move commands useful in testing drive configuration and set up
-//          comment out and replace as needed
+				
+/*          The following commands are test move commands useful in testing drive configuration and set up
+            comment out and replace as needed.
+            -------------------------------------
+		    .whenPressed("rightBumper",5,new MDPrintCommand(getRobot(),"Right Bumper Command","Right Bumper Command message"))
+		    .whileHeld("leftBumper",6,new MDPrintCommand(getRobot(),"Left Bumper Command","Left Bumper Command message"))				
+*/
 				
 /*
 			// Controller Config: Xbox
-			
+			// -------------------------------------------------
 			.whenPressed("X",3,new MDMoveCommand(getRobot(),"left command",Direction.left))
 			.whenPressed("A",1,new MDMoveCommand(getRobot(),"reverse command",Direction.reverse))
 			.whenPressed("B",2,new OpenDoorCommand(getRobot(),"Open Door Command"))
@@ -79,26 +83,23 @@ public class OI extends OIBase{
 */
 				
 			// Joystick Config: EXTREME 360 Pro
-
-				
-//			.whenPressed("trigger",1,new StopBallsystemCommand(getRobot(), "StopBallsystemCommand"))
-			.whenPressed("SideButton",2,new ToggleOrientationCommand(getRobot(), "ToggleOrientationCommand"))
-//		    .whenPressed("Button7",7,new StopBallsystemCommand(getRobot(), "CollectCommand"))
-	
-
+			// -------------------------------------------------
 			.whileHeld("trigger",1,new ShootCommand(getRobot(), "ShootCommand"))
+			.whenPressed("SideButton",2,new ToggleOrientationCommand(getRobot(), "ToggleOrientationCommand"))
+			.whenPressed("Button3",3,new ShiftToggleCommand(getRobot(), "ShiftToggle"))
+			.whenPressed("Button8",8,new StopShootSystemCommand(getRobot(),"StopShootSystemCommand"))
+			.whenPressed("Button9",9,new UnjamShootCommand(getRobot(),"UnjamShootCommand"))
+			.whenPressed("Button10",10,new UnjamBallsystemCommand(getRobot(),"UnjamBallsystemCommand"))
+			.whileHeld("Button11",11,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
+
+//			.whenPressed("trigger",1,new StopBallsystemCommand(getRobot(), "StopBallsystemCommand"))			
+//		    .whenPressed("Button7",7,new StopBallsystemCommand(getRobot(), "CollectCommand"))			
 //			.whenPressed("Trigger",1,new ShootCommand(getRobot(), "ShootCommand"))
 //			.whenPressed("SideButton",2,new ToggleOrientationCommand(getRobot(), "ToggleOrientationCommand"))
-//			.whenPressed("Button3",3,new OpenDoorCommand(getRobot(), "OpenDoorCommand"))
+//			.whenPressed("Button3",3,new OpenDoorCommand(getRobot(), "OpenDoorCommand"))			
+//			.whenPressed("Button6",6,new MDMoveCommand(getRobot(),"forward command",Direction.forward))			
+//			.whenPressed("Button7",7,new ShootCommand(getRobot(),"ShootCommand"))	
 			
-			.whenPressed("Button3",3,new ShiftToggleCommand(getRobot(), "ShiftToggle"))
-			.whenPressed("Button4",4,new MDMoveCommand(getRobot(),"reverse command",Direction.reverse))
-			.whileHeld("Button5",5,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
-//			.whenPressed("Button6",6,new MDMoveCommand(getRobot(),"forward command",Direction.forward))
-			.whenPressed("Button6",6,new UnjamBallsystemCommand(getRobot(),"UnjamBallsystemCommand"))
-//			.whenPressed("Button7",7,new ShootCommand(getRobot(),"ShootCommand"))
-			.whenPressed("Button11",11,new StopShootSystemCommand(getRobot(),"StopShootSystemCommand"))
-			.whenPressed("Button12",12,new UnjamShootCommand(getRobot(),"UnjamShootCommand"))
 			.configure()
 		);
 

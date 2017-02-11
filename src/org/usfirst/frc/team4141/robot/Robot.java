@@ -54,35 +54,39 @@ public class Robot extends MDRobotBase {
 						.configure()
 				);	
 				
-//				add(new MDDriveSubsystem(this, "driveSystem", Type.MecanumDrive)
-//						.add(MotorPosition.frontLeft, new Victor(3))
-//						.add(MotorPosition.rearLeft, new Victor(2))
-//						.add(MotorPosition.frontRight, new Victor(1))
-//						.add(MotorPosition.rearRight, new Victor(0))
-//						.add("accelerometer", new MD_BuiltInAccelerometer())
-//						.add("IMU", new MD_IMU())
-//						.add("a", new DoubleConfigSetting(0.0, 1.0, 0.25))
-//						.add("b", new DoubleConfigSetting(0.0, 1.0, 0.4))
-//						.add("c", new DoubleConfigSetting(0.0, 1.0, 1.0))
-//						.configure()
-//				);	
+		// MecanumDrive example
+		// ---------------------------------		
+/*				add(new MDDriveSubsystem(this, "driveSystem", Type.MecanumDrive)
+						.add(MotorPosition.frontLeft, new Victor(3))
+						.add(MotorPosition.rearLeft, new Victor(2))
+						.add(MotorPosition.frontRight, new Victor(1))
+						.add(MotorPosition.rearRight, new Victor(0))
+						.add("accelerometer", new MD_BuiltInAccelerometer())
+						.add("IMU", new MD_IMU())
+						.add("a", new DoubleConfigSetting(0.0, 1.0, 0.25))
+						.add("b", new DoubleConfigSetting(0.0, 1.0, 0.4))
+						.add("c", new DoubleConfigSetting(0.0, 1.0, 1.0))
+						.configure()
+				);	
+*/	
 				
-		//// TankDrive with 4 motors example:
-		//
-		///*		add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
-//						.add(MotorPosition.frontRight, new Victor(0))
-//						.add(MotorPosition.rearRight, new Victor(1))
-//						.add(MotorPosition.frontLeft, new Victor(2))
-//						.add(MotorPosition.rearLeft, new Victor(3))
-//						.add("accelerometer", new MD_BuiltInAccelerometer())
-//						.add("IMU", new MD_IMU())
-//						.configure()
-//				);	
-		//	
-		//*/
+		// TankDrive with 4 motors example:
+		// ----------------------------------
+/*				add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
+						.add(MotorPosition.frontRight, new Victor(0))
+						.add(MotorPosition.rearRight, new Victor(1))
+						.add(MotorPosition.frontLeft, new Victor(2))
+						.add(MotorPosition.rearLeft, new Victor(3))
+						.add("accelerometer", new MD_BuiltInAccelerometer())
+						.add("IMU", new MD_IMU())
+						.configure()
+				);	
+			
+		*/
 				
 		//A commands needs to be configured for the autonomous mode.
 		//In some cases it is desirable to have more than 1 auto command and make a decision at game time which command to use
+		
 		setAutonomousCommand(new MDCommand[]{
 				new MDDriveStopCommand(this,"StopCommand")
 			}, "StopCommand"  //specify the default
@@ -95,41 +99,40 @@ public class Robot extends MDRobotBase {
 				 .configure()
 		);		
 		
-//		//A robot is composed of subsystems
-//		//A robot will typically have 1 drive system and several other fit to purpose subsystems		
-//		//The Drive system is a special subsystem in that it has specific logic handle the speed controllers
-//		//We have 2 types of drive systems, tank drive and mecanum drive
-//		//uncomment the desired drive system and adjust the motor configuration as needed
-//		//Mecanum example :
-//		
-///*		add(new MDDriveSubsystem(this, "driveSystem", Type.MecanumDrive)
-//				.add(MotorPosition.frontRight, new Victor(1))
-//				.add(MotorPosition.rearRight, new Victor(0))
-//				.add(MotorPosition.frontLeft, new Victor(3))
-//				.add(MotorPosition.rearLeft, new Victor(2))
-//				.add("accelerometer", new MD_BuiltInAccelerometer())
-//				.add("IMU", new MD_IMU())
-//				.configure()
-//		);	
-//*/
-//
-//
-//
+		// -----------------------------------------------------------------------
+		// A robot is composed of subsystems
+		// A robot will typically have 1 drive system and several other fit to purpose subsystems		
+		// The Drive system is a special subsystem in that it has specific logic handle the speed controllers
+		// We have 2 types of drive systems, tank drive and mecanum drive
+		// ncomment the desired drive system and adjust the motor configuration as needed
+		// -----------------------------------------------------------------------
+	
+		// Mecanum example :
+		// ---------------------
+/*		add(new MDDriveSubsystem(this, "driveSystem", Type.MecanumDrive)
+				.add(MotorPosition.frontRight, new Victor(1))
+				.add(MotorPosition.rearRight, new Victor(0))
+				.add(MotorPosition.frontLeft, new Victor(3))
+				.add(MotorPosition.rearLeft, new Victor(2))
+				.add("accelerometer", new MD_BuiltInAccelerometer())
+				.add("IMU", new MD_IMU())
+				.configure()
+		);	
+*/
 		
-		add(new GearSubSystem(this, "gearSubsystem")
+/*		add(new GearSubSystem(this, "gearSubsystem")
 				.add(GearSubSystem.SolenoidPosition.left.toString(), new Solenoid(0))
 				.add(GearSubSystem.SolenoidPosition.right.toString(), new Solenoid(1))
 				.add(GearSubSystem.motorName, new Victor(4))
 				.add(GearSubSystem.SwitchPosition.extended.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.extended.toString(), 2))
 				.add(GearSubSystem.SwitchPosition.recessed.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.recessed.toString(), 3))
 				.configure());
+*/
 
 		add(new BallPickupSubsystem(this, "ballPickupSubsystem")
 				.add(BallPickupSubsystem.motorCollect, new Victor(2))
 				.add("pickupSpeed",new DoubleConfigSetting(0.0, 1.0, 0.5))
 				.add("unjamSpeed",new DoubleConfigSetting(-1.0, 0.0, -0.3))
-
-			//	.add(BallSubsystem.?
 				.configure());
 
 		add(new RopeSubsystem(this, "ropeSubsystem")
@@ -144,7 +147,6 @@ public class Robot extends MDRobotBase {
 				.add("feedSpeed",new DoubleConfigSetting(0.0, 1.0, 0.5))
 				.add("unjamSpeed",new DoubleConfigSetting(-1.0, 0.0, -0.2))
 				.configure());
-
 	}
 	
 	@Override
@@ -167,27 +169,26 @@ public class Robot extends MDRobotBase {
 }
 
 
-
-
-//	//Override lifecycle methods, as needed
-//	//	@Override
-//	//	public void teleopPeriodic() {
-//	//		super.teleopPeriodic();
-//	//		...
-//	//	}
-//	//	@Override
-//	//	public void autonomousPeriodic() {
-//	//		super.autonomousPeriodic();
-//	//		...
-//	//	}	
-//	
-//		
-//		//Event manager WebSocket related methods
-//		//Override as needed
-//	//	@Override
-//	//	public void onConnect(Session session) {
-//	//		super.onConnect(session);
-//	//		...
-//	//	}
-//		
-//}
+/* Override lifecycle methods, as needed
+	@Override
+	public void teleopPeriodic() {
+			super.teleopPeriodic();
+			...
+		}
+		@Override
+		public void autonomousPeriodic() {
+			super.autonomousPeriodic();
+			...
+		}	
+	
+		
+		Event manager WebSocket related methods
+		Override as needed
+		@Override
+		public void onConnect(Session session) {
+			super.onConnect(session);
+			...
+		}
+		
+ }
+*/
