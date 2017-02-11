@@ -45,7 +45,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 	
 	public MDDriveSubsystem add(MotorPosition position,SpeedController speedController){
 		if(speedController instanceof PWM){
-			super.add(position.toString(),(PWM)speedController);
+			super.add(position.toString(),(SpeedController)speedController);
 		}
 		else
 		{
@@ -60,7 +60,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 	}
 	
 	public SpeedController get(MotorPosition position){
-		PWM motor = getMotors().get(position.toString());
+		SpeedController motor = getMotors().get(position.toString());
 		if(motor instanceof SpeedController){
 			return (SpeedController) motor;
 		}

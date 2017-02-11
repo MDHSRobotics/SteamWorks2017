@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SolenoidBase;
+import edu.wpi.first.wpilibj.SpeedController;
 
 public class RobotConfigurationNotification extends RobotNotification {
 	
@@ -52,7 +53,7 @@ public class RobotConfigurationNotification extends RobotNotification {
 				if(firstWritten) sb.append(", ");
 				else firstWritten = true;
 				Hashtable<String, ConfigSetting> settings = subsystem.getConfigSettings();
-				Hashtable<String, PWM> motors = subsystem.getMotors();
+				Hashtable<String, SpeedController> motors = subsystem.getMotors();
 				Hashtable<String, SolenoidBase> solenoids = subsystem.getSolenoids();
 				Hashtable<String, Sensor> sensors = subsystem.getSensors();
 					sb.append("\"");
@@ -186,7 +187,7 @@ public class RobotConfigurationNotification extends RobotNotification {
 		sb.append("}");
 	}
 
-	private void appendMotors(Hashtable<String, PWM> motors) {
+	private void appendMotors(Hashtable<String, SpeedController> motors) {
 		boolean first = true;
 		for(String motorName : motors.keySet()){
 			if(first) first = false;
@@ -195,11 +196,12 @@ public class RobotConfigurationNotification extends RobotNotification {
 		}
 	}
 	
-	private void append(String motorName,PWM motor) {
+	private void append(String motorName,SpeedController motor) {
 		sb.append("{\"name\":\"");
 		sb.append(motorName);
 		sb.append("\", \"channel\":\"");
-		sb.append(motor.getChannel());
+		//TODO:  fix SpeedController refactor
+//		sb.append(motor.getChannel());
 		sb.append("\", \"isServo\":");
 		if(motor instanceof Servo){
 			sb.append(true);
@@ -208,9 +210,9 @@ public class RobotConfigurationNotification extends RobotNotification {
 			sb.append(false);
 		}
 		sb.append(", \"position\":");
-		sb.append(motor.getPosition());
+//		sb.append(motor.getPosition());
 		sb.append(", \"speed\":");
-		sb.append(motor.getSpeed());
+//		sb.append(motor.getSpeed());
 		sb.append(", \"class\":\"");
 		sb.append(motor.getClass().getName());
 		sb.append("\"");
