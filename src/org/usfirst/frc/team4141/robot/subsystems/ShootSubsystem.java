@@ -4,8 +4,8 @@ import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
 import org.usfirst.frc.team4141.MDRobotBase.config.ConfigSetting;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MDDigitalInput;
-import org.usfirst.frc.team4141.robot.subsystems.GearSubSystem.SolenoidPosition;
-import org.usfirst.frc.team4141.robot.subsystems.GearSubSystem.SwitchPosition;
+//import org.usfirst.frc.team4141.robot.subsystems.GearSubSystem.SolenoidPosition;
+//import org.usfirst.frc.team4141.robot.subsystems.GearSubSystem.SwitchPosition;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;

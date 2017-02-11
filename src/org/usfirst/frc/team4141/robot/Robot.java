@@ -13,14 +13,16 @@ import org.usfirst.frc.team4141.robot.commands.MDDriveStopCommand;
 import org.usfirst.frc.team4141.robot.commands.SpinShootMotorCommand;
 //import org.usfirst.frc.team4141.robot.commands.SpinShootMotorCommand;
 import org.usfirst.frc.team4141.robot.subsystems.CoreSubsystem;
-import org.usfirst.frc.team4141.robot.subsystems.GearSubSystem;
+//import org.usfirst.frc.team4141.robot.subsystems.GearSubSystem;
 import org.usfirst.frc.team4141.robot.subsystems.BallPickupSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem.MotorPosition;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem.Type;
 import org.usfirst.frc.team4141.robot.subsystems.RopeSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.ShootSubsystem;
+import org.usfirst.frc.team4141.robot.subsystems.TalonDriveSubsystem;
 
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 
@@ -116,13 +118,13 @@ public class Robot extends MDRobotBase {
 //
 //
 		
-		add(new GearSubSystem(this, "gearSubsystem")
-				.add(GearSubSystem.SolenoidPosition.left.toString(), new Solenoid(0))
-				.add(GearSubSystem.SolenoidPosition.right.toString(), new Solenoid(1))
-				.add(GearSubSystem.motorName, new Victor(4))
-				.add(GearSubSystem.SwitchPosition.extended.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.extended.toString(), 2))
-				.add(GearSubSystem.SwitchPosition.recessed.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.recessed.toString(), 3))
-				.configure());
+//		add(new GearSubSystem(this, "gearSubsystem")
+//				.add(GearSubSystem.SolenoidPosition.left.toString(), new Solenoid(0))
+//				.add(GearSubSystem.SolenoidPosition.right.toString(), new Solenoid(1))
+//				.add(GearSubSystem.motorName, new Victor(4))
+//				.add(GearSubSystem.SwitchPosition.extended.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.extended.toString(), 2))
+//				.add(GearSubSystem.SwitchPosition.recessed.toString(), new MDDigitalInput(GearSubSystem.SwitchPosition.recessed.toString(), 3))
+//				.configure());
 
 		add(new BallPickupSubsystem(this, "ballPickupSubsystem")
 				.add(BallPickupSubsystem.motorCollect, new Victor(2))
@@ -132,9 +134,14 @@ public class Robot extends MDRobotBase {
 			//	.add(BallSubsystem.?
 				.configure());
 
-		add(new RopeSubsystem(this, "ropeSubsystem")
-				.add(RopeSubsystem.motorName, new Victor(6))
-				.add("liftSpeed", new DoubleConfigSetting(-1.0, 1.0, 0.2))
+//		add(new RopeSubsystem(this, "ropeSubsystem")
+//				.add(RopeSubsystem.motorName, new Victor(6))
+//				.add("liftSpeed", new DoubleConfigSetting(-1.0, 1.0, 0.2))
+//				.configure());
+//		
+		add(new TalonDriveSubsystem(this, "talonSubsystem")
+				.add(TalonDriveSubsystem.motorName, new CANTalon(0)) //TODO figure out what the number needs to be
+				.add("talonSpeed", new DoubleConfigSetting(-1.0, 1.0, 0.2))
 				.configure());
 		
 		add(new ShootSubsystem(this, "shootSubsystem")

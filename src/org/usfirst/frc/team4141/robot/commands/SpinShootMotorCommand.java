@@ -5,7 +5,7 @@ import java.util.Date;
 import org.usfirst.frc.team4141.MDRobotBase.MDCommand;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
-import org.usfirst.frc.team4141.robot.subsystems.GearSubSystem;
+//import org.usfirst.frc.team4141.robot.subsystems.GearSubSystem;
 import org.usfirst.frc.team4141.robot.subsystems.ShootSubsystem;
 
 public class SpinShootMotorCommand extends MDCommand {

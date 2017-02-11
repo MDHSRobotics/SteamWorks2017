@@ -15,6 +15,7 @@ import org.usfirst.frc.team4141.robot.commands.RopeRiseCommand;
 
 import org.usfirst.frc.team4141.robot.commands.StopBallsystemCommand;
 import org.usfirst.frc.team4141.robot.commands.StopShootSystemCommand;
+import org.usfirst.frc.team4141.robot.commands.TalonDriveCommand;
 import org.usfirst.frc.team4141.robot.commands.ShiftToggleCommand;
 import org.usfirst.frc.team4141.robot.commands.ShootCommand;
 //import org.usfirst.frc.team4141.robot.commands.ShootCommand;
@@ -94,6 +95,7 @@ public class OI extends OIBase{
 			.whenPressed("Button3",3,new ShiftToggleCommand(getRobot(), "ShiftToggle"))
 			.whenPressed("Button4",4,new MDMoveCommand(getRobot(),"reverse command",Direction.reverse))
 			.whileHeld("Button5",5,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
+			.whileHeld("Button8",8,new TalonDriveCommand(getRobot(), "TalonDriveCommand"))
 //			.whenPressed("Button6",6,new MDMoveCommand(getRobot(),"forward command",Direction.forward))
 			.whenPressed("Button6",6,new UnjamBallsystemCommand(getRobot(),"UnjamBallsystemCommand"))
 //			.whenPressed("Button7",7,new ShootCommand(getRobot(),"ShootCommand"))

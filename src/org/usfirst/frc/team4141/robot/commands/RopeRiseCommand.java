@@ -17,6 +17,7 @@ public class RopeRiseCommand extends MDCommand {
 			throw new IllegalArgumentException("Rope Subsystem not found");
 		}
 		ropeSubsystem = (RopeSubsystem)getRobot().getSubsystems().get("ropeSubsystem"); 
+		requires(ropeSubsystem);
 	}
 
 	protected void initialize() {

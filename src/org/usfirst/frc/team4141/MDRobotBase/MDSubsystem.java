@@ -11,6 +11,7 @@ import org.usfirst.frc.team4141.MDRobotBase.sensors.SensorReading;
 
 import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.SolenoidBase;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
@@ -18,7 +19,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 public abstract class MDSubsystem extends Subsystem {
 	protected String name;
 	private MDRobotBase robot;
-	private Hashtable<String,PWM> motors;
+	private Hashtable<String,SpeedController> motors;
 	private Hashtable<String,SolenoidBase> solenoids;
 	private Hashtable<String,Sensor> sensors;
 	private Hashtable<String,ConfigSetting> configSettings;	
@@ -28,12 +29,12 @@ public abstract class MDSubsystem extends Subsystem {
 	public boolean isCore(){ return isCore;}
 	public void setCore(boolean isCore){this.isCore = isCore;}
 	
-	public MDSubsystem add(String name,PWM motor){
+	public MDSubsystem add(String name,SpeedController motor){
 		if(isConfigured) return this;
 		motors.put(name, motor);
 		return this;
 	}
-	public Hashtable<String,PWM> getMotors() {
+	public Hashtable<String,SpeedController> getMotors() {
 		return motors;
 	}
 	public MDSubsystem add(String name,SolenoidBase solenoid){
@@ -70,7 +71,7 @@ public abstract class MDSubsystem extends Subsystem {
 		super();
 		this.robot=robot;
 		this.name = name;
-		motors = new Hashtable<String,PWM>();
+		motors = new Hashtable<String,SpeedController>();
 		solenoids = new Hashtable<String,SolenoidBase>();
 		sensors = new Hashtable<String,Sensor>();
 		configSettings = new Hashtable<String,ConfigSetting>();
@@ -80,7 +81,10 @@ public abstract class MDSubsystem extends Subsystem {
 		if(this.motors!=null && this.motors.size()>0){
 			Set<String> keys = motors.keySet();
 			for(String key : keys){
-				LiveWindow.addActuator(getName(), key, motors.get(key));
+				SpeedController speedController = motors.get(key);
+				if(speedController instanceof LiveWindowSendable){
+					LiveWindow.addActuator(getName(), key, (LiveWindowSendable)speedController);
+				}
 			}
 		}
 		if(this.solenoids!=null && this.solenoids.size()>0){
