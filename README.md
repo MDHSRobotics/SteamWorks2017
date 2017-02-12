@@ -4,6 +4,9 @@
 
 This project is intended to be the base project from which this season's Java RoboRio controller project is derived from. All contributions made will be added to this project moving forward. Learn how to push changes in the guide [How to Git](https://github.com/MDHSRobotics/TeamWiki/wiki/How%20to%20Git).
 
+__important__ after cloning your repository make sure that all of the contents of the tools folder of this repository are copied to the C:\Users\<USERNAME>\wpilib\user folder on your local computer, see [3rd Party Libraries screenstepslive article](http://wpilib.screenstepslive.com/s/4485/m/13503/l/682619-3rd-party-libraries) _The Mechanism - Java_ section for more details.
+
+
 ###Features
 * Improved Configuration
 * MDConsole Support
