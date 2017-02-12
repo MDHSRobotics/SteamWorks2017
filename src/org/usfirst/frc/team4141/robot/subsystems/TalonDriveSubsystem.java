@@ -3,10 +3,7 @@ package org.usfirst.frc.team4141.robot.subsystems;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
 import org.usfirst.frc.team4141.MDRobotBase.config.ConfigSetting;
-import org.usfirst.frc.team4141.MDRobotBase.sensors.MDDigitalInput;
-
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.SpeedController;
+import com.ctre.CANTalon;
 
 public class TalonDriveSubsystem extends MDSubsystem {
 	
@@ -28,7 +25,7 @@ public class TalonDriveSubsystem extends MDSubsystem {
 	
 	public TalonDriveSubsystem(MDRobotBase robot, String name) {
 		super(robot, name);
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public void move(){
@@ -38,7 +35,7 @@ public class TalonDriveSubsystem extends MDSubsystem {
 	}
 		
 	public void stop(){
-		talonController.stopMotor();
+		talonController.disableControl();
 		
 	}
 	
@@ -58,7 +55,6 @@ public class TalonDriveSubsystem extends MDSubsystem {
 
 	@Override
 	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
 
 	}
 

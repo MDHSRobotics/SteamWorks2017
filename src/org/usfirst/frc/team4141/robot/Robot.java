@@ -7,6 +7,7 @@ import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.config.DoubleConfigSetting;
 import org.usfirst.frc.team4141.MDRobotBase.config.StringConfigSetting;
 import org.usfirst.frc.team4141.robot.commands.Auto1;
+import org.usfirst.frc.team4141.robot.commands.Auto2;
 import org.usfirst.frc.team4141.robot.commands.CollectCommand;
 import org.usfirst.frc.team4141.robot.commands.SpinShootMotorCommand;
 //import org.usfirst.frc.team4141.robot.commands.SpinShootMotorCommand;
@@ -21,7 +22,8 @@ import org.usfirst.frc.team4141.robot.subsystems.RumbleSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.ShootSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.TalonDriveSubsystem;
 
-import edu.wpi.first.wpilibj.CANTalon;
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 
@@ -88,12 +90,7 @@ public class Robot extends MDRobotBase {
 		//A commands needs to be configured for the autonomous mode.
 		//In some cases it is desirable to have more than 1 auto command and make a decision at game time which command to use
 		
-		//Subsystem to manage robot wide config settings
-		add( new CoreSubsystem(this, "core")
-				 .add("name",new StringConfigSetting("MaterBot"))					//go ahead name your robot
-				 .add("autoCommand",new StringConfigSetting("StopCommand"))		//name of autoCommand you wish to start with
-				 .configure()
-		);		
+	
 		
 		// -----------------------------------------------------------------------
 		// A robot is composed of subsystems
@@ -150,16 +147,22 @@ public class Robot extends MDRobotBase {
 				.configure());
 		
 		add(new RumbleSubsystem(this, "rumbleSubsystem")
-				.add("rumbleDuration",new DoubleConfigSetting(0.0, 1.0, 0.5))
+				.add("rumbleDuration",new DoubleConfigSetting(0.0, 0.5, 0.12))
 				.add("rumbleIntenisty",new DoubleConfigSetting(0.0, 1.0, 0.5))
 				.configure());
 
+		//The last 2 items are SetAutonomousCommand
+		// and CoreSubSystem		
 		setAutonomousCommand(new MDCommandGroup[]{
-				new Auto1(this,"Auto1")
+				new Auto1(this),
+				new Auto2(this)
 			}, "Auto1"  //specify the default
 		);
-
-	
+		//Subsystem to manage robot wide config settings
+		add( new CoreSubsystem(this, "core")
+				 .add("name",new StringConfigSetting("MaterBot"))					//go ahead name your robot
+				 .configure()
+		);	
 	}
 	
 	@Override
@@ -179,6 +182,8 @@ public class Robot extends MDRobotBase {
     	CollectCommand collectCommand = new CollectCommand(this,"collectCommand");
     	collectCommand.start();
 	} 	
+	
+
 }
 
 

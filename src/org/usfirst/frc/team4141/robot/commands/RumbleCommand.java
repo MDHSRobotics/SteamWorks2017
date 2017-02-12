@@ -5,10 +5,9 @@ import java.util.Date;
 import org.usfirst.frc.team4141.MDRobotBase.MDCommand;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
-import org.usfirst.frc.team4141.robot.subsystems.BallPickupSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.RumbleSubsystem;
 
-import edu.wpi.first.wpilibj.command.Scheduler;
+
 
 public class RumbleCommand extends MDCommand {
 
@@ -31,12 +30,12 @@ public class RumbleCommand extends MDCommand {
 	@Override
 	protected void initialize() {
 		start =(new Date()).getTime();
-		rumbleSubsystem.rumble();
+		log(Level.DEBUG,"","rumble duration:"+rumbleSubsystem.getRumbleDuration());
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		long now = (new Date()).getTime();
+		now = (new Date()).getTime();
 		return  (now >=(start+rumbleSubsystem.getRumbleDuration()));
 	}
 	

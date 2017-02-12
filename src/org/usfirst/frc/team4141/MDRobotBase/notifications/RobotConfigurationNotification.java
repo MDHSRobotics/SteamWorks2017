@@ -10,6 +10,8 @@ import org.usfirst.frc.team4141.MDRobotBase.sensors.Sensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.SensorReading;
 import org.usfirst.frc.team4141.robot.subsystems.WebSocketSubsystem;
 
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.Servo;
@@ -199,20 +201,24 @@ public class RobotConfigurationNotification extends RobotNotification {
 	private void append(String motorName,SpeedController motor) {
 		sb.append("{\"name\":\"");
 		sb.append(motorName);
-		sb.append("\", \"channel\":\"");
-		//TODO:  fix SpeedController refactor
-//		sb.append(motor.getChannel());
-		sb.append("\", \"isServo\":");
+		sb.append("\"");
+		if(motor instanceof PWM){
+			sb.append(", \"channel\":");
+			sb.append(((PWM)motor).getChannel());
+			sb.append("");
+		}
+		if(motor instanceof CANTalon){
+			sb.append(", \"channel\":");
+			sb.append(((CANTalon)motor).getDeviceID());
+			sb.append("");
+		}
+		sb.append(", \"isServo\":");
 		if(motor instanceof Servo){
 			sb.append(true);
 		}
 		else{
 			sb.append(false);
 		}
-		sb.append(", \"position\":");
-//		sb.append(motor.getPosition());
-		sb.append(", \"speed\":");
-//		sb.append(motor.getSpeed());
 		sb.append(", \"class\":\"");
 		sb.append(motor.getClass().getName());
 		sb.append("\"");

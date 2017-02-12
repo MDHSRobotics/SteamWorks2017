@@ -300,6 +300,17 @@ public abstract class MDRobotBase extends IterativeRobot{
 	public void debug(String message) {
 		log(Level.DEBUG, "", message);
 	}
+
+	public MDCommandGroup getAutoCommand() {
+		return autonomousCommand;
+	}
+	@Override
+	public void robotPeriodic() {
+	}
+
+	public boolean hasAutoCommand(String name) {
+		return commandChooser.containsKey(name);
+	}	
 }
 
 

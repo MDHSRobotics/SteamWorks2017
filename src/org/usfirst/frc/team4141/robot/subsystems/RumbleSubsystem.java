@@ -1,15 +1,12 @@
 package org.usfirst.frc.team4141.robot.subsystems;
 
-import java.util.Date;
-
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
 import org.usfirst.frc.team4141.MDRobotBase.config.ConfigSetting;
 
-import edu.wpi.first.wpilibj.Joystick.RumbleType;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 
-// TODO: configure subsystem in Robot.java and configure buttons
 
 public class RumbleSubsystem extends MDSubsystem {
 	private long rumbleDuration = 500;
@@ -30,14 +27,18 @@ public class RumbleSubsystem extends MDSubsystem {
 	
 	@Override
 	protected void setUp() {
-		if(getConfigSettings().containsKey("rumbleIntenisty")) rumbleIntenisty = getConfigSettings().get("rumbleIntenisty").getDouble();
-		if(getConfigSettings().containsKey("rumbleDuration")) rumbleDuration = (long)(getConfigSettings().get("rumbleDuration").getDouble());
+		if(getConfigSettings().containsKey("rumbleIntenisty")){
+			rumbleIntenisty = getConfigSettings().get("rumbleIntenisty").getDouble();
+		}
+		if(getConfigSettings().containsKey("rumbleDuration")){
+			rumbleDuration = (long)(getConfigSettings().get("rumbleDuration").getDouble()*1000);
+		}
 	}
 
 	@Override
 	public void settingChangeListener(ConfigSetting changedSetting) {
-		if(changedSetting.getName().equals("rumbleIntenisty")) rumbleIntenisty = changedSetting.getDouble();
-		if(changedSetting.getName().equals("rumbleDuration")) rumbleDuration = (long)(changedSetting.getDouble());
+	//	if(changedSetting.getName().equals("rumbleIntenisty")) rumbleIntenisty = changedSetting.getDouble();
+		if(changedSetting.getName().equals("rumbleDuration")) rumbleDuration = (long)(changedSetting.getDouble()*1000);
 	}
 
 	@Override

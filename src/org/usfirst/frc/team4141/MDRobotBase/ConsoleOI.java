@@ -20,9 +20,8 @@ public class ConsoleOI extends MDGenericHID {
 	}
 	
 	public ConsoleOI(MDRobotBase robot, String name) {
-		super(robot,name);
-		this.buttons = new Hashtable<Integer,MDConsoleButton>();
-		
+		super(robot,name,-1,HIDType.kXInputUnknown);
+		this.buttons = new Hashtable<Integer,MDConsoleButton>();		
 		debug("ConsoleOI created");
 	}
 	

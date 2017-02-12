@@ -17,24 +17,22 @@ public class RioHID extends MDGenericHID {
 		this(robot,"RioHID");
 	}
 	public RioHID(MDRobotBase robot, String name) {
-		super(robot,name);
+		super(robot,name,-2,HIDType.kXInputUnknown);
 		this.userButton = new InternalButton();
 		this.agent = new Notifier(new UserButtonAgent(userButton));
 		agent.startPeriodic(0.2);
 		debug("RioHID created");
 	}
 
-
 	@Override
-	public boolean getTrigger(Hand hand) {
-		return userButton.get();
+	public int getPOV() {
+		return (userButton.get()?1:0);
 	}
 
 
 	@Override
 	public boolean getRawButton(int button) {
-		if(button==0) return userButton.get();
-		return false;
+		return userButton.get();
 	}
 
 

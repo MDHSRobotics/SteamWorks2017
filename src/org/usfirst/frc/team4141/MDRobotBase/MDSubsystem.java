@@ -9,7 +9,6 @@ import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.Sensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.SensorReading;
 
-import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.SolenoidBase;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;

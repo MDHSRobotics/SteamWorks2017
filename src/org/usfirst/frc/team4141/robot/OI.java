@@ -6,19 +6,11 @@ import org.usfirst.frc.team4141.MDRobotBase.MDJoystick;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.OIBase;
 import org.usfirst.frc.team4141.MDRobotBase.RioHID;
-import org.usfirst.frc.team4141.robot.commands.CollectCommand;
-import org.usfirst.frc.team4141.robot.commands.MDMoveCommand;
-import org.usfirst.frc.team4141.robot.commands.MDMoveCommand.Direction;
 import org.usfirst.frc.team4141.robot.commands.MDPrintCommand;
-//import org.usfirst.frc.team4141.robot.commands.OpenDoorCommand;
-import org.usfirst.frc.team4141.robot.commands.RopeRiseCommand;
 import org.usfirst.frc.team4141.robot.commands.RumbleCommand;
-import org.usfirst.frc.team4141.robot.commands.StopBallsystemCommand;
 import org.usfirst.frc.team4141.robot.commands.StopShootSystemCommand;
-import org.usfirst.frc.team4141.robot.commands.TalonDriveCommand;
 import org.usfirst.frc.team4141.robot.commands.ShiftToggleCommand;
 import org.usfirst.frc.team4141.robot.commands.ShootCommand;
-//import org.usfirst.frc.team4141.robot.commands.ShootCommand;
 import org.usfirst.frc.team4141.robot.commands.ToggleOrientationCommand;
 import org.usfirst.frc.team4141.robot.commands.UnjamBallsystemCommand;
 import org.usfirst.frc.team4141.robot.commands.UnjamShootCommand;
@@ -93,8 +85,8 @@ public class OI extends OIBase{
 			.whenPressed("Button8",8,new StopShootSystemCommand(getRobot(),"StopShootSystemCommand"))
 			.whenPressed("Button9",9,new UnjamShootCommand(getRobot(),"UnjamShootCommand"))
 			.whenPressed("Button10",10,new UnjamBallsystemCommand(getRobot(),"UnjamBallsystemCommand"))
-			.whileHeld("Button11",11,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
-			.whenPressed("Button12",12,new RumbleCommand(getRobot(), "RumbleCommand"))
+			//.whileHeld("Button11",11,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
+//			.whenPressed("Button12",12,new RumbleCommand(getRobot(), "RumbleCommand"))
 
 //			.whenPressed("trigger",1,new StopBallsystemCommand(getRobot(), "StopBallsystemCommand"))			
 //		    .whenPressed("Button7",7,new StopBallsystemCommand(getRobot(), "CollectCommand"))			
