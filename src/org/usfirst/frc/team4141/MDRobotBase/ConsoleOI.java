@@ -5,6 +5,7 @@ import java.util.Hashtable;
 import org.usfirst.frc.team4141.MDRobotBase.notifications.ConsoleRumbleNotification;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.command.Command;
 
 
 public class ConsoleOI extends MDGenericHID {
@@ -54,7 +55,7 @@ public class ConsoleOI extends MDGenericHID {
 		return this;
 	}
 	
-	public ConsoleOI whenPressed(String buttonName,int buttonNumber,MDCommand command){
+	public ConsoleOI whenPressed(String buttonName,int buttonNumber,Command command){
 			MDConsoleButton button = new MDConsoleButton(this, buttonName, buttonNumber);
 			button.whenPressed(command);
 			buttons.put(new Integer(buttonNumber), button);
