@@ -67,7 +67,7 @@ public class ShootSubsystem extends MDSubsystem {
 	
 	public void spin(){
 		shooterController.set(shootSpeed);
-		debug("Spin at " + shootSpeed);
+//		debug("Spin at " + shootSpeed);
 	}
 	
 	public void shoot(){

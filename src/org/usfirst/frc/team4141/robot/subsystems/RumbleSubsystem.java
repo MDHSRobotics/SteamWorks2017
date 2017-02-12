@@ -6,6 +6,8 @@ import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
 import org.usfirst.frc.team4141.MDRobotBase.config.ConfigSetting;
 
+import edu.wpi.first.wpilibj.Joystick.RumbleType;
+
 
 // TODO: configure subsystem in Robot.java and configure buttons
 
@@ -44,6 +46,9 @@ public class RumbleSubsystem extends MDSubsystem {
 	
 	public void rumble(){
 		debug("rumbling...");
+		getRobot().getOi().getJoysticks().get("driveJoystick").setRumble(RumbleType.kLeftRumble, (float) this.rumbleIntenisty);
+		getRobot().getOi().getJoysticks().get("driveJoystick").setRumble(RumbleType.kRightRumble, (float) this.rumbleIntenisty);
+	
 	}
 	
 	public double getRumbleDuration(){
@@ -51,8 +56,10 @@ public class RumbleSubsystem extends MDSubsystem {
 	}
 
 	public void stop() {
-		debug("Stoped Rumbling");
-		stop();
+		debug("Stopped Rumbling");
+		getRobot().getOi().getJoysticks().get("driveJoystick").setRumble(RumbleType.kLeftRumble, 0);
+		getRobot().getOi().getJoysticks().get("driveJoystick").setRumble(RumbleType.kRightRumble, 0);
+
 	}
 	
 	

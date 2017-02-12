@@ -82,13 +82,14 @@ public class OI extends OIBase{
 			.whenPressed("RightBumper",6,new MDPrintCommand(getRobot(),"RB","Right Bumper Pressed"))
 			.whenPressed("Y",4,new ToggleOrientationCommand(getRobot(),"Flip"))
 */
+			.whenPressed("Y",4,new RumbleCommand(getRobot(), "RumbleCommand"))
 				
 			// Joystick Config: EXTREME 360 Pro
 			// -------------------------------------------------
 			.whileHeld("trigger",1,new ShootCommand(getRobot(), "ShootCommand"))
 			.whenPressed("SideButton",2,new ToggleOrientationCommand(getRobot(), "ToggleOrientationCommand"))
 			.whenPressed("Button3",3,new ShiftToggleCommand(getRobot(), "ShiftToggle"))
-			.whileHeld("Button4",4,new TalonDriveCommand(getRobot(), "TalonCommand"))
+	//		.whileHeld("Button4",4,new TalonDriveCommand(getRobot(), "TalonCommand"))
 			.whenPressed("Button8",8,new StopShootSystemCommand(getRobot(),"StopShootSystemCommand"))
 			.whenPressed("Button9",9,new UnjamShootCommand(getRobot(),"UnjamShootCommand"))
 			.whenPressed("Button10",10,new UnjamBallsystemCommand(getRobot(),"UnjamBallsystemCommand"))
