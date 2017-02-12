@@ -3,9 +3,6 @@ package org.usfirst.frc.team4141.robot.commands;
 import org.usfirst.frc.team4141.MDRobotBase.MDCommandGroup;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
-
-
 public class Auto1 extends MDCommandGroup{
 	public Auto1(MDRobotBase robot,String name){
 		super(robot,name);

@@ -3,7 +3,6 @@ package org.usfirst.frc.team4141.MDRobotBase;
 import java.util.Hashtable;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.hal.HALUtil;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -34,7 +33,7 @@ public abstract class MDRobotBase extends IterativeRobot{
 
 	private OI oi;
 	private Hashtable<String,MDSubsystem> subsystems;
-	private Hashtable<String,MDCommand> commandChooser;
+	private Hashtable<String,MDCommandGroup> commandChooser;
 
 	private String name;
 	
@@ -76,7 +75,7 @@ public abstract class MDRobotBase extends IterativeRobot{
 		return sensorsDictionary;
 	}	
     
-    public Hashtable<String, MDCommand> getCommandChooser() {
+    public Hashtable<String, MDCommandGroup> getCommandChooser() {
 		return commandChooser;
 	}
 	
@@ -120,7 +119,7 @@ public abstract class MDRobotBase extends IterativeRobot{
 //		return logger;
 //	}
 
-    protected Command autonomousCommand=null;
+    protected MDCommandGroup autonomousCommand=null;
 	
     // Operator Interface
     public OI getOi() {
@@ -137,7 +136,7 @@ public abstract class MDRobotBase extends IterativeRobot{
 	public void robotInit() {
     	
     	this.subsystems=new Hashtable<String,MDSubsystem>();
-    	this.commandChooser=new Hashtable<String,MDCommand>();
+    	this.commandChooser=new Hashtable<String,MDCommandGroup>();
     	oi = new OI(this);
     	
     	if(HALUtil.getFPGAButton()){
@@ -258,8 +257,9 @@ public abstract class MDRobotBase extends IterativeRobot{
 		}
 	}
 	
-	protected void setAutonomousCommand(MDCommand[] commands) {
-		for(MDCommand command : commands){
+	protected void setAutonomousCommand(MDCommandGroup[] commands) {
+		setAutonomousCommand(commands,null);
+		for(MDCommandGroup command : commands){
 			commandChooser.put(command.getName(), command);
 			if(autonomousCommand==null){
 				debug("defaulting autoCommand to "+command.getName());
@@ -268,18 +268,27 @@ public abstract class MDRobotBase extends IterativeRobot{
 		}
 	}
 
-	protected void setAutonomousCommand(MDCommand[] commands, String defaultCommandName) {
-		for(MDCommand command : commands){
+	protected void setAutonomousCommand(MDCommandGroup[] commands, String defaultCommandName) {
+		if(commands==null || commands.length<1){
+			debug("no automous commands to set");
+			return;
+		}
+		autonomousCommand = null;
+		for(MDCommandGroup command : commands){
 			commandChooser.put(command.getName(), command);
 			if(defaultCommandName!=null && defaultCommandName.equals(command.getName())){
 				debug("defaulting autoCommand to "+command.getName());
 				autonomousCommand = command;
 			}
 		}
+		if(autonomousCommand==null){
+			debug("defaulting autoCommand to "+commands[0].getName());
+			autonomousCommand = commands[0];
+		}
 	}
 	
-	protected void setAutonomousCommand(MDCommand command) {
-		setAutonomousCommand(new MDCommand[]{command});
+	protected void setAutonomousCommand(MDCommandGroup command) {
+		setAutonomousCommand(new MDCommandGroup[]{command});
 	}
 	
 	public void setAutoCommand(String commandName) {

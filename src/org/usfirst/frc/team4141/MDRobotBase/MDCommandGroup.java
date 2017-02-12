@@ -1,34 +1,29 @@
 package org.usfirst.frc.team4141.MDRobotBase;
 
-import org.usfirst.frc.team4141.robot.commands.MDPrintCommand;
 
-import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public abstract class MDCommandGroup extends MDCommand {
-	
-	private CommandGroup group;
+public abstract class MDCommandGroup extends CommandGroup {
+	private MDRobotBase robot;
 
-	public MDCommandGroup(MDRobotBase robot, String name) {
-		super(robot,name);
-		group = new CommandGroup();
+	public MDCommandGroup(MDRobotBase robot,String name) {
+		super(name);
+		this.robot=robot;
 	}
-	
 
-	protected void addSequential(Command command) {
-		if(group!=null) group.addSequential(command);	
+	public void log(String methodName, String message) {
+		getRobot().log(this.getClass().getSimpleName()+"."+methodName+"()", message);
+		
 	}
-	protected void addSequential(Command command, double timeOut) {
-		if(group!=null) group.addSequential(command,timeOut);	
+	public void log(Level level, String methodName, String message) {
+		getRobot().log(level,this.getClass().getSimpleName()+"."+methodName+"()", message);
 	}
-	protected void addParallel(Command command) {
-		if(group!=null) group.addParallel(command);	
-	}
-	protected void addParallel(Command command, double timeOut) {
-		if(group!=null) group.addParallel(command,timeOut);	
-	}
-	public void cancel() {
-		if(group!=null) group.cancel();;	
+
+	public MDRobotBase getRobot() {
+		return robot;
 	}
 
 }

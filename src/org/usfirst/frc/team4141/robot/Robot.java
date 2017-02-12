@@ -1,16 +1,13 @@
 package org.usfirst.frc.team4141.robot;
 
-import org.usfirst.frc.team4141.MDRobotBase.MDCommand;
-import org.usfirst.frc.team4141.MDRobotBase.sensors.MDDigitalInput;
+import org.usfirst.frc.team4141.MDRobotBase.MDCommandGroup;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_BuiltInAccelerometer;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_IMU;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.config.DoubleConfigSetting;
 import org.usfirst.frc.team4141.MDRobotBase.config.StringConfigSetting;
-import org.usfirst.frc.team4141.robot.commands.ArcadeDriveCommand;
 import org.usfirst.frc.team4141.robot.commands.Auto1;
 import org.usfirst.frc.team4141.robot.commands.CollectCommand;
-import org.usfirst.frc.team4141.robot.commands.MDDriveStopCommand;
 import org.usfirst.frc.team4141.robot.commands.SpinShootMotorCommand;
 //import org.usfirst.frc.team4141.robot.commands.SpinShootMotorCommand;
 import org.usfirst.frc.team4141.robot.subsystems.CoreSubsystem;
@@ -157,7 +154,7 @@ public class Robot extends MDRobotBase {
 				.add("rumbleIntenisty",new DoubleConfigSetting(0.0, 1.0, 0.5))
 				.configure());
 
-		setAutonomousCommand(new MDCommand[]{
+		setAutonomousCommand(new MDCommandGroup[]{
 				new Auto1(this,"Auto1")
 			}, "Auto1"  //specify the default
 		);
