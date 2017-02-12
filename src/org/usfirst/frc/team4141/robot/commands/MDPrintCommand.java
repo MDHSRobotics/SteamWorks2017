@@ -2,6 +2,7 @@ package org.usfirst.frc.team4141.robot.commands;
 
 import org.usfirst.frc.team4141.MDRobotBase.MDCommand;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
+import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
 
 public class MDPrintCommand extends MDCommand {
 	
@@ -24,7 +25,7 @@ public class MDPrintCommand extends MDCommand {
 	@Override
 	protected void execute() {
 		super.execute();
-		log("execute", message);
+		log(Level.DEBUG,"execute", message);
 	}
 
 }

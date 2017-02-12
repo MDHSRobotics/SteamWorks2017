@@ -8,6 +8,7 @@ import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.config.DoubleConfigSetting;
 import org.usfirst.frc.team4141.MDRobotBase.config.StringConfigSetting;
 import org.usfirst.frc.team4141.robot.commands.ArcadeDriveCommand;
+import org.usfirst.frc.team4141.robot.commands.Auto1;
 import org.usfirst.frc.team4141.robot.commands.CollectCommand;
 import org.usfirst.frc.team4141.robot.commands.MDDriveStopCommand;
 import org.usfirst.frc.team4141.robot.commands.SpinShootMotorCommand;
@@ -90,11 +91,6 @@ public class Robot extends MDRobotBase {
 		//A commands needs to be configured for the autonomous mode.
 		//In some cases it is desirable to have more than 1 auto command and make a decision at game time which command to use
 		
-		setAutonomousCommand(new MDCommand[]{
-				new MDDriveStopCommand(this,"StopCommand")
-			}, "StopCommand"  //specify the default
-		);
-
 		//Subsystem to manage robot wide config settings
 		add( new CoreSubsystem(this, "core")
 				 .add("name",new StringConfigSetting("MaterBot"))					//go ahead name your robot
@@ -160,6 +156,13 @@ public class Robot extends MDRobotBase {
 				.add("rumbleDuration",new DoubleConfigSetting(0.0, 1.0, 0.5))
 				.add("rumbleIntenisty",new DoubleConfigSetting(0.0, 1.0, 0.5))
 				.configure());
+
+		setAutonomousCommand(new MDCommand[]{
+				new Auto1(this,"Auto1")
+			}, "Auto1"  //specify the default
+		);
+
+	
 	}
 	
 	@Override

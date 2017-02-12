@@ -185,7 +185,10 @@ public abstract class MDRobotBase extends IterativeRobot{
      */    
     @Override
 	public void autonomousInit() {
-    	if (autonomousCommand != null) autonomousCommand.start();
+    	if (autonomousCommand != null){
+    		debug("autonomous command should start");
+    		autonomousCommand.start();
+    	}
     	else{
     		debug("autonomousCommand is unexpectedly null");
     	}
