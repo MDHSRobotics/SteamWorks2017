@@ -5,13 +5,14 @@ import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
 import org.usfirst.frc.team4141.MDRobotBase.config.ConfigSetting;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MDDigitalInput;
 
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.SpeedController;
 
 public class TalonDriveSubsystem extends MDSubsystem {
 	
 	private double talonSpeed=0.2;
 	
-	private SpeedController talonController;
+	private CANTalon talonController;
 	
 	public static String motorName="talonMotor";
 
@@ -21,7 +22,7 @@ public class TalonDriveSubsystem extends MDSubsystem {
 		if(getMotors()==null 
 				|| !getMotors().containsKey(motorName))
 			throw new IllegalArgumentException("Invalid motor configuration for talon system.");
-		talonController = (SpeedController)(getMotors().get(motorName));
+		talonController = (CANTalon)(getMotors().get(motorName));
 		return this;
 	}
 	
