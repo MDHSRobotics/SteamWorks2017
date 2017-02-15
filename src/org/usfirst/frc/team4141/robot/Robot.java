@@ -6,8 +6,8 @@ import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_IMU;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.config.DoubleConfigSetting;
 import org.usfirst.frc.team4141.MDRobotBase.config.StringConfigSetting;
-import org.usfirst.frc.team4141.robot.commands.Auto1;
-import org.usfirst.frc.team4141.robot.commands.Auto2;
+import org.usfirst.frc.team4141.robot.commands.AUTOMoveFromWall;
+import org.usfirst.frc.team4141.robot.commands.AUTODistanceDetection;
 import org.usfirst.frc.team4141.robot.commands.CollectCommand;
 import org.usfirst.frc.team4141.robot.commands.SpinShootMotorCommand;
 //import org.usfirst.frc.team4141.robot.commands.SpinShootMotorCommand;
@@ -160,8 +160,8 @@ public class Robot extends MDRobotBase {
 		//The last 2 items are SetAutonomousCommand
 		// and CoreSubSystem		
 		setAutonomousCommand(new MDCommandGroup[]{
-				new Auto1(this),
-				new Auto2(this)
+				new AUTOMoveFromWall(this),
+				new AUTODistanceDetection(this)
 			}, "Auto1"  //specify the default
 		);
 		//Subsystem to manage robot wide config settings

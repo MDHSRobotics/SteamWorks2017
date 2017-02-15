@@ -6,8 +6,8 @@ import org.usfirst.frc.team4141.MDRobotBase.MDJoystick;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.OIBase;
 import org.usfirst.frc.team4141.MDRobotBase.RioHID;
-import org.usfirst.frc.team4141.robot.commands.Auto1;
-import org.usfirst.frc.team4141.robot.commands.Auto2;
+import org.usfirst.frc.team4141.robot.commands.AUTOMoveFromWall;
+import org.usfirst.frc.team4141.robot.commands.AUTODistanceDetection;
 import org.usfirst.frc.team4141.robot.commands.CollectCommand;
 import org.usfirst.frc.team4141.robot.commands.MDMoveCommand;
 import org.usfirst.frc.team4141.robot.commands.MDMoveCommand.Direction;
@@ -122,8 +122,8 @@ public class OI extends OIBase{
 				.whenPressed("whenPressed",0,new MDPrintCommand(getRobot(),"whenPressed","whenPressed..."))
 				.whileHeld("whileHeld",3,new MDPrintCommand(getRobot(),"whileHeld","whileHeld..."))
 				.whenPressed("rumble",4,new RumbleCommand(getRobot(),"rumble"))
-				.whenPressed("Auto1",1,new Auto1(getRobot()))
-				.whenPressed("Auto2",2,new Auto2(getRobot()))
+				.whenPressed("Auto1",1,new AUTOMoveFromWall(getRobot()))
+				.whenPressed("Auto2",2,new AUTODistanceDetection(getRobot()))
 				.configure()
 			);		
 		
