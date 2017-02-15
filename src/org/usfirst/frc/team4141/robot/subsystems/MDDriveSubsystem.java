@@ -287,6 +287,11 @@ public class MDDriveSubsystem extends MDSubsystem {
 		debug("shifted to " + (isHighGear?"high gear" : "low gear"));
 		
 	}
+
+	public void resetGyro() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 		
 }

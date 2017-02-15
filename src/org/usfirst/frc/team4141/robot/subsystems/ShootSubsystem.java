@@ -10,8 +10,8 @@ public class ShootSubsystem extends MDSubsystem {
 	//motors may change
 	private SpeedController shooterController;
 	private SpeedController feederController;
-	private double shootSpeed=0.5; 
-	private double feedSpeed=0.5;
+	private double shootSpeed=1; 
+	private double feedSpeed=1;
 	private double unjamSpeed=-0.2;
 	
 	public static String shootMotor="ShootMotor";

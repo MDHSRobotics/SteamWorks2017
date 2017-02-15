@@ -5,17 +5,25 @@ import org.usfirst.frc.team4141.MDRobotBase.ConsoleOI;
 import org.usfirst.frc.team4141.MDRobotBase.MDJoystick;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.OIBase;
+import org.usfirst.frc.team4141.MDRobotBase.RioHID;
 import org.usfirst.frc.team4141.robot.commands.Auto1;
 import org.usfirst.frc.team4141.robot.commands.Auto2;
+import org.usfirst.frc.team4141.robot.commands.CollectCommand;
+import org.usfirst.frc.team4141.robot.commands.MDMoveCommand;
+import org.usfirst.frc.team4141.robot.commands.MDMoveCommand.Direction;
 import org.usfirst.frc.team4141.robot.commands.MDPrintCommand;
+//import org.usfirst.frc.team4141.robot.commands.OpenDoorCommand;
+import org.usfirst.frc.team4141.robot.commands.RopeRiseCommand;
 import org.usfirst.frc.team4141.robot.commands.RumbleCommand;
+import org.usfirst.frc.team4141.robot.commands.StopBallsystemCommand;
 import org.usfirst.frc.team4141.robot.commands.StopShootSystemCommand;
+import org.usfirst.frc.team4141.robot.commands.TalonDriveCommand;
 import org.usfirst.frc.team4141.robot.commands.ShiftToggleCommand;
 import org.usfirst.frc.team4141.robot.commands.ShootCommand;
+//import org.usfirst.frc.team4141.robot.commands.ShootCommand;
 import org.usfirst.frc.team4141.robot.commands.ToggleOrientationCommand;
 import org.usfirst.frc.team4141.robot.commands.UnjamBallsystemCommand;
 import org.usfirst.frc.team4141.robot.commands.UnjamShootCommand;
-
 
 
 /**
@@ -76,19 +84,18 @@ public class OI extends OIBase{
 			.whenPressed("RightBumper",6,new MDPrintCommand(getRobot(),"RB","Right Bumper Pressed"))
 			.whenPressed("Y",4,new ToggleOrientationCommand(getRobot(),"Flip"))
 */
-			.whenPressed("Y",4,new RumbleCommand(getRobot(), "RumbleCommand"))
 				
 			// Joystick Config: EXTREME 360 Pro
 			// -------------------------------------------------
 			.whileHeld("trigger",1,new ShootCommand(getRobot(), "ShootCommand"))
 			.whenPressed("SideButton",2,new ToggleOrientationCommand(getRobot(), "ToggleOrientationCommand"))
 			.whenPressed("Button3",3,new ShiftToggleCommand(getRobot(), "ShiftToggle"))
-	//		.whileHeld("Button4",4,new TalonDriveCommand(getRobot(), "TalonCommand"))
+			.whileHeld("Button4",4,new TalonDriveCommand(getRobot(), "TalonCommand"))
 			.whenPressed("Button8",8,new StopShootSystemCommand(getRobot(),"StopShootSystemCommand"))
 			.whenPressed("Button9",9,new UnjamShootCommand(getRobot(),"UnjamShootCommand"))
 			.whenPressed("Button10",10,new UnjamBallsystemCommand(getRobot(),"UnjamBallsystemCommand"))
-			//.whileHeld("Button11",11,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
-//			.whenPressed("Button12",12,new RumbleCommand(getRobot(), "RumbleCommand"))
+			.whileHeld("Button11",11,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
+			.whenPressed("Button12",12,new RumbleCommand(getRobot(), "RumbleCommand"))
 
 //			.whenPressed("trigger",1,new StopBallsystemCommand(getRobot(), "StopBallsystemCommand"))			
 //		    .whenPressed("Button7",7,new StopBallsystemCommand(getRobot(), "CollectCommand"))			
@@ -109,13 +116,14 @@ public class OI extends OIBase{
 //		);
 		
 		
+		
 		//Configure the MDConsole OI here		
 		add(new ConsoleOI(getRobot())
-				.whenPressed("WhenPressed",0,new MDPrintCommand(getRobot(),"WhenPressed","WhenPressed ..."))
-				.whileHeld("WhileHeld",1,new MDPrintCommand(getRobot(),"WhileHeld","WhileHeld ..."))
-				.whenPressed("Rumble",2,new RumbleCommand(getRobot(),"RumbleCommand"))
-				.whenPressed("Auto1",3,new Auto1(getRobot()))
-				.whenPressed("Auto2",4,new Auto2(getRobot()))
+				.whenPressed("whenPressed",0,new MDPrintCommand(getRobot(),"whenPressed","whenPressed..."))
+				.whileHeld("whileHeld",3,new MDPrintCommand(getRobot(),"whileHeld","whileHeld..."))
+				.whenPressed("rumble",4,new RumbleCommand(getRobot(),"rumble"))
+				.whenPressed("Auto1",1,new Auto1(getRobot()))
+				.whenPressed("Auto2",2,new Auto2(getRobot()))
 				.configure()
 			);		
 		

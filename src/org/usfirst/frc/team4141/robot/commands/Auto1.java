@@ -6,9 +6,9 @@ import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 public class Auto1 extends MDCommandGroup{
 	public Auto1(MDRobotBase robot){
 		super(robot,"Auto1");
-		addSequential(new MDPrintCommand(getRobot(),"auto1-1","auto1-1"));
-		addSequential(new MDPrintCommand(getRobot(),"auto1-2","auto1-2"));
-		addSequential(new MDPrintCommand(getRobot(),"auto1-3","auto1-3"));
+		addSequential(new MDPrintCommand(getRobot(),"auto1-1","Scenario - Auto1: BEGIN!!"));
+		addSequential(new MoveFromWallCommand(getRobot(),"Move From Wall."));
+		addSequential(new MDPrintCommand(getRobot(),"auto1-3","Scenario - Auto1: End... :("));
 	}
 
 }

@@ -12,6 +12,7 @@ import org.usfirst.frc.team4141.robot.commands.CollectCommand;
 import org.usfirst.frc.team4141.robot.commands.SpinShootMotorCommand;
 //import org.usfirst.frc.team4141.robot.commands.SpinShootMotorCommand;
 import org.usfirst.frc.team4141.robot.subsystems.CoreSubsystem;
+import org.usfirst.frc.team4141.robot.subsystems.AutonomousSubsystem;
 //import org.usfirst.frc.team4141.robot.subsystems.GearSubSystem;
 import org.usfirst.frc.team4141.robot.subsystems.BallPickupSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem;
@@ -142,13 +143,18 @@ public class Robot extends MDRobotBase {
 				.add(ShootSubsystem.shootMotor, new Victor(7))
 				.add(ShootSubsystem.feedMotor, new Victor(8))
 				.add("shootSpeed",new DoubleConfigSetting(0.0, 1.0, 0.5))
-				.add("feedSpeed",new DoubleConfigSetting(0.0, 1.0, 0.5))
+				.add("feedSpeed",new DoubleConfigSetting(-1.0, 0.0, -0.6))
 				.add("unjamSpeed",new DoubleConfigSetting(-1.0, 0.0, -0.2))
 				.configure());
 		
 		add(new RumbleSubsystem(this, "rumbleSubsystem")
 				.add("rumbleDuration",new DoubleConfigSetting(0.0, 0.5, 0.12))
 				.add("rumbleIntenisty",new DoubleConfigSetting(0.0, 1.0, 0.5))
+				.configure());
+		
+		add(new AutonomousSubsystem(this, "autoSubsystem")
+				.add("auto1Speed",new DoubleConfigSetting(0.0, 1.0, 0.5))
+				.add("auto1Duration",new DoubleConfigSetting(0.0, 15.0, 5.0))
 				.configure());
 
 		//The last 2 items are SetAutonomousCommand
