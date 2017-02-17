@@ -8,8 +8,9 @@ public class AUTODistanceDetection extends MDCommandGroup{
 		super(robot,"Auto2");
 		addSequential(new MDPrintCommand(getRobot(),"auto2-1","[AUTO] Detecting Distance: Begin"));
 		addSequential(new MDPrintCommand(getRobot(),"auto2-2","Lidar... "));
-		addSequential(new MDPrintCommand(getRobot(),"auto2-3","Gyro..."));
-		addSequential(new MDPrintCommand(getRobot(),"auto2-4","[AUTO] Detecting Distance: End"));
+		addSequential(new DistanceDetectionCommand(getRobot(),"It is moving..."));
+		addSequential(new MDPrintCommand(getRobot(),"auto2-4","Gyro..."));
+		addSequential(new MDPrintCommand(getRobot(),"auto2-5","[AUTO] Detecting Distance: End"));
 
 	}
 

@@ -1,3 +1,4 @@
+//error 404 not found
 package org.usfirst.frc.team4141.robot;
 
 import org.usfirst.frc.team4141.MDRobotBase.MDCommandGroup;
@@ -155,6 +156,8 @@ public class Robot extends MDRobotBase {
 		add(new AutonomousSubsystem(this, "autoSubsystem")
 				.add("auto1Speed",new DoubleConfigSetting(0.0, 1.0, 0.5))
 				.add("auto1Duration",new DoubleConfigSetting(0.0, 15.0, 5.0))
+				
+				.add("auto2Distance",new DoubleConfigSetting(0.0, 18.0, 0.0))
 				.configure());
 
 		//The last 2 items are SetAutonomousCommand
