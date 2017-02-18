@@ -7,6 +7,8 @@ import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.robot.subsystems.AutonomousSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
+import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
+
 
 public class DistanceDetectionCommand extends MDCommand {
 	
@@ -41,6 +43,8 @@ public class DistanceDetectionCommand extends MDCommand {
 	
 	@Override
 	protected boolean isFinished() {
+		auto2Distance = autoSubsystem.getAuto2Distance();
+		log(Level.DEBUG, "isFinished()", "auto2Distance="+auto2Distance+" | targetDistance="+targetDistance+" | (auto2Distance >= targetDistance)="+(auto2Distance >= targetDistance));
 		return (auto2Distance >= targetDistance);
 			}
 		
@@ -54,6 +58,7 @@ public class DistanceDetectionCommand extends MDCommand {
 	
 	@Override
 	protected void end() {
+		log(Level.DEBUG, "end()", "driveSubsystem="+driveSubsystem);
 		driveSubsystem.stop();
 	}
 }

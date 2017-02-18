@@ -1,6 +1,8 @@
 //error 404 not found
 package org.usfirst.frc.team4141.robot;
 
+import java.beans.Encoder;
+
 import org.usfirst.frc.team4141.MDRobotBase.MDCommandGroup;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_BuiltInAccelerometer;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_IMU;
