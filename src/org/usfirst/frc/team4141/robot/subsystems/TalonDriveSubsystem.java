@@ -34,6 +34,10 @@ public class TalonDriveSubsystem extends MDSubsystem {
 		talonController.set(talonSpeed);
 	}
 		
+	public void initialize(){
+		talonController.enableControl();
+	}
+	
 	public void stop(){
 		talonController.disableControl();
 		

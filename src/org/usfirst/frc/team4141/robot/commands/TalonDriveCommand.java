@@ -22,7 +22,9 @@ public class TalonDriveCommand extends MDCommand {
 	}
 
 	protected void initialize() {
-		}
+		log(Level.DEBUG, "intitalize()", "talonSubsystem="+talonSubsystem);
+		talonSubsystem.initialize();
+	}
 	
 	protected boolean isFinished() {
 		return false;
