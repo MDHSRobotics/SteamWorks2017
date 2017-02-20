@@ -4,6 +4,7 @@ import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
 import org.usfirst.frc.team4141.MDRobotBase.config.ConfigSetting;
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
 public class TalonDriveSubsystem extends MDSubsystem {
@@ -45,11 +46,16 @@ public class TalonDriveSubsystem extends MDSubsystem {
 	}
 		
 	public void initialize(){
-		talonController.enableControl();
-	       talonController.configNominalOutputVoltage(+0.0f, -0.0f);
-	       talonController.configPeakOutputVoltage(+12.0f, -12.0f);
+		talonController.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		talonController.reverseSensor(false);
+	        //_talon.configEncoderCodesPerRev(XXX), // if using FeedbackDevice.QuadEncoder
+	        //_talon.configPotentiometerTurns(XXX), // if using FeedbackDevice.AnalogEncoder or AnalogPot
+
+	        talonController.configNominalOutputVoltage(+0.0f, -0.0f);
+	        talonController.configPeakOutputVoltage(+12.0f, -12.0f);
 	        /* set closed loop gains in slot0 */
-	       talonController.setProfile(0);
+	        //end
+	        talonController.setProfile(0);
 	        talonController.setF(F);
 	        talonController.setP(P);
 	        talonController.setI(I); 
