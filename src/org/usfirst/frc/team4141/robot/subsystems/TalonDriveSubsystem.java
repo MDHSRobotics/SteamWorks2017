@@ -5,18 +5,19 @@ import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
 import org.usfirst.frc.team4141.MDRobotBase.config.ConfigSetting;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
+import com.ctre.CANTalon.FeedbackDeviceStatus;
 import com.ctre.CANTalon.TalonControlMode;
+import com.ctre.CANTalon.VelocityMeasurementPeriod;
 
 public class TalonDriveSubsystem extends MDSubsystem {
 	
 	private double talonSpeed=0.2;
-	private double F=0.11;
-	private double P=0.22;
-	private double I=0.0;
+	private double F=0.0;
+	private double P=0.0;
+	private double I=0.1;
 	private double D=0.0;
 	private double rpm=1.0;
-	
-	
+
 	private CANTalon talonController;
 	
 	public static String motorName="talonMotor";
@@ -41,13 +42,43 @@ public class TalonDriveSubsystem extends MDSubsystem {
 		//positive speed=wind
 		//negative speed=unwind
 //		talonController.set(talonSpeed);
-		double targetSpeed = talonSpeed * rpm; /* 1500 RPM in either direction */
+//      double targetSpeed = talonSpeed * rpm; /* 1500 RPM in either direction */
+//	    talonController.changeControlMode(TalonControlMode.Speed);
+//    	talonController.set(targetSpeed);
+//		talonController.changeControlMode(TalonControlMode.PercentVbus);
+//		talonController.set(talonSpeed);
+    	double motorOutput = talonController.getOutputVoltage() / talonController.getBusVoltage();
+    	double targetSpeed = talonSpeed * rpm; /* 1500 RPM in either direction */
+    	talonController.changeControlMode(TalonControlMode.Speed);
     	talonController.set(targetSpeed);
+    	/* prepare line to print */
+    	System.out.print("\tout:");
+		System.out.print(motorOutput);
+		System.out.print("\tspd:");
+		System.out.print(talonController.getSpeed() );
+		System.out.print("\terr:");
+		System.out.print(talonController.getClosedLoopError());
+		System.out.print("\ttrg:");
+		System.out.println(targetSpeed);
+//		double currentAmps = _talons[masterId].getOutputCurrent(); 
+//		double outputV = _talons[masterId].getOutputVoltage();
+//		double busV = _talons[masterId].getBusVoltage();
+//		double quadEncoderPos = _talons[masterId].getEncPosition(); 
+//		double quadEncoderVelocity = _talons[master1d].getEchelocity(); 
+//		int analogPos = _talons[masterId].getAnalogInPosition();
+//		int analogVelocity = _talons[masterId].getAnalogInVelocity(); 
+//		double selectedSensorPos = _talons[masterId].getPosition(); 
+//		double selectedSensorSpeed = _talons[master1d].getSpeed();
+//		int closeLoopErr = _talons[masterId].getClosedLoopError();
 	}
 		
 	public void initialize(){
-		talonController.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		talonController.enableControl();
+		talonController.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		talonController.reverseSensor(false);
+		talonController.configEncoderCodesPerRev(1440); // or 360
+//		talonController.SetVelocityMeasurementPeriod(VelocityMeasurementPeriod.Period_100Ms);
+//		talonController.SetVelocityMeasurementWindow(64);
 	        //_talon.configEncoderCodesPerRev(XXX), // if using FeedbackDevice.QuadEncoder
 	        //_talon.configPotentiometerTurns(XXX), // if using FeedbackDevice.AnalogEncoder or AnalogPot
 
@@ -60,7 +91,25 @@ public class TalonDriveSubsystem extends MDSubsystem {
 	        talonController.setP(P);
 	        talonController.setI(I); 
 	        talonController.setD(D);
-	        talonController.changeControlMode(TalonControlMode.Speed);
+//	        talonController.setProfile(0);
+	        
+//	        talonController.changeControlMode(TalonControlMode.PercentVbus);
+//			talonController.set(talonSpeed);
+	 
+//	        double targetSpeed = talonSpeed * rpm; /* 1500 RPM in either direction */
+//		    talonController.changeControlMode(TalonControlMode.Speed);
+//	    	talonController.set(targetSpeed);
+	    	
+//	    	double motorOutput = talonController.getOutputVoltage() / talonController.getBusVoltage();
+//		    System.out.print("\tout:");
+//			System.out.print(motorOutput);
+//			System.out.print("\tspd:");
+//			System.out.print(talonController.getSpeed() );
+//			System.out.print("\terr:");
+//			System.out.print(talonController.getClosedLoopError());
+//			System.out.print("\ttrg:");
+//			System.out.println(targetSpeed);
+//			System.out.println(talonSpeed);
 		}
 	
 	public void stop(){
@@ -70,11 +119,10 @@ public class TalonDriveSubsystem extends MDSubsystem {
 	
 	@Override
 	protected void setUp() {
-		
 		if(getConfigSettings().containsKey("talonSpeed")) talonSpeed = getConfigSettings().get("talonSpeed").getDouble();
 		if(getConfigSettings().containsKey("F")) F = getConfigSettings().get("F").getDouble();
 		if(getConfigSettings().containsKey("P")) P = getConfigSettings().get("P").getDouble();
-		if(getConfigSettings().containsKey("I")) I = getConfigSettings().get("I").getDouble();
+		if(getConfigSettings().containsKey("I")) I = getConfigSettings().get("I").getDouble()*0.003;
 		if(getConfigSettings().containsKey("D")) D = getConfigSettings().get("D").getDouble();
 		if(getConfigSettings().containsKey("RPM")) rpm = getConfigSettings().get("RPM").getDouble();//*1000;
 	}
@@ -85,7 +133,7 @@ public class TalonDriveSubsystem extends MDSubsystem {
 		if(changedSetting.getName().equals("talonSpeed")) talonSpeed = changedSetting.getDouble();
 		if(changedSetting.getName().equals("F")) F = changedSetting.getDouble();
 		if(changedSetting.getName().equals("P")) P = changedSetting.getDouble();
-		if(changedSetting.getName().equals("I")) I = changedSetting.getDouble();
+		if(changedSetting.getName().equals("I")) I = changedSetting.getDouble()*0.003;
 		if(changedSetting.getName().equals("D")) D = changedSetting.getDouble();
 		if(changedSetting.getName().equals("RPM")) rpm = changedSetting.getDouble();//*1000;
 
