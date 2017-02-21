@@ -117,13 +117,14 @@ public class TalonDriveSubsystem extends MDSubsystem {
 		
 	}
 	
+	private double pidFactor = 0.005;
 	@Override
 	protected void setUp() {
 		if(getConfigSettings().containsKey("talonSpeed")) talonSpeed = getConfigSettings().get("talonSpeed").getDouble();
 		if(getConfigSettings().containsKey("F")) F = getConfigSettings().get("F").getDouble();
-		if(getConfigSettings().containsKey("P")) P = getConfigSettings().get("P").getDouble();
-		if(getConfigSettings().containsKey("I")) I = getConfigSettings().get("I").getDouble()*0.003;
-		if(getConfigSettings().containsKey("D")) D = getConfigSettings().get("D").getDouble();
+		if(getConfigSettings().containsKey("P")) P = getConfigSettings().get("P").getDouble()*pidFactor;
+		if(getConfigSettings().containsKey("I")) I = getConfigSettings().get("I").getDouble()*pidFactor;
+		if(getConfigSettings().containsKey("D")) D = getConfigSettings().get("D").getDouble()*pidFactor;
 		if(getConfigSettings().containsKey("RPM")) rpm = getConfigSettings().get("RPM").getDouble();//*1000;
 	}
 
@@ -132,9 +133,9 @@ public class TalonDriveSubsystem extends MDSubsystem {
 		
 		if(changedSetting.getName().equals("talonSpeed")) talonSpeed = changedSetting.getDouble();
 		if(changedSetting.getName().equals("F")) F = changedSetting.getDouble();
-		if(changedSetting.getName().equals("P")) P = changedSetting.getDouble();
-		if(changedSetting.getName().equals("I")) I = changedSetting.getDouble()*0.003;
-		if(changedSetting.getName().equals("D")) D = changedSetting.getDouble();
+		if(changedSetting.getName().equals("P")) P = changedSetting.getDouble()*pidFactor;
+		if(changedSetting.getName().equals("I")) I = changedSetting.getDouble()*pidFactor;
+		if(changedSetting.getName().equals("D")) D = changedSetting.getDouble()*pidFactor;
 		if(changedSetting.getName().equals("RPM")) rpm = changedSetting.getDouble();//*1000;
 
 	}

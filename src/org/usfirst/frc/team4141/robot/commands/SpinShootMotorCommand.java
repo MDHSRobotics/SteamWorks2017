@@ -24,6 +24,7 @@ public class SpinShootMotorCommand extends MDCommand {
 		
 		@Override
 		protected void initialize() {
+			shootSubsystem.initialize();
 		}
 		
 		@Override
@@ -33,6 +34,7 @@ public class SpinShootMotorCommand extends MDCommand {
 		@Override
 		protected void execute() {
 			shootSubsystem.spin();
+			
 		}
 		
 		protected void end() {
