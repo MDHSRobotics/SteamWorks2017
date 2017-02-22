@@ -6,6 +6,7 @@ import org.usfirst.frc.team4141.MDRobotBase.MultiSpeedController;
 import org.usfirst.frc.team4141.MDRobotBase.NotImplementedException;
 import org.usfirst.frc.team4141.MDRobotBase.TankDriveInterpolator;
 import org.usfirst.frc.team4141.MDRobotBase.config.ConfigSetting;
+import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_IMU;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.Sensor;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -36,6 +37,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 	private boolean isHighGear = false;
 	public static String shiftSolenoid = "shiftSolenoid";
 	private Solenoid shifter;
+	private MD_IMU imu;
 	
 	
 	public MDDriveSubsystem(MDRobotBase robot, String name, Type type) {
@@ -76,14 +78,14 @@ public class MDDriveSubsystem extends MDSubsystem {
 			}				
 			if(getMotors().size()==2){
 				if(!getMotors().containsKey(MotorPosition.left.toString()) || !getMotors().containsKey(MotorPosition.right.toString())){
-					throw new IllegalArgumentException("Invalid motor configuration for TankDrive system with 2 motors.");
+					throw new IllegalArgumentException("Invalid MDDriveSubsystem TankDrive configuratopn, missing motors.");
 				}
 				robotDrive = new RobotDrive(get(MotorPosition.left), get(MotorPosition.right));
 			}
 			else if(getMotors().size()==4){
 				if(!getMotors().containsKey(MotorPosition.rearLeft.toString()) || !getMotors().containsKey(MotorPosition.frontLeft.toString())
 						  || !getMotors().containsKey(MotorPosition.rearRight.toString()) || !getMotors().containsKey(MotorPosition.frontRight.toString())){
-					throw new IllegalArgumentException("Invalid motor configuration for TankDrive system with 4 motors.");
+					throw new IllegalArgumentException("Invalid MDDriveSubsystem TankDrive configuratopn, missing motors.");
 				}
 				robotDrive = new RobotDrive(new MultiSpeedController(new SpeedController[]{get(MotorPosition.rearLeft), get(MotorPosition.frontLeft)}),
 						new MultiSpeedController(new SpeedController[]{get(MotorPosition.rearRight), get(MotorPosition.frontRight)}));
@@ -91,9 +93,15 @@ public class MDDriveSubsystem extends MDSubsystem {
 			
 			if(getSolenoids()==null 
 					|| !getSolenoids().containsKey(shiftSolenoid) || !(getSolenoids().get(shiftSolenoid) instanceof Solenoid)) {
-					throw new IllegalArgumentException("Invalid shift solenoid configuration for Drive system.");
+					throw new IllegalArgumentException("Invalid MDDriveSubsystem configuratopn, missing shift solenoid.");
 			}	
 			shifter=(Solenoid) getSolenoids().get(shiftSolenoid);
+
+			if(getSensors()==null && !getSensors().containsKey("IMU")){
+				throw new IllegalArgumentException("Invalid MDDriveSubsystem configuratopn, missing IMU.");
+			}
+		    imu=(MD_IMU) getSensors().get("IMU");
+			
 			
 			break;
 		case MecanumDrive:
@@ -288,12 +296,21 @@ public class MDDriveSubsystem extends MDSubsystem {
 		
 	}
 
-	public void resetGyro() {
-		// TODO Auto-generated method stub
-		
+	public double getAngle() {
+		return imu.getAngleZ();
+	}
+
+	public void gyroReset() {
+		imu.reset();
 	}
 	
-		
+	public void move(double speed, double angle) {
+		if(speed == 0) {stop();return;}
+//  	  debug("forward = " + forward + ", rotate = " + rotate);
+	  	  double[] speeds = interpolator.calculate(speed, angle, isFlipped);
+		  robotDrive.tankDrive(-speeds[0], speeds[1]);
+	}
+
 }
 
 

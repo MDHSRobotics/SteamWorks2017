@@ -52,7 +52,6 @@ public class DistanceDetectionCommand extends MDCommand {
 	protected void execute() {
 		// TODO: Gyro implementation
 		driveSubsystem.forward(autoSpeed);
-		driveSubsystem.resetGyro();
 
 	}
 	

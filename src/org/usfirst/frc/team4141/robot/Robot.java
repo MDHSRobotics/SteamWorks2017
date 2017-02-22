@@ -2,6 +2,7 @@
 package org.usfirst.frc.team4141.robot;
 
 import org.usfirst.frc.team4141.MDRobotBase.MDCommandGroup;
+import org.usfirst.frc.team4141.MDRobotBase.sensors.DualDistanceSensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_BuiltInAccelerometer;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_IMU;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
@@ -52,6 +53,7 @@ public class Robot extends MDRobotBase {
 						.add(MotorPosition.left, new Victor(1))
 						.add("accelerometer", new MD_BuiltInAccelerometer())
 						.add("IMU", new MD_IMU())
+						.add("dualDistance", new DualDistanceSensor(0x41))
 						.add(MDDriveSubsystem.shiftSolenoid, new Solenoid(2))
 						.add("a", new DoubleConfigSetting(0.0, 1.0, 0.25))//high speed turn factor
 				 	    .add("b", new DoubleConfigSetting(0.0, 1.0, 0.4))//slow speed turn factor
