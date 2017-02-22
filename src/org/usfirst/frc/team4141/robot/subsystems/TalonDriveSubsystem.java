@@ -52,14 +52,14 @@ public class TalonDriveSubsystem extends MDSubsystem {
     	talonController.changeControlMode(TalonControlMode.Speed);
     	talonController.set(targetSpeed);
     	/* prepare line to print */
-    	System.out.print("\tout:");
-		System.out.print(motorOutput);
-		System.out.print("\tspd:");
-		System.out.print(talonController.getSpeed() );
-		System.out.print("\terr:");
-		System.out.print(talonController.getClosedLoopError());
-		System.out.print("\ttrg:");
-		System.out.println(targetSpeed);
+//    	System.out.print("\tout:");
+//		System.out.print(motorOutput);
+//		System.out.print("\tspd:");
+//		System.out.print(talonController.getSpeed() );
+//		System.out.print("\terr:");
+//		System.out.print(talonController.getClosedLoopError());
+//		System.out.print("\ttrg:");
+//		System.out.println(targetSpeed);
 //		double currentAmps = _talons[masterId].getOutputCurrent(); 
 //		double outputV = _talons[masterId].getOutputVoltage();
 //		double busV = _talons[masterId].getBusVoltage();

@@ -101,6 +101,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 				throw new IllegalArgumentException("Invalid MDDriveSubsystem configuratopn, missing IMU.");
 			}
 		    imu=(MD_IMU) getSensors().get("IMU");
+		    imu.reset();
 			
 			
 			break;
@@ -306,7 +307,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 	
 	public void move(double speed, double angle) {
 		if(speed == 0) {stop();return;}
-//  	  debug("forward = " + forward + ", rotate = " + rotate);
+//  	  		debug("speed = " + speed + ", angle = " + angle+ ", isFlipped = "+ isFlipped);
 	  	  double[] speeds = interpolator.calculate(speed, angle, isFlipped);
 		  robotDrive.tankDrive(-speeds[0], speeds[1]);
 	}
