@@ -18,7 +18,22 @@ __important__ after cloning your repository make sure that all of the contents o
 * ADIS16448_IMU Gyro Implementation
 
 
-###Subsystem Info
+##Subsystem Info
+
+###Motor Ports for the RoboRIO
+
+| Port Number | Motor      |
+|-------------|------------|
+|0            |Right Drive |
+|1            |Left Drive  |
+|2            |Pickup      |
+|3            |N/A         |
+|4            |N/A         |
+|5            |N/A         |
+|6            |Winch       |
+|7            |Shoot       |
+|8            |Feed        |
+|9            |N/A         |
 
 ####Shooter
 
