@@ -44,6 +44,7 @@ public class MoveFromWallCommand extends MDCommand {
 	
 	@Override
 	protected void initialize() {
+		driveSubsystem.gyroRefresh();
 		autoDuration = autoSubsystem.getAuto1Duration();
 		autoSpeed = autoSubsystem.getAuto1Speed();
 		start =(new Date()).getTime();	
@@ -59,6 +60,7 @@ public class MoveFromWallCommand extends MDCommand {
 	@Override
 	protected void execute() {
 		// TODO: Gyro implementation
+		driveSubsystem.gyroRefresh();
 		actualAngle = driveSubsystem.getAngle();
 		driveAngle = setAngle - actualAngle;
 	  	log(Level.DEBUG,"execute","setAngle="+setAngle+", actualAngle="+actualAngle+", driveAngle="+driveAngle);

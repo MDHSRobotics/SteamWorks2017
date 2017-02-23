@@ -173,7 +173,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 //			  double leftTriggerValue = -joystick.getRawAxis(2);
 			  double forwardAxisValue = -joystick.getRawAxis(1);
 			  double forward = (forwardAxisValue)*(1.0-(1.0-c));
-		  	  double rotate = joystick.getRawAxis(2);
+		  	  double rotate = 0; //joystick.getRawAxis(2); (Changed to accompass shifting w/controller and deadzoned)
 //	  	  debug("forward = " + forward + ", rotate = " + rotate);
 		  	  double[] speeds = interpolator.calculate(forward, rotate, isFlipped);
 			  robotDrive.tankDrive(-speeds[0], speeds[1]);
@@ -239,7 +239,6 @@ public class MDDriveSubsystem extends MDSubsystem {
 
 	public void reverse(double speed) {
 		this.speed = speed;
-		
 		if (isFlipped) {
 			this.speed = -this.speed;
 		}
@@ -255,10 +254,8 @@ public class MDDriveSubsystem extends MDSubsystem {
 	}
 
 	public void forward(double speed) {
-	//	debug("forward"); 
-		
+	//	debug("forward"); 	
 		this.speed = speed;
-		
 		if (isFlipped) {
 			this.speed = -this.speed;
 		}
@@ -278,21 +275,14 @@ public class MDDriveSubsystem extends MDSubsystem {
 	public void flip() {
 		
 		if (speed != 0) return;
-	
 		isFlipped = !isFlipped;
-			
 		debug("flip. isFlipped now sent to " + isFlipped + ". speed = " + speed);
 	}
 	
 	public void shift() {
 		stop();
-		
 		isHighGear = !isHighGear;
-		
 		shifter.set(isHighGear);
-		
-		
-		
 		debug("shifted to " + (isHighGear?"high gear" : "low gear"));
 		
 	}
@@ -303,6 +293,10 @@ public class MDDriveSubsystem extends MDSubsystem {
 
 	public void gyroReset() {
 		imu.reset();
+	}
+	
+	public void gyroRefresh() {
+		imu.refresh();
 	}
 	
 	public void move(double speed, double angle) {
