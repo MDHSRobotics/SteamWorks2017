@@ -44,7 +44,7 @@ public class MoveFromWallCommand extends MDCommand {
 	
 	@Override
 	protected void initialize() {
-		driveSubsystem.gyroRefresh();
+		driveSubsystem.gyroReset();
 		autoDuration = autoSubsystem.getAuto1Duration();
 		autoSpeed = autoSubsystem.getAuto1Speed();
 		start =(new Date()).getTime();	

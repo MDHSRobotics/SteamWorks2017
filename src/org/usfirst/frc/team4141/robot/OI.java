@@ -12,6 +12,7 @@ import org.usfirst.frc.team4141.robot.commands.CollectCommand;
 import org.usfirst.frc.team4141.robot.commands.MDMoveCommand;
 import org.usfirst.frc.team4141.robot.commands.MDMoveCommand.Direction;
 import org.usfirst.frc.team4141.robot.commands.MDPrintCommand;
+import org.usfirst.frc.team4141.robot.commands.ResetGyroCommand;
 //import org.usfirst.frc.team4141.robot.commands.OpenDoorCommand;
 import org.usfirst.frc.team4141.robot.commands.RopeRiseCommand;
 import org.usfirst.frc.team4141.robot.commands.RumbleCommand;
@@ -124,6 +125,9 @@ public class OI extends OIBase{
 				.whenPressed("rumble",4,new RumbleCommand(getRobot(),"rumble"))
 				.whenPressed("Auto1",1,new AUTOMoveFromWall(getRobot()))
 				.whenPressed("Auto2",2,new AUTODistanceDetection(getRobot()))
+				.whenPressed("Flip",5,new ToggleOrientationCommand(getRobot(),"consoleOrientationToggler"))
+				.whenPressed("ResetGyro",6,new ResetGyroCommand(getRobot(),"resetGyro"))
+				
 				.configure()
 			);		
 		

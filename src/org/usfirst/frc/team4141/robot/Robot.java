@@ -204,7 +204,18 @@ public class Robot extends MDRobotBase {
     	CollectCommand collectCommand = new CollectCommand(this,"collectCommand");
     	collectCommand.start();
 	} 	
-	
+
+	@Override
+	public void disabledPeriodic() {
+		super.disabledPeriodic();
+//		if(getSubsystems()!=null && getSubsystems().containsKey("driveSystem")){
+//			MDDriveSubsystem sys = (MDDriveSubsystem)getSubsystems().get("driveSystem");
+//			if(sys.getSensors()!= null && sys.getSensors().containsKey("IMU")){
+//				MD_IMU imu = (MD_IMU)sys.getSensors().get("IMU");
+//				debug("angles: x = "+imu.getAngleX()+", y = "+imu.getAngleY()+", z = "+imu.getAngleZ()+ ", angle="+imu.getAngle());
+//			}
+//		}
+	}
 
 }
 

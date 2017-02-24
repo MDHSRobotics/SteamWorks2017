@@ -301,9 +301,21 @@ public class MDDriveSubsystem extends MDSubsystem {
 	
 	public void move(double speed, double angle) {
 		if(speed == 0) {stop();return;}
-//  	  		debug("speed = " + speed + ", angle = " + angle+ ", isFlipped = "+ isFlipped);
-	  	  double[] speeds = interpolator.calculate(speed, angle, isFlipped);
-		  robotDrive.tankDrive(-speeds[0], speeds[1]);
+//		double correction = angle/180.00;
+//  	  		debug("speed = " + speed + ", angle = " + angle+ ", correction = "+correction+", isFlipped = "+ isFlipped);
+//	  	  double[] speeds = interpolator.calculate(speed, correction, isFlipped);
+		double[] speeds = new double[2];
+		if(angle>=0){
+			if(angle>20) angle = 20;
+			speeds[1]=speed;
+			speeds[0]=speed*(1.0 - angle/10.0);
+		}
+		else{
+			if(angle<-20) angle = -20;
+			speeds[1]=speed*(1.0 + angle/10.0);
+			speeds[0]=speed;
+		}
+		robotDrive.tankDrive(-speeds[0], speeds[1]);
 	}
 
 }
