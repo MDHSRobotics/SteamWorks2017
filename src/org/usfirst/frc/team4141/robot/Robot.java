@@ -54,7 +54,8 @@ public class Robot extends MDRobotBase {
 						.add("accelerometer", new MD_BuiltInAccelerometer())
 						.add("IMU", new MD_IMU())
 						.add("dualDistance", new DualDistanceSensor(0x41))
-						.add(MDDriveSubsystem.shiftSolenoid, new Solenoid(2))
+						.add(MDDriveSubsystem.shiftSolenoid, new Solenoid(1))
+						.add(MDDriveSubsystem.shiftSolenoid1, new Solenoid(2))
 						.add("a", new DoubleConfigSetting(0.0, 1.0, 0.25))//high speed turn factor
 				 	    .add("b", new DoubleConfigSetting(0.0, 1.0, 0.4))//slow speed turn factor
 						.add("c", new DoubleConfigSetting(0.0, 1.0, 1.0))//speed governor

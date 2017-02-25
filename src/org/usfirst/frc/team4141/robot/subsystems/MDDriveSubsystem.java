@@ -36,7 +36,9 @@ public class MDDriveSubsystem extends MDSubsystem {
 	private double speed = 0;
 	private boolean isHighGear = false;
 	public static String shiftSolenoid = "shiftSolenoid";
+	public static String shiftSolenoid1 = "shiftSolenoid1";
 	private Solenoid shifter;
+	private Solenoid shifter1;
 	private MD_IMU imu;
 	
 	
@@ -97,6 +99,12 @@ public class MDDriveSubsystem extends MDSubsystem {
 			}	
 			shifter=(Solenoid) getSolenoids().get(shiftSolenoid);
 
+			if(getSolenoids()==null 
+					|| !getSolenoids().containsKey(shiftSolenoid1) || !(getSolenoids().get(shiftSolenoid1) instanceof Solenoid)) {
+					throw new IllegalArgumentException("Invalid MDDriveSubsystem configuratopn, missing shift solenoid.");
+			}	
+			shifter1=(Solenoid) getSolenoids().get(shiftSolenoid1);
+			
 			if(getSensors()==null && !getSensors().containsKey("IMU")){
 				throw new IllegalArgumentException("Invalid MDDriveSubsystem configuratopn, missing IMU.");
 			}
@@ -283,10 +291,10 @@ public class MDDriveSubsystem extends MDSubsystem {
 		stop();
 		isHighGear = !isHighGear;
 		shifter.set(isHighGear);
+		shifter1.set(isHighGear);
 		debug("shifted to " + (isHighGear?"high gear" : "low gear"));
 		
 	}
-
 	public double getAngle() {
 		return imu.getAngleZ();
 	}
