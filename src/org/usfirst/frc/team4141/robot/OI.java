@@ -122,6 +122,7 @@ public class OI extends OIBase{
 		add(new ConsoleOI(getRobot())
 				.whenPressed("whenPressed",0,new MDPrintCommand(getRobot(),"whenPressed","whenPressed..."))
 				.whileHeld("whileHeld",3,new MDPrintCommand(getRobot(),"whileHeld","whileHeld..."))
+				.whileHeld("whileHeldRopeRise",7,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
 				.whenPressed("rumble",4,new RumbleCommand(getRobot(),"rumble"))
 				.whenPressed("Auto1",1,new AUTOMoveFromWall(getRobot()))
 				.whenPressed("Auto2",2,new AUTODistanceDetection(getRobot()))
