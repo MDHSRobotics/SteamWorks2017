@@ -88,21 +88,21 @@ public class ShootSubsystem extends MDSubsystem {
     	shooterController.changeControlMode(TalonControlMode.Speed);
     	shooterController.set(targetSpeed);
     	/* prepare line to print */
-//    	System.out.print("\tout:");
-//		System.out.print(motorOutput);
-//		System.out.print("\tspd:");
-//		System.out.print(shooterController.getSpeed() );
-//		System.out.print("\terr:");
-//		System.out.print(shooterController.getClosedLoopError());
-//		System.out.print("\ttrg:");
-//		System.out.println(targetSpeed);
+    	System.out.print("\tout:");
+		System.out.print(motorOutput);
+		System.out.print("\tspd:");
+		System.out.print(shooterController.getSpeed() );
+		System.out.print("\terr:");
+		System.out.print(shooterController.getClosedLoopError());
+		System.out.print("\ttrg:");
+		System.out.println(targetSpeed);
 	}
 		
 	public void initialize(){
 		shooterController.enableControl();
 		shooterController.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		shooterController.reverseSensor(false);
-		shooterController.configEncoderCodesPerRev(1440); // or 360
+		shooterController.configEncoderCodesPerRev(400); // or 360
 
 	        shooterController.configNominalOutputVoltage(+0.0f, -0.0f);
 	        shooterController.configPeakOutputVoltage(+12.0f, -12.0f);

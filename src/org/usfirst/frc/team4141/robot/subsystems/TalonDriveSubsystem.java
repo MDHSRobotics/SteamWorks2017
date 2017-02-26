@@ -10,6 +10,8 @@ import com.ctre.CANTalon.TalonControlMode;
 import com.ctre.CANTalon.VelocityMeasurementPeriod;
 
 public class TalonDriveSubsystem extends MDSubsystem {
+
+
 	
 	private double talonSpeed=0.2;
 	private double F=0.0;
@@ -17,19 +19,23 @@ public class TalonDriveSubsystem extends MDSubsystem {
 	private double I=0.1;
 	private double D=0.0;
 	private double rpm=1.0;
+	private int motorOutput;
+	private double targetSpeed;
+
 
 	private CANTalon talonController;
-	
+
 	public static String motorName="talonMotor";
 
 
 	public MDSubsystem configure(){
 		super.configure();
-
-		if(getMotors()==null 
+		System.out.println("line32");
+		if(getMotors()==null
 				|| !getMotors().containsKey(motorName))
 			throw new IllegalArgumentException("Invalid motor configuration for talon system.");
 		talonController = (CANTalon)(getMotors().get(motorName));
+		System.out.println("line38");
 		return this;
 	}
 	
@@ -52,14 +58,13 @@ public class TalonDriveSubsystem extends MDSubsystem {
     	talonController.changeControlMode(TalonControlMode.Speed);
     	talonController.set(targetSpeed);
     	/* prepare line to print */
-//    	System.out.print("\tout:");
-//		System.out.print(motorOutput);
-//		System.out.print("\tspd:");
-//		System.out.print(talonController.getSpeed() );
+    	System.out.print("\tout:");
+		System.out.print(motorOutput);
+		System.out.print("\tspd:" + talonController.getSpeed());
 //		System.out.print("\terr:");
 //		System.out.print(talonController.getClosedLoopError());
-//		System.out.print("\ttrg:");
-//		System.out.println(targetSpeed);
+		System.out.print("\ttrg:");
+		System.out.println(targetSpeed);
 //		double currentAmps = _talons[masterId].getOutputCurrent(); 
 //		double outputV = _talons[masterId].getOutputVoltage();
 //		double busV = _talons[masterId].getBusVoltage();
@@ -76,12 +81,11 @@ public class TalonDriveSubsystem extends MDSubsystem {
 		talonController.enableControl();
 		talonController.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		talonController.reverseSensor(false);
-		talonController.configEncoderCodesPerRev(1440); // or 360
+		talonController.configEncoderCodesPerRev(400); // or 360 or 400
 //		talonController.SetVelocityMeasurementPeriod(VelocityMeasurementPeriod.Period_100Ms);
 //		talonController.SetVelocityMeasurementWindow(64);
 	        //_talon.configEncoderCodesPerRev(XXX), // if using FeedbackDevice.QuadEncoder
 	        //_talon.configPotentiometerTurns(XXX), // if using FeedbackDevice.AnalogEncoder or AnalogPot
-
 	        talonController.configNominalOutputVoltage(+0.0f, -0.0f);
 	        talonController.configPeakOutputVoltage(+12.0f, -12.0f);
 	        /* set closed loop gains in slot0 */
@@ -108,8 +112,9 @@ public class TalonDriveSubsystem extends MDSubsystem {
 //			System.out.print("\terr:");
 //			System.out.print(talonController.getClosedLoopError());
 //			System.out.print("\ttrg:");
-//			System.out.println(targetSpeed);
+//			System.out.print(targetSpeed);
 //			System.out.println(talonSpeed);
+	        
 		}
 	
 	public void stop(){
@@ -144,5 +149,6 @@ public class TalonDriveSubsystem extends MDSubsystem {
 	protected void initDefaultCommand() {
 
 	}
+
 
 }

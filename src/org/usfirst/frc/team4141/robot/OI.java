@@ -121,14 +121,14 @@ public class OI extends OIBase{
 		//Configure the MDConsole OI here		
 		add(new ConsoleOI(getRobot())
 				.whenPressed("whenPressed",0,new MDPrintCommand(getRobot(),"whenPressed","whenPressed..."))
-				.whileHeld("whileHeld",3,new MDPrintCommand(getRobot(),"whileHeld","whileHeld..."))
-				.whileHeld("whileHeldRopeRise",7,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
-				.whenPressed("rumble",4,new RumbleCommand(getRobot(),"rumble"))
 				.whenPressed("Auto1",1,new AUTOMoveFromWall(getRobot()))
 				.whenPressed("Auto2",2,new AUTODistanceDetection(getRobot()))
+				//	.whileHeld("whileHeld",3,new MDPrintCommand(getRobot(),"whileHeld","whileHeld..."))
+				.whileHeld("whileHeldRopeRise",3,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
+				.whenPressed("rumble",4,new RumbleCommand(getRobot(),"rumble"))
 				.whenPressed("Flip",5,new ToggleOrientationCommand(getRobot(),"consoleOrientationToggler"))
 				.whenPressed("ResetGyro",6,new ResetGyroCommand(getRobot(),"resetGyro"))
-				
+				.whileHeld("talonHeld",7,new TalonDriveCommand(getRobot(), "TalonDriveCommand"))
 				.configure()
 			);		
 		

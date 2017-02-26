@@ -139,7 +139,7 @@ public class Robot extends MDRobotBase {
 				.configure());
 		
 		add(new TalonDriveSubsystem(this, "talonSubsystem")
-				.add(TalonDriveSubsystem.motorName, new CANTalon(0))
+				.add(TalonDriveSubsystem.motorName, new CANTalon(1))
 				.add("talonSpeed", new DoubleConfigSetting(-1.0, 1.0, 0.2))
 				.add("F", new DoubleConfigSetting(0.0, 1.0, 0.0))
 		 	    .add("P", new DoubleConfigSetting(0.0, 1.0, 0.2))
