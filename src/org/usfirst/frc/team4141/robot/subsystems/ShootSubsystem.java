@@ -88,14 +88,10 @@ public class ShootSubsystem extends MDSubsystem {
     	shooterController.changeControlMode(TalonControlMode.Speed);
     	shooterController.set(targetSpeed);
     	/* prepare line to print */
-    	System.out.print("\tout:");
-		System.out.print(motorOutput);
-		System.out.print("\tspd:");
-		System.out.print(shooterController.getSpeed() );
-		System.out.print("\terr:");
-		System.out.print(shooterController.getClosedLoopError());
-		System.out.print("\ttrg:");
-		System.out.println(targetSpeed);
+		System.out.println("\ttrg:" + targetSpeed);
+		System.out.print("\tspd:" + shooterController.getSpeed());
+		System.out.print("\terr:" + shooterController.getClosedLoopError());
+    	System.out.print("\tout:" + motorOutput);
 	}
 		
 	public void initialize(){

@@ -30,12 +30,10 @@ public class TalonDriveSubsystem extends MDSubsystem {
 
 	public MDSubsystem configure(){
 		super.configure();
-		System.out.println("line32");
 		if(getMotors()==null
 				|| !getMotors().containsKey(motorName))
 			throw new IllegalArgumentException("Invalid motor configuration for talon system.");
 		talonController = (CANTalon)(getMotors().get(motorName));
-		System.out.println("line38");
 		return this;
 	}
 	
@@ -58,13 +56,10 @@ public class TalonDriveSubsystem extends MDSubsystem {
     	talonController.changeControlMode(TalonControlMode.Speed);
     	talonController.set(targetSpeed);
     	/* prepare line to print */
-    	System.out.print("\tout:");
-		System.out.print(motorOutput);
+    	System.out.print("\tout:" + motorOutput);
 		System.out.print("\tspd:" + talonController.getSpeed());
-//		System.out.print("\terr:");
-//		System.out.print(talonController.getClosedLoopError());
-		System.out.print("\ttrg:");
-		System.out.println(targetSpeed);
+		System.out.print("\terr:" + talonController.getClosedLoopError());
+		System.out.println("\ttrg:" + targetSpeed);
 //		double currentAmps = _talons[masterId].getOutputCurrent(); 
 //		double outputV = _talons[masterId].getOutputVoltage();
 //		double busV = _talons[masterId].getBusVoltage();

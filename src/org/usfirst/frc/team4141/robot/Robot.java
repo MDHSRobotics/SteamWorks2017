@@ -157,7 +157,7 @@ public class Robot extends MDRobotBase {
 				.add("D", new DoubleConfigSetting(0.0, 1.0, 0.1))
 				.add("RPM", new DoubleConfigSetting(0.0, 100.0, 10.0))
 				.add(ShootSubsystem.feedMotor, new Victor(8))
-				.add("shootSpeed",new DoubleConfigSetting(0.0, 1.0, 0.5))
+				.add("shootSpeed",new DoubleConfigSetting(-1.0, 1.0, 0.5))
 				.add("feedSpeed",new DoubleConfigSetting(-1.0, 0.0, -0.6))
 				.add("unjamSpeed",new DoubleConfigSetting(-1.0, 0.0, -0.2))
 				.configure());

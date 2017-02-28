@@ -101,7 +101,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 
 			if(getSolenoids()==null 
 					|| !getSolenoids().containsKey(shiftSolenoid1) || !(getSolenoids().get(shiftSolenoid1) instanceof Solenoid)) {
-					throw new IllegalArgumentException("Invalid MDDriveSubsystem configuratopn, missing shift solenoid.");
+					throw new IllegalArgumentException("Invalid MDDriveSubsystem configuratopn, missing shift solenoid1.");
 			}	
 			shifter1=(Solenoid) getSolenoids().get(shiftSolenoid1);
 			
