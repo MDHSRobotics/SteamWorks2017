@@ -9,6 +9,7 @@ import org.usfirst.frc.team4141.MDRobotBase.RioHID;
 import org.usfirst.frc.team4141.robot.commands.AUTOMoveFromWall;
 import org.usfirst.frc.team4141.robot.commands.AUTODistanceDetection;
 import org.usfirst.frc.team4141.robot.commands.CollectCommand;
+import org.usfirst.frc.team4141.robot.commands.DistanceDetectionCommand;
 import org.usfirst.frc.team4141.robot.commands.MDMoveCommand;
 import org.usfirst.frc.team4141.robot.commands.MDMoveCommand.Direction;
 import org.usfirst.frc.team4141.robot.commands.MDPrintCommand;
@@ -129,6 +130,7 @@ public class OI extends OIBase{
 				.whenPressed("Flip",5,new ToggleOrientationCommand(getRobot(),"consoleOrientationToggler"))
 				.whenPressed("ResetGyro",6,new ResetGyroCommand(getRobot(),"resetGyro"))
 				.whileHeld("talonHeld",7,new TalonDriveCommand(getRobot(), "TalonDriveCommand"))
+				.whileHeld("distanceWhileHeld",8,new DistanceDetectionCommand(getRobot(), "DistanceDetectionCommand"))
 				.configure()
 			);		
 		

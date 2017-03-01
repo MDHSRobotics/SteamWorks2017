@@ -43,15 +43,17 @@ public class DistanceDetectionCommand extends MDCommand {
 	
 	@Override
 	protected boolean isFinished() {
-		auto2Distance = autoSubsystem.getAuto2Distance();
-		log(Level.DEBUG, "isFinished()", "auto2Distance="+auto2Distance+" | targetDistance="+targetDistance+" | (auto2Distance >= targetDistance)="+(auto2Distance >= targetDistance));
-		return (auto2Distance >= targetDistance);
+	//	auto2Distance = autoSubsystem.getAuto2Distance();
+		auto2Distance = driveSubsystem.getDistance();
+		//log(Level.DEBUG, "isFinished()", "auto2Distance="+auto2Distance+" | targetDistance="+targetDistance+" | (auto2Distance >= targetDistance)="+(auto2Distance >= targetDistance));
+		//return (auto2Distance >= targetDistance);
+		return false;
 			}
 		
 	@Override
 	protected void execute() {
 		// TODO: Gyro implementation
-		driveSubsystem.forward(autoSpeed);
+		//driveSubsystem.forward(autoSpeed);
 
 	}
 	

@@ -35,7 +35,7 @@ public class DualDistanceSensor implements Sensor{
 		i2cDevice=new I2C(I2C.Port.kOnboard, address);
 		int i=0;
 		readings[i++]=new AnalogSensorReading(this,"distance0", 0);
-		readings[i++]=new AnalogSensorReading(this,"distance10", 0);
+		readings[i++]=new AnalogSensorReading(this,"distance1", 0);
 	}
 	
 	

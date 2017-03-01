@@ -6,8 +6,11 @@ import org.usfirst.frc.team4141.MDRobotBase.MultiSpeedController;
 import org.usfirst.frc.team4141.MDRobotBase.NotImplementedException;
 import org.usfirst.frc.team4141.MDRobotBase.TankDriveInterpolator;
 import org.usfirst.frc.team4141.MDRobotBase.config.ConfigSetting;
+import org.usfirst.frc.team4141.MDRobotBase.sensors.AnalogSensorReading;
+import org.usfirst.frc.team4141.MDRobotBase.sensors.DualDistanceSensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_IMU;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.Sensor;
+import org.usfirst.frc.team4141.MDRobotBase.sensors.SensorReading;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWM;
@@ -40,6 +43,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 	private Solenoid shifter;
 	private Solenoid shifter1;
 	private MD_IMU imu;
+	private DualDistanceSensor distanceSensor; 
 	
 	
 	public MDDriveSubsystem(MDRobotBase robot, String name, Type type) {
@@ -110,6 +114,10 @@ public class MDDriveSubsystem extends MDSubsystem {
 			}
 		    imu=(MD_IMU) getSensors().get("IMU");
 		    imu.reset();
+		    if(getSensors()==null && !getSensors().containsKey("dualDistance")){
+				throw new IllegalArgumentException("Invalid MDDriveSubsystem configuratopn, missing Dual Distance Sensors.");
+			}
+		    distanceSensor=(DualDistanceSensor) getSensors().get("dualDistance");
 			
 			
 			break;
@@ -297,6 +305,19 @@ public class MDDriveSubsystem extends MDSubsystem {
 	}
 	public double getAngle() {
 		return imu.getAngleZ();
+	}
+	
+	public double getDistance() {
+		SensorReading[] readings = distanceSensor.getReadings();
+		String s = new String();
+		for (int i = 0; i < readings.length; i++){ //initiation, change, and condition
+			if (i!= 0){
+				s += "\t";
+			}
+			s += ("Distance["+i+"]="+((AnalogSensorReading)(readings[i])).getValue());
+		}
+		debug(s);
+		return ((AnalogSensorReading)(readings[0])).getValue();
 	}
 
 	public void gyroReset() {
