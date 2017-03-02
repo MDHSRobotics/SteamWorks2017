@@ -1,12 +1,6 @@
 package org.usfirst.frc.team4141.robot.subsystems;
 
-import java.io.IOException;
-import java.net.InetAddress;
 import java.util.Map;
-
-import javax.jmdns.JmDNS;
-import javax.jmdns.NetworkTopologyDiscovery;
-import javax.jmdns.ServiceInfo;
 
 import org.usfirst.frc.team4141.MDRobotBase.MDConsoleButton;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
@@ -34,7 +28,7 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 
 	public enum Remote{
 		console,
-		holysee
+		tegra
 	}
 	
 	public WebSocketSubsystem(MDRobotBase robot, String name) {
@@ -71,37 +65,11 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 		debug("starting event manager");
 		try {
 			eventManager.start();
-			announce();
 		} catch (Exception e) {
 			debug("unable to start web socket manager");
 			e.printStackTrace();
 		}
 	}
-	private JmDNS jmdns;
-
-    private void announce() {
-    	InetAddress[] addresses = NetworkTopologyDiscovery.Factory.getInstance().getInetAddresses();
-    	for(InetAddress addr : addresses){
-    		if(addr.getHostName().contains("roboRIO")){
-    			 try {
-    	   	         // Create a JmDNS instance
-    	             jmdns = JmDNS.create(addr);
-
-    	             // Register a service
-    	             ServiceInfo serviceInfo = ServiceInfo.create("_ws._tcp.local.", "Team4141Robot", eventManager.getPort(), "");
-    	             jmdns.registerService(serviceInfo);
-
-    	         } catch (IOException e) {
-    	        	 debug(e.getMessage());
-    	         }		
-    			break;
-    		}
-    	}
-    	
-		
-	}
-    
-    
 
 	//
     //EventManager helper methods
@@ -114,7 +82,7 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 	@SuppressWarnings({"rawtypes" })
 	@Override
 	public void process(Request request) {
-//		System.out.println("Robot received message: "+messageText);
+		//System.out.println("Robot received message: "+request.getMessage());
 		Map message = JSON.parse(request.getMessage());
 		if(message.containsKey("type")){
 			String type = message.get("type").toString();
@@ -133,11 +101,15 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 
 	private void identifyRemote(Request request, Map message) {
 		if(message.containsKey("id")){
-			debug(message.get("id")+" connected!");
+			//debug(message.get("id")+" connected!");
 			eventManager.identify((String)message.get("id"),request.getSocket());
 			if(message.get("id").equals(Remote.console.toString())){
 				log("identifyRemote",Remote.console.toString()+" connected.");
 				eventManager.post(new RobotConfigurationNotification(getRobot()));
+			}
+			if(message.get("id").equals(Remote.tegra.toString())){
+				log("identifyRemote",Remote.console.toString()+" connected.");
+				//eventManager.post(new RobotConfigurationNotification(getRobot()));
 			}
 		}
 	}

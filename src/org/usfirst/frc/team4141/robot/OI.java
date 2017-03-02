@@ -5,20 +5,15 @@ import org.usfirst.frc.team4141.MDRobotBase.ConsoleOI;
 import org.usfirst.frc.team4141.MDRobotBase.MDJoystick;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.OIBase;
-import org.usfirst.frc.team4141.MDRobotBase.RioHID;
 import org.usfirst.frc.team4141.robot.commands.AUTOMoveFromWall;
 import org.usfirst.frc.team4141.robot.commands.AUTODistanceDetection;
-import org.usfirst.frc.team4141.robot.commands.CollectCommand;
 import org.usfirst.frc.team4141.robot.commands.DistanceDetectionCommand;
-import org.usfirst.frc.team4141.robot.commands.MDMoveCommand;
-import org.usfirst.frc.team4141.robot.commands.MDMoveCommand.Direction;
-import org.usfirst.frc.team4141.robot.commands.MDPrintCommand;
 import org.usfirst.frc.team4141.robot.commands.ResetGyroCommand;
 //import org.usfirst.frc.team4141.robot.commands.OpenDoorCommand;
 import org.usfirst.frc.team4141.robot.commands.RopeRiseCommand;
 import org.usfirst.frc.team4141.robot.commands.RumbleCommand;
-import org.usfirst.frc.team4141.robot.commands.StopBallsystemCommand;
 import org.usfirst.frc.team4141.robot.commands.StopShootSystemCommand;
+import org.usfirst.frc.team4141.robot.commands.SwitchChannelCommand;
 import org.usfirst.frc.team4141.robot.commands.TalonDriveCommand;
 import org.usfirst.frc.team4141.robot.commands.ShiftToggleCommand;
 import org.usfirst.frc.team4141.robot.commands.ShootCommand;
@@ -121,7 +116,7 @@ public class OI extends OIBase{
 		
 		//Configure the MDConsole OI here		
 		add(new ConsoleOI(getRobot())
-				.whenPressed("whenPressed",0,new MDPrintCommand(getRobot(),"whenPressed","whenPressed..."))
+//				.whenPressed("whenPressed",0,new MDPrintCommand(getRobot(),"whenPressed","whenPressed..."))
 				.whenPressed("Auto1",1,new AUTOMoveFromWall(getRobot()))
 				.whenPressed("Auto2",2,new AUTODistanceDetection(getRobot()))
 				//	.whileHeld("whileHeld",3,new MDPrintCommand(getRobot(),"whileHeld","whileHeld..."))
@@ -130,7 +125,8 @@ public class OI extends OIBase{
 				.whenPressed("Flip",5,new ToggleOrientationCommand(getRobot(),"consoleOrientationToggler"))
 				.whenPressed("ResetGyro",6,new ResetGyroCommand(getRobot(),"resetGyro"))
 				.whileHeld("talonHeld",7,new TalonDriveCommand(getRobot(), "TalonDriveCommand"))
-				.whileHeld("distanceWhileHeld",8,new DistanceDetectionCommand(getRobot(), "DistanceDetectionCommand"))
+				.whileHeld("distanceWhileHeld",9,new DistanceDetectionCommand(getRobot(), "DistanceDetectionCommand"))
+				.whenPressed("switch channel",8,new SwitchChannelCommand(getRobot(), "SwitchChannelCommand"))
 				.configure()
 			);		
 		
