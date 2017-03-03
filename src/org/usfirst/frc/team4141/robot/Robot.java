@@ -177,6 +177,7 @@ public class Robot extends MDRobotBase {
 				.add("visionConnected", new VisionConnectedSensor())
 				.add("Steam Target Acquired", new SteamTargetSensor())
 				.add("Gear Target Acquired", new GearTargetSensor())
+		    		.add("console", new ConsoleConnectionSensor())
 				.configure());
 		//The last 2 items are SetAutonomousCommand
 		// and CoreSubSystem		
