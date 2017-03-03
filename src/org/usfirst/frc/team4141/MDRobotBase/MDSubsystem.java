@@ -102,6 +102,7 @@ public abstract class MDSubsystem extends Subsystem {
 				if(item instanceof LiveWindowSendable){
 					LiveWindow.addSensor(getName(), key, (LiveWindowSendable)item);
 				}
+				System.out.println("system "+getName()+" has sensor "+key+" observe: "+item.observe());
 				if(item.observe()){
 					robot.add(item);
 					for(SensorReading reading : item.getReadings()){
@@ -109,7 +110,7 @@ public abstract class MDSubsystem extends Subsystem {
 							debug("reading unexpectedly null in sensor "+item.getName());
 						}
 						else{
-//							debug("registering reading "+reading.getName()+" from "+item.getName());	
+							debug("registering reading "+reading.getName()+" from "+item.getName());	
 							if(reading.observe()){
 								robot.add(reading);
 							}

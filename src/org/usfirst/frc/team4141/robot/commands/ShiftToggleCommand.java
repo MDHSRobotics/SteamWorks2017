@@ -2,8 +2,6 @@ package org.usfirst.frc.team4141.robot.commands;
 
 import java.util.Date;
 
-import org.eclipse.jetty.server.handler.DebugHandler;
-
 //REMEMBER TO TEST CODE
 
 import org.usfirst.frc.team4141.MDRobotBase.MDCommand;
@@ -32,7 +30,7 @@ public class ShiftToggleCommand extends MDCommand {
 	private MDDriveSubsystem driveSystem;
 	private long start;
 	private long shiftToggleDuration = 500;
-	private long now;
+
 
 	
 	@Override

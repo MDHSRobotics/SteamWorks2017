@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 public class UnjamShootCommand extends MDCommand {
 	
 	private long start;
-	private long now;
 	private long unjamDuration = 2000;
 
 	public UnjamShootCommand(MDRobotBase robot, String name) {

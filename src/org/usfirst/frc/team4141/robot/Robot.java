@@ -2,7 +2,6 @@
 package org.usfirst.frc.team4141.robot;
 
 import org.usfirst.frc.team4141.MDRobotBase.MDCommandGroup;
-import org.usfirst.frc.team4141.MDRobotBase.sensors.DigitalSensorReading;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.DualDistanceSensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.GearTargetSensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_BuiltInAccelerometer;

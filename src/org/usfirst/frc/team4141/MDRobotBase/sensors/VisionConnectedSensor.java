@@ -10,12 +10,13 @@ public class VisionConnectedSensor implements Sensor {
 	private boolean observe;
 
 	public VisionConnectedSensor(){
-		this(null,true);
+		this(null,null,true);
 	}
 	
-	public VisionConnectedSensor(String name, boolean observe){
+	public VisionConnectedSensor(MDSubsystem subsystem, String name, boolean observe){
 		this.name = name;
-		this.observe = true;
+		this.observe = observe;
+		this.subsystem = subsystem;
 		reading = new DigitalSensorReading(this, "isVisionConnected", false);
 	}
 	

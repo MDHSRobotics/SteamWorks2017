@@ -241,7 +241,7 @@ public abstract class MDRobotBase extends IterativeRobot{
 	public void add(SensorReading reading) {
 		if(sensorReadingsDictionary!=null){
 			sensorReadingsDictionary.put(reading.getName(), reading);
-//			System.out.println("registering sensor reading: "+reading.getName());
+			System.out.println("registering sensor reading: "+reading.getName());
 		}
 	}
 	

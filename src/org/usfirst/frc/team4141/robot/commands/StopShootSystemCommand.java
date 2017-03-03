@@ -3,7 +3,6 @@ package org.usfirst.frc.team4141.robot.commands;
 import org.usfirst.frc.team4141.MDRobotBase.MDCommand;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
-import org.usfirst.frc.team4141.robot.subsystems.BallPickupSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.ShootSubsystem;
 
 public class StopShootSystemCommand extends MDCommand {

@@ -1,10 +1,6 @@
 package org.usfirst.frc.team4141.MDRobotBase.sensors;
 
-import java.nio.ByteBuffer;
-
 import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
-
-import edu.wpi.first.wpilibj.I2C;
 
 public class GearTargetSensor implements Sensor{
    
@@ -23,6 +19,8 @@ public class GearTargetSensor implements Sensor{
 	}
 	
 	public GearTargetSensor(MDSubsystem subsystem, boolean observe){
+		this.observe = observe;
+		this.subsystem = subsystem;
 		int i=0;
 		readings[i++]=new DigitalSensorReading(this,"Gear Target", false);
 	}

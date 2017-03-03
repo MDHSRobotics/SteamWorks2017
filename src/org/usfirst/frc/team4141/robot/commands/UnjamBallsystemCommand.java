@@ -26,7 +26,6 @@ public class UnjamBallsystemCommand extends MDCommand {
 	private BallPickupSubsystem ballPickupSubsystem;
 	private long start;
 	private long unjamedDuration = 2000;
-	private long now;
 	
 	@Override
 	protected void initialize() {

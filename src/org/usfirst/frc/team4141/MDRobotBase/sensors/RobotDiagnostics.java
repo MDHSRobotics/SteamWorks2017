@@ -48,6 +48,8 @@ public class RobotDiagnostics implements Sensor {
 		this.robot = robot;
 		this.name = name;
 		this.observe = observe;
+		this.subsystem = subsystem;
+
 		int i=0;
 		
 		//from ControllerPower  (5)
