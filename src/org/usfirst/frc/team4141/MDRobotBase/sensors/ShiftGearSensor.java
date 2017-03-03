@@ -4,7 +4,7 @@ import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
 
 public class ShiftGearSensor implements Sensor{
    
-	SensorReading[] readings = new SensorReading[1];
+	SensorReading reading;
 	private String name;
 	private boolean observe;
 	private MDSubsystem subsystem;
@@ -21,16 +21,15 @@ public class ShiftGearSensor implements Sensor{
 	public ShiftGearSensor(MDSubsystem subsystem, boolean observe){
 		this.observe = observe;
 		this.subsystem = subsystem;
-		int i=0;
-		readings[i++]=new DigitalSensorReading(this,"Shift Gear", false);
+		reading = new DigitalSensorReading(this,"Shift Gear", false);
 	}
 
 	public void set(boolean isHighGear){
-		((DigitalSensorReading)readings[0]).setValue(isHighGear);
+		reading.setValue(isHighGear);
 	}
 	
 	public boolean get(){
-		return ((DigitalSensorReading)readings[0]).getValue();
+		return reading.getValue();
 	}
 	
 	public void setName(String name){
@@ -46,7 +45,7 @@ public class ShiftGearSensor implements Sensor{
 	}
 
 	public SensorReading[] getReadings() {
-		return readings;
+		return new SensorReading[] {reading};
 	}
 
 
