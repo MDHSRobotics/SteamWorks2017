@@ -4,7 +4,7 @@ import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
 
 public class ConsoleConnectionSensor implements Sensor{
    
-	SensorReading[] readings = new SensorReading[1];
+	SensorReading reading;
 	private String name;
 	private boolean observe;
 	private MDSubsystem subsystem;
@@ -21,12 +21,11 @@ public class ConsoleConnectionSensor implements Sensor{
 	public ConsoleConnectionSensor(MDSubsystem subsystem, boolean observe){
 		this.observe = observe;
 		this.subsystem = subsystem;
-		int i=0;
 		reading=new StringSensorReading(this,"console", "");
 	}
 
 	public void set(String consoleAddress){
-		readings.setValue(consoleAddress);
+		reading.setValue(consoleAddress);
 	}
 	
 	public String get(){
@@ -46,7 +45,7 @@ public class ConsoleConnectionSensor implements Sensor{
 	}
 
 	public SensorReading[] getReadings() {
-		return readings;
+		return new SensorReading[] {reading};
 	}
 
 
