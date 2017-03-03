@@ -32,8 +32,9 @@ public class EventManagerWebSocket{
 
 	@OnWebSocketClose
 	public void onClose(Session session, int closeCode, String closeReason){
+		
         eventManager.removeSocket(this);
-        System.out.println("session closed");
+        System.out.println("socketOnClose: "+this.name);
 	}
 	
     @OnWebSocketMessage

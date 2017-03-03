@@ -55,11 +55,11 @@ public class VisionConnectedSensor implements Sensor {
 		return observe;
 	}
 
-	public boolean isVisionConnected(){
-		return reading.getValue();
-	}
-
-	public void setVisionConnected(boolean connected){
+	public void set(boolean connected){
 		reading.setValue(connected);
+	}
+	
+	public boolean get(){
+		return reading.getValue();
 	}
 }

@@ -8,6 +8,7 @@ import org.eclipse.jetty.websocket.server.WebSocketHandler;
 import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
 import org.usfirst.frc.team4141.MDRobotBase.notifications.RobotLogNotification;
+import org.usfirst.frc.team4141.robot.subsystems.WebSocketSubsystem.Remote;
 
 /**
  * @author RobotC
@@ -117,7 +118,12 @@ public class EventManager {
 	private boolean enableWebSockets = false;
 
 	public synchronized void removeSocket(EventManagerWebSocket socket) {
-		if(socket!=null && remotes.containsKey(socket.toString())){remotes.remove(socket.toString());}
+        System.out.println("removeSocket: "+socket.getName());
+
+		if(socket!=null && remotes.containsKey(socket.getName())){
+			handler.close(socket);
+			remotes.remove(socket.toString());
+		}
 	}
 
 	public synchronized boolean isWebSocketsEnabled() {

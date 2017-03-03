@@ -16,6 +16,7 @@ import org.usfirst.frc.team4141.MDRobotBase.eventmanager.MessageHandler;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.Request;
 import org.usfirst.frc.team4141.MDRobotBase.notifications.RobotConfigurationNotification;
 import org.usfirst.frc.team4141.MDRobotBase.notifications.RobotNotification;
+import org.usfirst.frc.team4141.robot.subsystems.WebSocketSubsystem.Remote;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Notifier;
@@ -95,13 +96,37 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 			if(type.equals("remoteIdentification")){
 				identifyRemote(request,message);
 			}
+			if(type.equals("targetAcquiredNotification")){
+				targetAcquired(request,message);
+			}
 		}
 		message.keySet();
 	}
 
+	private void targetAcquired(Request request, Map message) {
+		if(message.containsKey("filter") && message.containsKey("targetAcquired")){
+			HolySeeSubsystem visionSystem = (HolySeeSubsystem) getRobot().getSubsystems().get("HolySeeSubsystem");
+			String filter = (String)message.get("filter");
+			boolean targetAcquired = ((Boolean)message.get("targetAcquired")).booleanValue();
+			System.out.println("filter "+ filter +" targetAcquired: "+(targetAcquired?"true":"false"));
+			if(filter.equals("steamAR")){
+				visionSystem.setSteamTargetAcquired(targetAcquired);
+			}
+			else if(filter.equals("gearAR")){
+				visionSystem.setGearTargetAcquired(targetAcquired);
+			}
+			else if(filter.equals("circleAR")){
+				visionSystem.setSteamTargetAcquired(targetAcquired);
+			}
+		}
+	}
+
+
+
 	private void identifyRemote(Request request, Map message) {
 		if(message.containsKey("id")){
-			//debug(message.get("id")+" connected!");
+			request.getSocket().setName((String)message.get("id"));
+			debug(message.get("id")+" connected!");
 			eventManager.identify((String)message.get("id"),request.getSocket());
 			if(message.get("id").equals(Remote.console.toString())){
 				log("identifyRemote",Remote.console.toString()+" connected.");
@@ -109,6 +134,10 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 			}
 			if(message.get("id").equals(Remote.tegra.toString())){
 				log("identifyRemote",Remote.console.toString()+" connected.");
+				if(getRobot().getSubsystems()!=null && getRobot().getSubsystems().containsKey("HolySeeSubsystem")){
+					HolySeeSubsystem visionSystem = (HolySeeSubsystem) getRobot().getSubsystems().get("HolySeeSubsystem");
+					visionSystem.setVisionConnected(true);
+				}
 				//eventManager.post(new RobotConfigurationNotification(getRobot()));
 			}
 		}
@@ -197,6 +226,20 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 
 	@Override
 	public void connect(EventManagerWebSocket socket) {	
+	}
+
+
+
+	@Override
+	public void close(EventManagerWebSocket socket) {
+        System.out.println("session closed: "+socket.getName());
+
+		if(socket.getName().equals(Remote.tegra.toString())){
+			if(getRobot().getSubsystems()!=null && getRobot().getSubsystems().containsKey("HolySeeSubsystem")){
+				HolySeeSubsystem visionSystem = (HolySeeSubsystem) getRobot().getSubsystems().get("HolySeeSubsystem");
+				visionSystem.setVisionConnected(false);
+			}
+		}
 	}
 
 }

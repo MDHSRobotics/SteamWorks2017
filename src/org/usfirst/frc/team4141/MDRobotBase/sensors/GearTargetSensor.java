@@ -4,7 +4,7 @@ import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
 
 public class GearTargetSensor implements Sensor{
    
-	SensorReading[] readings = new SensorReading[1];
+	DigitalSensorReading reading;
 	private String name;
 	private boolean observe;
 	private MDSubsystem subsystem;
@@ -21,16 +21,15 @@ public class GearTargetSensor implements Sensor{
 	public GearTargetSensor(MDSubsystem subsystem, boolean observe){
 		this.observe = observe;
 		this.subsystem = subsystem;
-		int i=0;
-		readings[i++]=new DigitalSensorReading(this,"Gear Target", false);
+		reading=new DigitalSensorReading(this,"Gear Target", false);
 	}
 
 	public void set(boolean targetAcquried){
-		((DigitalSensorReading)readings[0]).setValue(targetAcquried);
+		reading.setValue(targetAcquried);
 	}
 	
 	public boolean get(){
-		return ((DigitalSensorReading)readings[0]).getValue();
+		return reading.getValue();
 	}
 	
 	public void setName(String name){
@@ -46,7 +45,7 @@ public class GearTargetSensor implements Sensor{
 	}
 
 	public SensorReading[] getReadings() {
-		return readings;
+		return new SensorReading[]{reading};
 	}
 
 
