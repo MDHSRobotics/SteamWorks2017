@@ -7,6 +7,7 @@ import org.usfirst.frc.team4141.MDRobotBase.notifications.SwitchChannelNotificat
 import org.usfirst.frc.team4141.MDRobotBase.sensors.GearTargetSensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.SteamTargetSensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.VisionConnectedSensor;
+import org.usfirst.frc.team4141.MDRobotBase.sensors.ConsoleConnectionSensor;
 
 
 public class HolySeeSubsystem extends MDSubsystem{
@@ -14,6 +15,7 @@ public class HolySeeSubsystem extends MDSubsystem{
 	private VisionConnectedSensor visionConnected;
 	private SteamTargetSensor steamTargetAcquired;
 	private GearTargetSensor gearTargetAcquired;
+	private ConsoleConnectionSensor consoleConnection;
 
 	public HolySeeSubsystem(MDRobotBase robot, String name) {
 		super(robot, name);
@@ -30,6 +32,9 @@ public class HolySeeSubsystem extends MDSubsystem{
 		if(getSensors()==null || !getSensors().containsKey("Gear Target Acquired"))
 			throw new IllegalArgumentException("Invalid HolySeeSubsystem configuration, missing GearTargetSensor.");
 		gearTargetAcquired = (GearTargetSensor)(getSensors().get("Gear Target Acquired"));
+		if(getSensors()==null || !getSensors().containsKey("console"))
+			throw new IllegalArgumentException("Invalid HolySeeSubsystem configuration, missing ConsoleConnectionSensor.");
+		consoleConnection = (ConsoleConnectionSensor)(getSensors().get("console"));
 		return this;
 	}
 	@Override
@@ -61,6 +66,10 @@ public class HolySeeSubsystem extends MDSubsystem{
 		return gearTargetAcquired.get();
 	}	
 
+	public String getConsoleAddress(){
+		return consoleConnection.get();
+	}	
+
 	public void setVisionConnected(boolean connected){
 		visionConnected.set(connected);
 	}
@@ -69,6 +78,9 @@ public class HolySeeSubsystem extends MDSubsystem{
 	}
 	public void setGearTargetAcquired(boolean targetAcquired){
 		gearTargetAcquired.set(targetAcquired);
+	}
+	public void setConsoleAddress(String consoleAddress){
+		consoleConnection.set(consoleAddress);
 	}
 	
 }
