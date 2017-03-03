@@ -57,7 +57,6 @@ public class MoveFromWallCommand extends MDCommand {
 		}
 	@Override
 	protected void execute() {
-		// TODO: Gyro implementation
 		actualAngle = driveSubsystem.getAngle();
 		driveAngle = setAngle - actualAngle;
 	  	log(Level.DEBUG,"execute","setAngle="+setAngle+", actualAngle="+actualAngle+", driveAngle="+driveAngle);
