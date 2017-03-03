@@ -4,8 +4,11 @@ package org.usfirst.frc.team4141.robot;
 import org.usfirst.frc.team4141.MDRobotBase.MDCommandGroup;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.DigitalSensorReading;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.DualDistanceSensor;
+import org.usfirst.frc.team4141.MDRobotBase.sensors.GearTargetSensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_BuiltInAccelerometer;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_IMU;
+import org.usfirst.frc.team4141.MDRobotBase.sensors.ShiftGearSensor;
+import org.usfirst.frc.team4141.MDRobotBase.sensors.SteamTargetSensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.VisionConnectedSensor;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.config.DoubleConfigSetting;
@@ -57,6 +60,7 @@ public class Robot extends MDRobotBase {
 						.add("accelerometer", new MD_BuiltInAccelerometer())
 						.add("IMU", new MD_IMU())
 						.add("dualDistance", new DualDistanceSensor(0x41))
+						.add("High Gear", new ShiftGearSensor())
 						.add(MDDriveSubsystem.shiftSolenoid, new Solenoid(1))
 						.add(MDDriveSubsystem.shiftSolenoid1, new Solenoid(2))
 						.add("a", new DoubleConfigSetting(0.0, 1.0, 0.25))//high speed turn factor
@@ -172,6 +176,8 @@ public class Robot extends MDRobotBase {
 		
 		add(new HolySeeSubsystem(this, "HolySeeSubsystem")
 				.add("visionConnected", new VisionConnectedSensor())
+				.add("Steam Target Acquired", new SteamTargetSensor())
+				.add("Gear Target Acquired", new GearTargetSensor())
 				.configure());
 		//The last 2 items are SetAutonomousCommand
 		// and CoreSubSystem		

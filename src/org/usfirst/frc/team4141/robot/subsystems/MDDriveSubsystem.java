@@ -11,6 +11,7 @@ import org.usfirst.frc.team4141.MDRobotBase.sensors.DualDistanceSensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_IMU;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.Sensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.SensorReading;
+import org.usfirst.frc.team4141.MDRobotBase.sensors.ShiftGearSensor;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWM;
@@ -37,13 +38,14 @@ public class MDDriveSubsystem extends MDSubsystem {
 	private Type type;
 	private boolean isFlipped = false;
 	private double speed = 0;
-	private boolean isHighGear = false;
+	//private boolean isHighGear = false;
 	public static String shiftSolenoid = "shiftSolenoid";
 	public static String shiftSolenoid1 = "shiftSolenoid1";
 	private Solenoid shifter;
 	private Solenoid shifter1;
 	private MD_IMU imu;
-	private DualDistanceSensor distanceSensor; 
+	private DualDistanceSensor distanceSensor;
+	private ShiftGearSensor shiftGearSensor; 
 	
 	
 	public MDDriveSubsystem(MDRobotBase robot, String name, Type type) {
@@ -84,14 +86,14 @@ public class MDDriveSubsystem extends MDSubsystem {
 			}				
 			if(getMotors().size()==2){
 				if(!getMotors().containsKey(MotorPosition.left.toString()) || !getMotors().containsKey(MotorPosition.right.toString())){
-					throw new IllegalArgumentException("Invalid MDDriveSubsystem TankDrive configuratopn, missing motors.");
+					throw new IllegalArgumentException("Invalid MDDriveSubsystem TankDrive configuraton, missing motors.");
 				}
 				robotDrive = new RobotDrive(get(MotorPosition.left), get(MotorPosition.right));
 			}
 			else if(getMotors().size()==4){
 				if(!getMotors().containsKey(MotorPosition.rearLeft.toString()) || !getMotors().containsKey(MotorPosition.frontLeft.toString())
 						  || !getMotors().containsKey(MotorPosition.rearRight.toString()) || !getMotors().containsKey(MotorPosition.frontRight.toString())){
-					throw new IllegalArgumentException("Invalid MDDriveSubsystem TankDrive configuratopn, missing motors.");
+					throw new IllegalArgumentException("Invalid MDDriveSubsystem TankDrive configuraton, missing motors.");
 				}
 				robotDrive = new RobotDrive(new MultiSpeedController(new SpeedController[]{get(MotorPosition.rearLeft), get(MotorPosition.frontLeft)}),
 						new MultiSpeedController(new SpeedController[]{get(MotorPosition.rearRight), get(MotorPosition.frontRight)}));
@@ -99,25 +101,29 @@ public class MDDriveSubsystem extends MDSubsystem {
 			
 			if(getSolenoids()==null 
 					|| !getSolenoids().containsKey(shiftSolenoid) || !(getSolenoids().get(shiftSolenoid) instanceof Solenoid)) {
-					throw new IllegalArgumentException("Invalid MDDriveSubsystem configuratopn, missing shift solenoid.");
+					throw new IllegalArgumentException("Invalid MDDriveSubsystem configuraton, missing shift solenoid.");
 			}	
 			shifter=(Solenoid) getSolenoids().get(shiftSolenoid);
 
 			if(getSolenoids()==null 
 					|| !getSolenoids().containsKey(shiftSolenoid1) || !(getSolenoids().get(shiftSolenoid1) instanceof Solenoid)) {
-					throw new IllegalArgumentException("Invalid MDDriveSubsystem configuratopn, missing shift solenoid1.");
+					throw new IllegalArgumentException("Invalid MDDriveSubsystem configuraton, missing shift solenoid1.");
 			}	
 			shifter1=(Solenoid) getSolenoids().get(shiftSolenoid1);
 			
 			if(getSensors()==null && !getSensors().containsKey("IMU")){
-				throw new IllegalArgumentException("Invalid MDDriveSubsystem configuratopn, missing IMU.");
+				throw new IllegalArgumentException("Invalid MDDriveSubsystem configuraton, missing IMU.");
 			}
 		    imu=(MD_IMU) getSensors().get("IMU");
 		    imu.reset();
 		    if(getSensors()==null && !getSensors().containsKey("dualDistance")){
-				throw new IllegalArgumentException("Invalid MDDriveSubsystem configuratopn, missing Dual Distance Sensors.");
+				throw new IllegalArgumentException("Invalid MDDriveSubsystem configuraton, missing Dual Distance Sensors.");
 			}
 		    distanceSensor=(DualDistanceSensor) getSensors().get("dualDistance");
+		    if(getSensors()==null && !getSensors().containsKey("High Gear")){
+				throw new IllegalArgumentException("Invalid MDDriveSubsystem configuraton, missing Gear Shift Sensors.");
+			}
+		    shiftGearSensor=(ShiftGearSensor) getSensors().get("High Gear");
 			
 			
 			break;
@@ -297,10 +303,10 @@ public class MDDriveSubsystem extends MDSubsystem {
 	
 	public void shift() {
 		stop();
-		isHighGear = !isHighGear;
-		shifter.set(isHighGear);
-		shifter1.set(isHighGear);
-		debug("shifted to " + (isHighGear?"high gear" : "low gear"));
+		shiftGearSensor.set(!shiftGearSensor.get());
+		shifter.set(shiftGearSensor.get());
+		shifter1.set(shiftGearSensor.get());
+		debug("shifted to " + (shiftGearSensor.get()?"high gear" : "low gear"));
 		
 	}
 	public double getAngle() {

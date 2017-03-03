@@ -126,6 +126,7 @@ public class OI extends OIBase{
 				.whenPressed("ResetGyro",6,new ResetGyroCommand(getRobot(),"resetGyro"))
 				.whileHeld("talonHeld",7,new TalonDriveCommand(getRobot(), "TalonDriveCommand"))
 				.whileHeld("distanceWhileHeld",9,new DistanceDetectionCommand(getRobot(), "DistanceDetectionCommand"))
+				.whenPressed("Shift Gear",10,new ShiftToggleCommand(getRobot(), "ShiftToggle"))
 				.whenPressed("switch channel",8,new SwitchChannelCommand(getRobot(), "SwitchChannelCommand"))
 				.configure()
 			);		
