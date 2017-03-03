@@ -8,12 +8,10 @@ import org.usfirst.frc.team4141.MDRobotBase.eventmanager.LogNotification.Level;
 import org.usfirst.frc.team4141.robot.subsystems.AutonomousSubsystem;
 import org.usfirst.frc.team4141.robot.subsystems.MDDriveSubsystem;
 
-import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class MoveFromWallCommand extends MDCommand {
 
 	private long start;
-	private long now;
 	private double autoSpeed;
 	private long autoDuration;
 	private double setAngle;
@@ -60,7 +58,6 @@ public class MoveFromWallCommand extends MDCommand {
 	@Override
 	protected void execute() {
 		// TODO: Gyro implementation
-		driveSubsystem.gyroRefresh();
 		actualAngle = driveSubsystem.getAngle();
 		driveAngle = setAngle - actualAngle;
 	  	log(Level.DEBUG,"execute","setAngle="+setAngle+", actualAngle="+actualAngle+", driveAngle="+driveAngle);
