@@ -39,6 +39,7 @@ public class DistanceDetectionCommand extends MDCommand {
 	protected void initialize() {
 		auto2Distance = autoSubsystem.getAuto2Distance();
 		autoSpeed = autoSubsystem.getAuto1Speed();
+		driveSubsystem.distanceRefresh();
 		}
 	
 	@Override
@@ -53,7 +54,6 @@ public class DistanceDetectionCommand extends MDCommand {
 	@Override
 	protected void execute() {
 		// TODO: Gyro implementation
-		//driveSubsystem.forward(autoSpeed);
 
 	}
 	

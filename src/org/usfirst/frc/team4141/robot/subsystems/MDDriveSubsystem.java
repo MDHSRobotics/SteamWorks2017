@@ -327,6 +327,9 @@ public class MDDriveSubsystem extends MDSubsystem {
 	public void gyroRefresh() {
 		imu.refresh();
 	}
+	public void distanceRefresh() {
+		distanceSensor.refresh();
+	}
 	
 	public void move(double speed, double angle) {
 		if(speed == 0) {stop();return;}

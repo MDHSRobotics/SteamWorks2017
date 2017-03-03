@@ -52,15 +52,19 @@ public class DualDistanceSensor implements Sensor{
 
 	public void refresh(){
 		ByteBuffer data = ByteBuffer.allocateDirect(DATA_SIZE);//size of 2 char (e.g. 2 byte unsigned ints
-		   
+		  
+		System.out.print("Reading i2c");
 		if(i2cDevice.read(DATA_ADDRESS, DATA_SIZE, data)){
 			for(int i=0;i<DATA_SIZE/2;i++){
 				((AnalogSensorReading)readings[i]).setValue(data.getChar());
-//				if(i>0) System.out.print("\t");
-//				System.out.printf("%d", (int)(distances[i].getValue()));
+				if(i>0) System.out.print("\t");
+				System.out.printf("%d", (int)(((AnalogSensorReading)readings[i]).getValue()));
 			}
-//			System.out.println();
+		
+		}else{
+			System.out.print("\tCould not read");
 		}
+		System.out.println();
 	}
 
 	@Override
