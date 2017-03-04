@@ -4,7 +4,7 @@ import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
 
 public class ShiftGearSensor implements Sensor{
    
-	SensorReading reading;
+	DigitalSensorReading reading;
 	private String name;
 	private boolean observe;
 	private MDSubsystem subsystem;

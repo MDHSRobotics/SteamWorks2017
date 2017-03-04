@@ -14,6 +14,7 @@ import org.usfirst.frc.team4141.MDRobotBase.eventmanager.EventManagerWebSocket;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.JSON;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.MessageHandler;
 import org.usfirst.frc.team4141.MDRobotBase.eventmanager.Request;
+import org.usfirst.frc.team4141.MDRobotBase.notifications.ConsoleConnectionNotification;
 import org.usfirst.frc.team4141.MDRobotBase.notifications.RobotConfigurationNotification;
 import org.usfirst.frc.team4141.MDRobotBase.notifications.RobotNotification;
 import org.usfirst.frc.team4141.robot.subsystems.WebSocketSubsystem.Remote;
@@ -131,7 +132,7 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 			if(message.get("id").equals(Remote.console.toString())){
 				log("identifyRemote",Remote.console.toString()+" connected.");
 				eventManager.post(new RobotConfigurationNotification(getRobot()));
-				String consoleAddress="10.41.41.43";  //TODO:  get from Request object
+				String consoleAddress="10.41.41.101";  //TODO:  get from Request object
 				if(getRobot().getSubsystems()!=null && getRobot().getSubsystems().containsKey("HolySeeSubsystem")){
 					HolySeeSubsystem visionSystem = (HolySeeSubsystem) getRobot().getSubsystems().get("HolySeeSubsystem");
 					visionSystem.setConsoleAddress(consoleAddress);

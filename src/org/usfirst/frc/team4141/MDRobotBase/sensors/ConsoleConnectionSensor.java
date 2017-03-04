@@ -4,7 +4,7 @@ import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
 
 public class ConsoleConnectionSensor implements Sensor{
    
-	SensorReading reading;
+	StringSensorReading reading;
 	private String name;
 	private boolean observe;
 	private MDSubsystem subsystem;
