@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4141.MDRobotBase;
 
 import java.util.Hashtable;
+import java.util.Properties;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -30,7 +31,10 @@ import org.usfirst.frc.team4141.robot.subsystems.WebSocketSubsystem;
  * directory.
  */
 public abstract class MDRobotBase extends IterativeRobot{
-
+	static {
+		Properties props = System.getProperties();
+		props.setProperty("java.net.preferIPv4Stack", "true");
+	}
 	private OI oi;
 	private Hashtable<String,MDSubsystem> subsystems;
 	private Hashtable<String,MDCommandGroup> commandChooser;

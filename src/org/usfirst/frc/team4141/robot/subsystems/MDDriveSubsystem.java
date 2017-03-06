@@ -337,6 +337,13 @@ public class MDDriveSubsystem extends MDSubsystem {
 		distanceSensor.refresh();
 	}
 	
+	boolean isOn = false;
+	public void toggleLight(){
+		if(getSensors()==null && !getSensors().containsKey("dualDistance")) return;
+		isOn=!isOn;
+		distanceSensor.setStatusLed(isOn);
+	}
+	
 	public void move(double speed, double angle) {
 		if(speed == 0) {stop();return;}
 //		double correction = angle/180.00;

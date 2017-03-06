@@ -132,7 +132,8 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 			if(message.get("id").equals(Remote.console.toString())){
 				log("identifyRemote",Remote.console.toString()+" connected.");
 				eventManager.post(new RobotConfigurationNotification(getRobot()));
-				String consoleAddress="10.41.41.101";  //TODO:  get from Request object
+//				String consoleAddress="10.41.41.101";  //TODO:  get from Request object
+				String consoleAddress=request.getSocket().getSession().getRemoteAddress().getHostString();
 				if(getRobot().getSubsystems()!=null && getRobot().getSubsystems().containsKey("HolySeeSubsystem")){
 					HolySeeSubsystem visionSystem = (HolySeeSubsystem) getRobot().getSubsystems().get("HolySeeSubsystem");
 					visionSystem.setConsoleAddress(consoleAddress);

@@ -15,6 +15,7 @@ import org.usfirst.frc.team4141.robot.commands.RumbleCommand;
 import org.usfirst.frc.team4141.robot.commands.StopShootSystemCommand;
 import org.usfirst.frc.team4141.robot.commands.SwitchChannelCommand;
 import org.usfirst.frc.team4141.robot.commands.TalonDriveCommand;
+import org.usfirst.frc.team4141.robot.commands.ToggleLightCommand;
 import org.usfirst.frc.team4141.robot.commands.ShiftToggleCommand;
 import org.usfirst.frc.team4141.robot.commands.ShootCommand;
 //import org.usfirst.frc.team4141.robot.commands.ShootCommand;
@@ -128,6 +129,7 @@ public class OI extends OIBase{
 				.whileHeld("distanceWhileHeld",9,new DistanceDetectionCommand(getRobot(), "DistanceDetectionCommand"))
 				.whenPressed("Shift Gear",10,new ShiftToggleCommand(getRobot(), "ShiftToggle"))
 				.whenPressed("switch channel",8,new SwitchChannelCommand(getRobot(), "SwitchChannelCommand"))
+				.whenPressed("toggle light",11,new ToggleLightCommand(getRobot(), "ToggleLightCommand"))
 				.configure()
 			);		
 		
