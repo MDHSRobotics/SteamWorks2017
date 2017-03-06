@@ -345,7 +345,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 	}
 	public void setLight(boolean lightState){
 		if(getSensors()==null && !getSensors().containsKey("dualDistance")) return;
-		isOn=ligthState;
+		isOn=lightState;
 		distanceSensor.setStatusLed(isOn);
 	}	
 	
