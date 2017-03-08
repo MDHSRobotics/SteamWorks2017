@@ -29,7 +29,7 @@ public class ShiftToggleCommand extends MDCommand {
 	
 	private MDDriveSubsystem driveSystem;
 	private long start;
-	private long shiftToggleDuration = 500;
+	private long shiftToggleDuration = 250;
 
 
 	

@@ -94,17 +94,12 @@ public class OI extends OIBase{
 			*/
 			
 				
-			// Joystick Config: EXTREME 360 Pro
+			// Joystick Config: EXTREME 360 Pro and NES Controller
 			// -------------------------------------------------
+			//Joystick Buttons
 			.whileHeld("trigger",1,new ShootCommand(getRobot(), "ShootCommand"))
-			.whileHeld("sideButton",2,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
 			.whenPressed("Button3",3,new ShiftToggleCommand(getRobot(), "ShiftToggle"))
-			.whenPressed("Button4",4,new UnjamShootCommand(getRobot(),"UnjamShootCommand"))
 			.whenPressed("Button5",5,new ToggleOrientationCommand(getRobot(), "ToggleOrientationCommand"))
-			.whenPressed("Button6",6,new UnjamBallsystemCommand(getRobot(),"UnjamBallsystemCommand"))
-			.whenPressed("Button8",8,new StopShootSystemCommand(getRobot(),"StopShootSystemCommand"))
-			
-			
 //			.whenPressed("Button12",12,new RumbleCommand(getRobot(), "RumbleCommand"))
 //			.whileHeld("Button4",4,new TalonDriveCommand(getRobot(), "TalonCommand"))
 //			.whenPressed("trigger",1,new StopBallsystemCommand(getRobot(), "StopBallsystemCommand"))			
@@ -117,6 +112,14 @@ public class OI extends OIBase{
 
 			.configure());
 
+		//fgjldjgsl
+		add(new MDJoystick(getRobot(), "buttonJoystick", 1)
+		.whileHeld("A",2,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
+		.whenPressed("B",1,new UnjamBallsystemCommand(getRobot(),"UnjamBallsystemCommand"))
+		.whenPressed("Start",10,new UnjamShootCommand(getRobot(),"UnjamShootCommand"))
+		.whenPressed("Select",9,new StopShootSystemCommand(getRobot(),"StopShootSystemCommand"))
+		.configure());
+		
 		//Configure the RioHID here
 		// Uncomment the following to attach a command to the user button on the RoboRio
 //		add(new RioHID(getRobot())
