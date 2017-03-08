@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4141.robot.subsystems;
 
+import java.util.Date;
+
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.MDSubsystem;
 import org.usfirst.frc.team4141.MDRobotBase.MultiSpeedController;
@@ -37,6 +39,9 @@ public class MDDriveSubsystem extends MDSubsystem {
 	private RobotDrive robotDrive;
 	private Type type;
 	private boolean isFlipped = false;
+	private boolean resettingGyro = false;
+	private long gyroResetStart;
+	private long gyroResetDuration = 150;
 	private double speed = 0;
 	//private boolean isHighGear = false;
 	public static String shiftSolenoid = "shiftSolenoid";
@@ -46,6 +51,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 	private MD_IMU imu;
 	private DualDistanceSensor distanceSensor;
 	private ShiftGearSensor shiftGearSensor; 
+	
 	
 	
 	public MDDriveSubsystem(MDRobotBase robot, String name, Type type) {
@@ -115,7 +121,8 @@ public class MDDriveSubsystem extends MDSubsystem {
 				throw new IllegalArgumentException("Invalid MDDriveSubsystem configuraton, missing IMU.");
 			}
 		    imu=(MD_IMU) getSensors().get("IMU");
-		    imu.reset();
+		    gyroReset();
+		    
 		    if(getSensors()==null && !getSensors().containsKey("dualDistance")){
 				throw new IllegalArgumentException("Invalid MDDriveSubsystem configuraton, missing Dual Distance Sensors.");
 			}
@@ -310,6 +317,12 @@ public class MDDriveSubsystem extends MDSubsystem {
 		
 	}
 	public double getAngle() {
+		if (resettingGyro) { 
+			long now = (new Date()).getTime();
+			if (now - gyroResetStart <= gyroResetDuration) return 0;
+			else resettingGyro = false;
+		}
+		
 		return imu.getAngleZ();
 	}
 	
@@ -328,6 +341,8 @@ public class MDDriveSubsystem extends MDSubsystem {
 
 	public void gyroReset() {
 		imu.reset();
+		resettingGyro = true;
+	    gyroResetStart = (new Date()).getTime();
 	}
 	
 	public void gyroRefresh() {

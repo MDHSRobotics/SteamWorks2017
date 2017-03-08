@@ -147,6 +147,7 @@ public class WebSocketSubsystem extends MDSubsystem implements MessageHandler{
 				if(getRobot().getSubsystems()!=null && getRobot().getSubsystems().containsKey("HolySeeSubsystem")){
 					HolySeeSubsystem visionSystem = (HolySeeSubsystem) getRobot().getSubsystems().get("HolySeeSubsystem");
 					visionSystem.setVisionConnected(true);
+					visionSystem.setTegraAddress(request.getSocket().getSession().getRemoteAddress().getHostName());
 					if(visionSystem.getConsoleAddress()!=null && visionSystem.getConsoleAddress().length()>0){
 						eventManager.post(new ConsoleConnectionNotification(getRobot(),visionSystem.getConsoleAddress()));
 					}

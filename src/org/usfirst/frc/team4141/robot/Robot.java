@@ -9,6 +9,7 @@ import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_BuiltInAccelerometer;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.MD_IMU;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.ShiftGearSensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.SteamTargetSensor;
+import org.usfirst.frc.team4141.MDRobotBase.sensors.TegraConnectionSensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.VisionConnectedSensor;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.config.DoubleConfigSetting;
@@ -150,7 +151,7 @@ public class Robot extends MDRobotBase {
 		
 		add(new ShootSubsystem(this, "shootSubsystem")
 		//		.add(ShootSubsystem.shootMotor, new Victor(7))
-				.add(ShootSubsystem.shootMotor, new CANTalon(0))
+				.add(ShootSubsystem.shootMotor, new CANTalon(2))
 				.add("F", new DoubleConfigSetting(0.0, 1.0, 0.0))
 		 	    .add("P", new DoubleConfigSetting(0.0, 1.0, 0.1))
 				.add("I", new DoubleConfigSetting(0.0, 1.0, 0.8))
@@ -178,7 +179,8 @@ public class Robot extends MDRobotBase {
 				.add("visionConnected", new VisionConnectedSensor())
 				.add("Steam Target Acquired", new SteamTargetSensor())
 				.add("Gear Target Acquired", new GearTargetSensor())
-		    		.add("console", new ConsoleConnectionSensor())
+		    	.add("console", new ConsoleConnectionSensor())
+		    	.add("tegra", new TegraConnectionSensor())
 				.configure());
 		//The last 2 items are SetAutonomousCommand
 		// and CoreSubSystem		

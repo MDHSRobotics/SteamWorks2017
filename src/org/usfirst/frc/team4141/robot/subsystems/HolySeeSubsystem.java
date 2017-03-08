@@ -6,6 +6,7 @@ import org.usfirst.frc.team4141.MDRobotBase.config.ConfigSetting;
 import org.usfirst.frc.team4141.MDRobotBase.notifications.SwitchChannelNotification;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.GearTargetSensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.SteamTargetSensor;
+import org.usfirst.frc.team4141.MDRobotBase.sensors.TegraConnectionSensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.VisionConnectedSensor;
 import org.usfirst.frc.team4141.MDRobotBase.sensors.ConsoleConnectionSensor;
 
@@ -16,6 +17,7 @@ public class HolySeeSubsystem extends MDSubsystem{
 	private SteamTargetSensor steamTargetAcquired;
 	private GearTargetSensor gearTargetAcquired;
 	private ConsoleConnectionSensor consoleConnection;
+	private TegraConnectionSensor tegraConnection;
 
 	public HolySeeSubsystem(MDRobotBase robot, String name) {
 		super(robot, name);
@@ -35,6 +37,9 @@ public class HolySeeSubsystem extends MDSubsystem{
 		if(getSensors()==null || !getSensors().containsKey("console"))
 			throw new IllegalArgumentException("Invalid HolySeeSubsystem configuration, missing ConsoleConnectionSensor.");
 		consoleConnection = (ConsoleConnectionSensor)(getSensors().get("console"));
+		if(getSensors()==null || !getSensors().containsKey("tegra"))
+			throw new IllegalArgumentException("Invalid HolySeeSubsystem configuration, missing TegraConnectionSensor.");
+		tegraConnection = (TegraConnectionSensor)(getSensors().get("tegra"));
 		return this;
 	}
 	@Override
@@ -69,6 +74,10 @@ public class HolySeeSubsystem extends MDSubsystem{
 	public String getConsoleAddress(){
 		return consoleConnection.get();
 	}	
+	
+	public String getTegraAddress(){
+		return tegraConnection.get();
+	}
 
 	public void setVisionConnected(boolean connected){
 		visionConnected.set(connected);
@@ -82,5 +91,7 @@ public class HolySeeSubsystem extends MDSubsystem{
 	public void setConsoleAddress(String consoleAddress){
 		consoleConnection.set(consoleAddress);
 	}
-	
+	public void setTegraAddress(String tegraAddress){
+		tegraConnection.set(tegraAddress);
+	}
 }
