@@ -83,31 +83,32 @@ public class ShootSubsystem extends MDSubsystem {
 	public void move(){
 		//positive speed=wind
 		//negative speed=unwind
-    	double motorOutput = shooterController.getOutputVoltage() / shooterController.getBusVoltage();
+    	//double motorOutput = shooterController.getOutputVoltage() / shooterController.getBusVoltage();
     	double targetSpeed = shootSpeed * rpm; /* 1500 RPM in either direction */
-    	shooterController.changeControlMode(TalonControlMode.Speed);
+    	//shooterController.changeControlMode(TalonControlMode.Speed);
+		debug("Spin at " + targetSpeed);
     	shooterController.set(targetSpeed);
     	/* prepare line to print */
-		System.out.print("\ttrg:" + targetSpeed);
-		System.out.print("\tspd:" + shooterController.getSpeed());
-		System.out.print("\terr:" + shooterController.getClosedLoopError());
-    	System.out.println("\tout:" + motorOutput);
+//		System.out.print("\ttrg:" + targetSpeed);
+//		System.out.print("\tspd:" + shooterController.getSpeed());
+//		System.out.print("\terr:" + shooterController.getClosedLoopError());
+//    	System.out.println("\tout:" + motorOutput);
 	}
 		
 	public void initialize(){
 		shooterController.enableControl();
-		shooterController.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		shooterController.reverseSensor(false);
-		shooterController.configEncoderCodesPerRev(400); // or 360
+		//shooterController.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		//shooterController.reverseSensor(false);
+		//shooterController.configEncoderCodesPerRev(400); // or 360
 
-	        shooterController.configNominalOutputVoltage(+0.0f, -0.0f);
-	        shooterController.configPeakOutputVoltage(+12.0f, -12.0f);
-	        
-	        shooterController.setProfile(0);
-	        shooterController.setF(F);
-	        shooterController.setP(P);
-	        shooterController.setI(I); 
-	        shooterController.setD(D);
+//	        shooterController.configNominalOutputVoltage(+0.0f, -0.0f);
+//	        shooterController.configPeakOutputVoltage(+12.0f, -12.0f);
+//	        
+//	        shooterController.setProfile(0);
+//	        shooterController.setF(F);
+//	        shooterController.setP(P);
+//	        shooterController.setI(I); 
+//	        shooterController.setD(D);
 		}
 
 	@Override
@@ -116,9 +117,8 @@ public class ShootSubsystem extends MDSubsystem {
 	}
 	
 	public void spin(){
-		shooterController.enableControl();
-		shooterController.set(shootSpeed);
-		debug("Spin at " + shootSpeed);
+//		shooterController.enableControl();
+//		shooterController.set(shootSpeed);
 		move();
 	}
 	
