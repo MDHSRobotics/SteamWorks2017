@@ -13,6 +13,8 @@ public class AutonomousSubsystem extends MDSubsystem {
 	
 	public AutonomousSubsystem(MDRobotBase robot, String name) {
 		super(robot, name);
+		setCore(true);
+
 		// TODO Auto-generated constructor stub
 	}
 

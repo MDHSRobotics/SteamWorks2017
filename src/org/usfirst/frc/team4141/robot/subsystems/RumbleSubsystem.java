@@ -23,6 +23,8 @@ public class RumbleSubsystem extends MDSubsystem {
 	
 	public RumbleSubsystem(MDRobotBase robot, String name) {
 		super(robot, name);
+		setCore(true);
+
 	}
 	
 	@Override

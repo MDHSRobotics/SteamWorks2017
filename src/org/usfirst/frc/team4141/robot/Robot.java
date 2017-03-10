@@ -58,15 +58,15 @@ public class Robot extends MDRobotBase {
 				add(new MDDriveSubsystem(this, "driveSystem", Type.TankDrive)
 						.add(MotorPosition.right, new Victor(0))
 						.add(MotorPosition.left, new Victor(1))
-						.add("accelerometer", new MD_BuiltInAccelerometer())
+						.add("Accelerometer", new MD_BuiltInAccelerometer())
 						.add("IMU", new MD_IMU())
-						.add("dualDistance", new DualDistanceSensor(0x41))
+						.add("Dual Distance", new DualDistanceSensor(0x41))
 						.add("High Gear", new ShiftGearSensor())
 						.add(MDDriveSubsystem.shiftSolenoid, new Solenoid(1))
 						.add(MDDriveSubsystem.shiftSolenoid1, new Solenoid(2))
-						.add("a", new DoubleConfigSetting(0.0, 1.0, 0.25))//high speed turn factor
-				 	    .add("b", new DoubleConfigSetting(0.0, 1.0, 0.4))//slow speed turn factor
-						.add("c", new DoubleConfigSetting(0.0, 1.0, 1.0))//speed governor
+						.add("High Speed Factor", new DoubleConfigSetting(0.0, 1.0, 0.25))//high speed turn factor
+				 	    .add("Slow Speed Factor", new DoubleConfigSetting(0.0, 1.0, 0.4))//slow speed turn factor
+						.add("Speed Governor", new DoubleConfigSetting(0.0, 1.0, 1.0))//speed governor
 						.configure()
 				);	
 				
@@ -130,49 +130,50 @@ public class Robot extends MDRobotBase {
 
 		add(new BallPickupSubsystem(this, "ballPickupSubsystem")
 				.add(BallPickupSubsystem.motorCollect, new Victor(2))
-				.add("pickupSpeed",new DoubleConfigSetting(0.0, 1.0, 0.5))
-				.add("unjamSpeed",new DoubleConfigSetting(-1.0, 0.0, -0.3))
+				.add("Pickup-Speed",new DoubleConfigSetting(0.0, 1.0, 0.5))
+				.add("Pickup-UnjamSpeed",new DoubleConfigSetting(-1.0, 0.0, -0.3))
 				.configure());
 
 		add(new RopeSubsystem(this, "ropeSubsystem")
 				.add(RopeSubsystem.motorName, new Victor(6))
-				.add("liftSpeed", new DoubleConfigSetting(-1.0, 1.0, 0.2))
+				.add("Rope-LiftSpeed", new DoubleConfigSetting(-1.0, 1.0, 0.2))
 				.configure());
 		
 		add(new TalonDriveSubsystem(this, "talonSubsystem")
 				.add(TalonDriveSubsystem.motorName, new CANTalon(1))
-				.add("talonSpeed", new DoubleConfigSetting(-1.0, 1.0, 0.2))
-				.add("F", new DoubleConfigSetting(0.0, 1.0, 0.0))
-		 	    .add("P", new DoubleConfigSetting(0.0, 1.0, 0.2))
-				.add("I", new DoubleConfigSetting(0.0, 1.0, 1.0))
-				.add("D", new DoubleConfigSetting(0.0, 1.0, 0.2))
-				.add("RPM", new DoubleConfigSetting(0.0, 100.0, 10.0))
+//				.add("Talon-Speed", new DoubleConfigSetting(-1.0, 1.0, 0.2))
+//				.add("Talon-F", new DoubleConfigSetting(0.0, 1.0, 0.0))
+//		 	    .add("Talon-P", new DoubleConfigSetting(0.0, 1.0, 0.2))
+//				.add("Talon-I", new DoubleConfigSetting(0.0, 1.0, 1.0))
+//				.add("Talon-D", new DoubleConfigSetting(0.0, 1.0, 0.2))
+//				.add("Talon-RPM", new DoubleConfigSetting(0.0, 100.0, 10.0))
 				.configure());
 		
 		add(new ShootSubsystem(this, "shootSubsystem")
 		//		.add(ShootSubsystem.shootMotor, new Victor(7))
 				.add(ShootSubsystem.shootMotor, new CANTalon(2))
-				.add("F", new DoubleConfigSetting(0.0, 1.0, 0.0))
-		 	    .add("P", new DoubleConfigSetting(0.0, 1.0, 0.1))
-				.add("I", new DoubleConfigSetting(0.0, 1.0, 0.8))
-				.add("D", new DoubleConfigSetting(0.0, 1.0, 0.1))
-				.add("RPM", new DoubleConfigSetting(0.0, 100.0, 10.0))
+				.add("Shoot-F", new DoubleConfigSetting(0.0, 1.0, 0.0))
+		 	    .add("Shoot-P", new DoubleConfigSetting(0.0, 1.0, 0.1))
+				.add("Shoot-I", new DoubleConfigSetting(0.0, 1.0, 0.8))
+				.add("Shoot-D", new DoubleConfigSetting(0.0, 1.0, 0.1))
+				.add("Shoot-RPM", new DoubleConfigSetting(0.0, 100.0, 10.0))
 				.add(ShootSubsystem.feedMotor, new Victor(8))
-				.add("shootSpeed",new DoubleConfigSetting(-1.0, 1.0, 0.5))
-				.add("feedSpeed",new DoubleConfigSetting(-1.0, 0.0, -0.6))
-				.add("unjamSpeed",new DoubleConfigSetting(-1.0, 0.0, -0.2))
+				.add("Shoot-Speed",new DoubleConfigSetting(-1.0, 1.0, 0.5))
+				.add("Shoot-FeedSpeed",new DoubleConfigSetting(-1.0, 0.0, -0.6))
+				.add("Shoot-UnjamSpeed",new DoubleConfigSetting(-1.0, 0.0, -0.2))
 				.configure());
 		
 		add(new RumbleSubsystem(this, "rumbleSubsystem")
-				.add("rumbleDuration",new DoubleConfigSetting(0.0, 0.5, 0.12))
-				.add("rumbleIntenisty",new DoubleConfigSetting(0.0, 1.0, 0.5))
+				//.add("rumbleDuration",new DoubleConfigSetting(0.0, 0.5, 0.12))
+				//.add("rumbleIntenisty",new DoubleConfigSetting(0.0, 1.0, 0.5))
+				// Not using for 2017
 				.configure());
 		
 		add(new AutonomousSubsystem(this, "autoSubsystem")
-				.add("auto1Speed",new DoubleConfigSetting(0.0, 1.0, 0.5))
-				.add("auto1Duration",new DoubleConfigSetting(0.0, 15.0, 5.0))
+				.add("Auto1-Speed",new DoubleConfigSetting(0.0, 1.0, 0.5))
+				.add("Auto1-Duration",new DoubleConfigSetting(0.0, 15.0, 5.0))
 				
-				.add("auto2Distance",new DoubleConfigSetting(0.0, 18.0, 0.0))
+				.add("Auto2-Distance",new DoubleConfigSetting(0.0, 18.0, 0.0))
 				.configure());
 		
 		add(new HolySeeSubsystem(this, "HolySeeSubsystem")

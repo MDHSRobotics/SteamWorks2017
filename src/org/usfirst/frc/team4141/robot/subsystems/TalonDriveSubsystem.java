@@ -34,6 +34,8 @@ public class TalonDriveSubsystem extends MDSubsystem {
 				|| !getMotors().containsKey(motorName))
 			throw new IllegalArgumentException("Invalid motor configuration for talon system.");
 		talonController = (CANTalon)(getMotors().get(motorName));
+		setCore(true);
+
 		return this;
 	}
 	

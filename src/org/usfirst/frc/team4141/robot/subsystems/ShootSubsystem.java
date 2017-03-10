@@ -43,6 +43,8 @@ public class ShootSubsystem extends MDSubsystem {
 				throw new IllegalArgumentException("Invalid feeder motor configuration for shoot system.");
 			shooterController = (CANTalon)(getMotors().get(shootMotor));
 			feederController = (SpeedController)(getMotors().get(feedMotor));
+			setCore(true);
+
 			return this;
 			
 				

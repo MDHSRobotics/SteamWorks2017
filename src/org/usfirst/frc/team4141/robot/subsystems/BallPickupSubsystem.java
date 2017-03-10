@@ -22,6 +22,8 @@ public class BallPickupSubsystem extends MDSubsystem {
 				|| !getMotors().containsKey(motorCollect)  || !(getMotors().get(motorCollect) instanceof SpeedController))
 			throw new IllegalArgumentException("Invalid motor configuration for ball Pickup system.");
 		motorController = (SpeedController)(getMotors().get(motorCollect));
+		setCore(true);
+
 		return this;
 	}
 
