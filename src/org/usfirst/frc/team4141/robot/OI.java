@@ -6,6 +6,7 @@ import org.usfirst.frc.team4141.MDRobotBase.MDJoystick;
 import org.usfirst.frc.team4141.MDRobotBase.MDRobotBase;
 import org.usfirst.frc.team4141.MDRobotBase.OIBase;
 import org.usfirst.frc.team4141.robot.commands.AUTOMoveFromWall;
+import org.usfirst.frc.team4141.robot.commands.ClearSettingsCommand;
 import org.usfirst.frc.team4141.robot.commands.AUTODistanceDetection;
 import org.usfirst.frc.team4141.robot.commands.DistanceDetectionCommand;
 import org.usfirst.frc.team4141.robot.commands.ResetGyroCommand;
@@ -98,6 +99,8 @@ public class OI extends OIBase{
 			// -------------------------------------------------
 			//Joystick Buttons
 			.whileHeld("trigger",1,new ShootCommand(getRobot(), "ShootCommand"))
+//			.whileHeld("A",2,new RopeRiseCommand(getRobot(), "RopeRiseCommand"))
+
 			.whenPressed("Button3",3,new ShiftToggleCommand(getRobot(), "ShiftToggle"))
 			.whenPressed("Button5",5,new ToggleOrientationCommand(getRobot(), "ToggleOrientationCommand"))
 //			.whenPressed("Button12",12,new RumbleCommand(getRobot(), "RumbleCommand"))
@@ -144,6 +147,7 @@ public class OI extends OIBase{
 				//.whenPressed("Shift Gear",10,new ShiftToggleCommand(getRobot(), "ShiftToggle"))
 				.whenPressed("Switch Cameras",8,new SwitchChannelCommand(getRobot(), "SwitchChannelCommand"))
 				//.whenPressed("Toggle Light",11,new ToggleLightCommand(getRobot(), "ToggleLightCommand"))
+				.whenPressed("Clear Settings",10,new ClearSettingsCommand(getRobot(), "ClearSettingsCommand"))
 				.configure()
 			);		
 		

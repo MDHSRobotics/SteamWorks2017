@@ -15,7 +15,7 @@ public class ShootSubsystem extends MDSubsystem {
 	//motors may change
 	//private SpeedController shooterController;
 	private SpeedController feederController;
-	private double shootSpeed=1; 
+	private double shootSpeed=-0.1; 
 	private double feedSpeed=1;
 	private double unjamSpeed=-0.2;
 	
@@ -86,8 +86,9 @@ public class ShootSubsystem extends MDSubsystem {
 		//positive speed=wind
 		//negative speed=unwind
     	//double motorOutput = shooterController.getOutputVoltage() / shooterController.getBusVoltage();
-    	double targetSpeed = shootSpeed * rpm; /* 1500 RPM in either direction */
-    	//shooterController.changeControlMode(TalonControlMode.Speed);
+    	//double targetSpeed = shootSpeed * rpm; /* 1500 RPM in either direction */
+		double targetSpeed = shootSpeed;
+    	shooterController.changeControlMode(TalonControlMode.Speed);
 		debug("Spin at " + targetSpeed);
     	shooterController.set(targetSpeed);
     	/* prepare line to print */
@@ -120,7 +121,7 @@ public class ShootSubsystem extends MDSubsystem {
 	
 	public void spin(){
 //		shooterController.enableControl();
-//		shooterController.set(shootSpeed);
+//		shooterController.set(0);
 		move();
 	}
 	

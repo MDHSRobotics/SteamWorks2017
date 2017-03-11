@@ -205,7 +205,8 @@ public class MDDriveSubsystem extends MDSubsystem {
 		  	  double rotate = joystick.getRawAxis(2); //(Changed to accompass shifting w/controller and deadzoned)
 //	  	  debug("forward = " + forward + ", rotate = " + rotate);
 		  	  double[] speeds = interpolator.calculate(forward, rotate, isFlipped);
-			  robotDrive.tankDrive(-speeds[0], speeds[1]);
+		  	 // debug("left: "+speeds[0]+", right: "+speeds[1]);
+			  robotDrive.tankDrive(-speeds[0], -speeds[1]);
 		}
 	}
 	
@@ -380,7 +381,7 @@ public class MDDriveSubsystem extends MDSubsystem {
 			speeds[1]=speed*(1.0 + angle/10.0);
 			speeds[0]=speed;
 		}
-		robotDrive.tankDrive(-speeds[0], speeds[1]);
+		robotDrive.tankDrive(speeds[0], speeds[1]);
 	}
 
 }
